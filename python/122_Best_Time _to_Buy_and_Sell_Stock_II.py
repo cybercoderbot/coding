@@ -16,3 +16,8 @@ class Solution(object):
             profit += max(prices[i] - prices[i-1], 0)
         
         return profit
+
+    
+    
+    
+    
