@@ -28,7 +28,8 @@ class Solution(object):
                 while j < len(arr) and int(arr[j]) > int(arr[i-1]):
                     j += 1
                     
-                arr[i-1], arr[j-1], j = arr[j-1], arr[i-1], len(arr)-1
+                arr[i-1], arr[j-1], j = arr[j-1], arr[i-1]
+                j = len(arr)-1
                 
                 # reverse array from pivot point until end
                 while i < j:
