@@ -34,7 +34,9 @@ class Solution(object):
                 # reverse array from pivot point until end
                 while i < j:
                     arr[i], arr[j] = arr[j], arr[i]
-                    i += 1; j -= 1
+                    i += 1
+                    j -= 1
+                    
                 res = int(''.join(arr))
                 
                 # check 32 bit constraint
