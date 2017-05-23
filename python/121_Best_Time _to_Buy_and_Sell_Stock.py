@@ -10,16 +10,19 @@ class Solution(object):
 
         # 对于这一题，我们只需要遍历一次数组，通过一个变量记录当前最低价格，
         # 同时算出此次交易利润，并与当前最大值比较就可以了。
-
-
-        if len(prices)<=1: return 0
         
-        p_min = prices[0]
-        profit = max(0, prices[1] - prices[0])
+        if len(prices) <=1: return 0
         
-        for p_cur in prices[1:]:
-            profit = max(profit, p_cur - p_min)
-            profix = max(profit, 0)
-            p_min = min(p_cur, p_min)
+        pmin = prices[0]
+        profit = 0
         
+        for i in range(1, len(prices)):
+            profit = max(profit, prices[i]-pmin)
+            profit = max(profit, 0)
+            pmin = min(pmin, prices[i])
         return profit
+    
+    
+    
+    
+        
