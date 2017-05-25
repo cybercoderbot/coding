@@ -12,17 +12,19 @@ class Solution(object):
         # 那么我们可以把路径看做是由一个或多个"/"分割开的众多子字符串，把它们分别提取出来一一处理即可
         
         
-        strs = []
-        for e in path.split('/'):
+        stack = []
+        split_path = path.split('/')
+        
+        for e in split_path:
             if e in ('', '.'):
                 pass
             elif e == '..':
-                if strs: 
-                    strs.pop()
+                if stack: 
+                    stack.pop()
             else:
-                strs.append(e)
+                stack.append(e)
                 
-        return '/' + '/'.join(strs)
+        return '/' + '/'.join(stack)
         
         
         
