@@ -25,10 +25,10 @@ class Solution(object):
                 nsum += 1
             else:
                 nsum -= 1
-            if nsum in d:
-                ans = max(ans, i-d[nsum])
-            else:
+            if nsum not in d:
                 d[nsum] = i
+            else:
+                ans = max(ans, i-d[nsum]) 
             
         return ans
         
