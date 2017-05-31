@@ -9,6 +9,9 @@
 
 **Permutations**
 
+**Binary Search**
+  
+  162. Find Peak Element
 
 ****
 
