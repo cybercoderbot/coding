@@ -1,21 +1,28 @@
+****
 **Array**
 
 
+
+****
 **List**
 
 
+
+****
 **Trees**
 
 
+****
 **Permutations**
 
+
+****
 **Binary Search**
   
   162. Find Peak Element
 
+
 ****
-
-
 **Dynamic Programming**
 
   322. Coin Change  
