@@ -1,34 +1,34 @@
- 653. Two Sum IV - Input is a BST
-DescriptionHintsSubmissionsDiscussSolution
+#  653. Two Sum IV - Input is a BST
+# DescriptionHintsSubmissionsDiscussSolution
 
-Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is 
-equal to the given target.
+# Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is 
+# equal to the given target.
 
-Example 1:
+# Example 1:
 
-Input: 
-    5
-   / \
-  3   6
- / \   \
-2   4   7
+# Input: 
+#     5
+#    / \
+#   3   6
+#  / \   \
+# 2   4   7
 
-Target = 9
+# Target = 9
 
-Output: True
+# Output: True
 
-Example 2:
+# Example 2:
 
-Input: 
-    5
-   / \
-  3   6
- / \   \
-2   4   7
+# Input: 
+#     5
+#    / \
+#   3   6
+#  / \   \
+# 2   4   7
 
-Target = 28
+# Target = 28
 
-Output: False
+# Output: False
 
 
 # Definition for a binary tree node.
