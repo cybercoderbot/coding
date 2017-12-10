@@ -6,13 +6,13 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-/* 建立一个新链表，然后把输入的两个链表从头往后，每两个相加，添加一个新节点到新链表后面，就是要处理下进位问题。
-   还有就是最高位的进位问题要最后特殊处理一下.*/
+/* 建立一个新链表，然后把输入的两个链表从头往后，每两个相加，添加一个新节点到新链表后面，
+   就是要处理下进位问题。还有,最高位的进位问题要最后特殊处理一下.*/
 
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        
+
         ListNode* res = new ListNode(-1);
         ListNode* curr = res;
         int carry = 0;
@@ -32,5 +32,3 @@ public:
         return res->next;
     }
 };
-
-
