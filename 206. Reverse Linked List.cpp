@@ -1,3 +1,6 @@
+/*Iterative solution: 在原链表之前建立一个dummy node，因为首节点会变，然后从head开始，
+将之后的一个节点移到dummy node之后，重复此操作知道head成为末节点为止*/
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
