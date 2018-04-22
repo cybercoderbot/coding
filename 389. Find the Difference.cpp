@@ -16,7 +16,8 @@ Explanation:
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        // 我们也可以使用位操作Bit Manipulation来做，利用xor的性质，相同位返回0，这样相同的字符都抵消了，剩下的就是后加的那个字符
+        // 我们也可以使用位操作Bit Manipulation来做，利用xor的性质，相同位返回0，这样相同的字符都抵消了，
+        // 剩下的就是后加的那个字符
         // Be careful how ans is initialized
         char ans = 0;
         for (char c : s) ans ^= c;
