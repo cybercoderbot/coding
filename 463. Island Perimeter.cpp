@@ -11,13 +11,12 @@ Example:
  [1,1,0,0]]
 Answer: 16 */
 
+/*对于每个岛屿格子先默认加上四条边，然后检查其左面和上面是否有岛屿格子，
+有的话分别减去两条边，即得正确的结果*/
 
 class Solution {
 public:
-    int islandPerimeter(vector<vector<int>>& grid) {
-        /*对于每个岛屿格子先默认加上四条边，然后检查其左面和上面是否有岛屿格子，
-        有的话分别减去两条边，即得正确的结果*/
-        
+    int islandPerimeter(vector<vector<int>>& grid) {        
         if (grid.empty()) return 0;
         int count = 0;
         for (int i=0; i<grid.size(); i++){
