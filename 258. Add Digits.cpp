@@ -6,13 +6,13 @@ Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one
 Follow up:
 Could you do it without any loop/recursion in O(1) runtime?*/
 
+/*这道题让我们求数根，所谓树根，就是将大于10的数的各个位上的数字相加，若结果还大于0的话，
+则继续相加，直到数字小于10为止。那么根据这个性质，我们可以写出: */
+
 
 class Solution {
 public:
-    int addDigits(int num) {
-        /*这道题让我们求数根，所谓树根，就是将大于10的数的各个位上的数字相加，若结果还大于0的话，
-        则继续相加，直到数字小于10为止。那么根据这个性质，我们可以写出: */
-        
+    int addDigits(int num) {      
         while (num >= 10){
             int sum = 0;
             while (num>0){
