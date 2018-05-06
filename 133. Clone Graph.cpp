@@ -42,6 +42,30 @@ Compare the order in which nodes are displayed, if the values are same but the a
 the traversals than the cloned graph is correct.
 **/
 
+class Solution{
+public:
+    UndirectedGraphNode* cloneGraph(UndirectedGraphNode *src){
+        if(!src) return NULL;
+        unordered_map<int, UndirectedGraphNode*> m;
+        return clone(src, m);
+    }
+    UndirectedGraphNode* clone(UndirectedGraphNode *src, unordered_map<int,UndirectedGraphNode*> &m){
+        if(!src) return NULL;
+        else if(m.count[src->label]){
+            return m[src->label];
+        }
+        else{
+            UndirectedGraphNode *newNode = new UndirectedGraphNode(src->label);
+            m[node->label] = newNode;
+            for (int i=0; i<src.neighbors.size(); i++){
+                UndirectedGraphNode *nbrsOfNbr = clone(src.neighbors[i], m);
+                (newNode->neighbors).push_back(nbrsOfNbr);
+            }
+        }
+        return newNode;
+    }
+};
+
 class Solution {
 public:
     UndirectedGraphNode *cloneGraph(UndirectedGraphNode *src) {
@@ -85,12 +109,16 @@ public:
         // Return the address of cloned src Node
         return m[src];
         
-        
-/*
-     用一个hash table记录原图节点和复制图节点间的对应关系，以防止重复建立节点。
+    }
+};
+
+
+/*   用一个hash table记录原图节点和复制图节点间的对应关系，以防止重复建立节点。
      和那题的不同在于遍历原图相对比linked list的情况复杂一点。可以用BFS或DFS来遍历原图。
-     而hash table本身除了记录对应关系外，还有记录原图中每个节点是否已经被visit的功能。
-        
+     而hash table本身除了记录对应关系外，还有记录原图中每个节点是否已经被visit的功能。*/
+class Solution {
+public:
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *src) {
         if(!src) return NULL;
         UndirectedGraphNode *p1 = src;
         UndirectedGraphNode *p2 = new UndirectedGraphNode(src->label);
@@ -117,9 +145,6 @@ public:
                 }
             }
         }
-        
         return ht[src];
-*/
-        
     }
 };
