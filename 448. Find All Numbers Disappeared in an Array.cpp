@@ -18,7 +18,7 @@ public:
         vector<int> ans;
         int N = nums.size();
         
-        // Iterate each number in nums (find existing numbers)
+        // Iterate each number in nums (find existing numbers) 
         for (int n : nums){
             int m = abs(n);
             nums[m-1] = -1 * abs(nums[m-1]);
