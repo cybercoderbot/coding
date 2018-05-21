@@ -51,18 +51,18 @@ public:
     }
     UndirectedGraphNode* clone(UndirectedGraphNode *src, unordered_map<int,UndirectedGraphNode*> &m){
         if(!src) return NULL;
-        else if(m.count[src->label]){
+        else if(m.count(src->label)){
             return m[src->label];
         }
         else{
             UndirectedGraphNode *newNode = new UndirectedGraphNode(src->label);
-            m[node->label] = newNode;
-            for (int i=0; i<src.neighbors.size(); i++){
-                UndirectedGraphNode *nbrsOfNbr = clone(src.neighbors[i], m);
+            m[src->label] = newNode;
+            for (int i=0; i<src->neighbors.size(); i++){
+                UndirectedGraphNode *nbrsOfNbr = clone(src->neighbors[i], m);
                 (newNode->neighbors).push_back(nbrsOfNbr);
             }
+            return newNode;
         }
-        return newNode;
     }
 };
 
