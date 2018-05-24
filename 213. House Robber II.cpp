@@ -21,17 +21,16 @@ public:
         return max(x, y);
     }
     
-    int rob(vector<int>& nums, int x0, int x1){
-        if (x1 - x0 <= 1) return nums[x0];
-        vector<int> dp(x1, 0);
-        dp[x0] = nums[x0];
-        dp[x0 + 1] = max(nums[x0], nums[x0 + 1]);
-        for (int i=2; i< x1; i++){
+    int rob(vector<int>& nums, int L, int R){
+        if (R - L <= 1) return nums[L];
+        vector<int> dp(R, 0);
+        dp[L] = nums[L];
+        dp[L + 1] = max(nums[L], nums[L + 1]);
+        for (int i=2; i< R; i++){
             dp[i] = max(nums[i] + dp[i-2], dp[i-1]);
         }
-        return dp.back();
+        return dp[R-1];
     }
 };
-
 
 
