@@ -20,10 +20,10 @@ public:
         if (!nums.size()) return 0;
         int mid = nums.size() / 2;
         TreeNode* root = new TreeNode(nums[mid]);
-        vector<int> nums_left( nums.begin(), nums.begin() + mid);
-        vector<int> nums_right(nums.begin() + mid + 1, nums.end());
-        root->left =  sortedArrayToBST(nums_left);
-        root->right = sortedArrayToBST(nums_right);
+        vector<int> numsLeft (nums.begin(), nums.begin() + mid);
+        vector<int> numsRight (nums.begin() + mid + 1, nums.end());
+        root->left =  sortedArrayToBST(numsLeft);
+        root->right = sortedArrayToBST(numsRight);
         return root;
     }
 };
