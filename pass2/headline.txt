@@ -1,0 +1,64 @@
+About the job
+About The Technology Department
+
+https://www.linkedin.com/in/yuhwang/
+
+The Technology team at Bridgewater engineers systems to understand the world. These systems synthesize and industrialize our global understanding into a hive mind of macroeconomic knowledge which enables us to educate and collaborate with the world’s most influential central banks and policy makers and carefully and strategically manage the world’s most important capital. Our technologists are engineering highly available, high performing and highly secure cloud platforms and infrastructure which support and scale our investing operations.
+
+
+Position Responsibilities
+
+
+We are seeking machine learning research engineers to join our data science team. We are a fast growing, ambitious, and collaborative team with the mandate to identify areas within Bridgewater where machine learning will improve our investment outcomes. We use machine learning methodologies to drive value throughout the investment pipeline, on problems like trade execution, portfolio construction, and signal generation. A successful candidate will collaborate with our research scientists, senior investors, and platform engineers on model building, deployment, and scaling. The individual will work on projects requiring complex machine learning models with high investment value and difficult engineering challenges throughout the stack from infrastructure, platform to algorithmic and visualization development. A successful candidate will have the opportunity to own broad swathes of investment research and participate actively in the idea generation and the productionization of research.
+
+
+We think you’ll click with us if you:
+
+
+Are passionate for understanding and applying the latest machine-learning techniques
+Can drive complex, high-value ML projects involving multiple partners to success, on time
+Act as an owner, assume responsibility and drive issues to resolution
+Constantly raise the bar, exploring new, unique solutions to established and emerging issues
+Anticipate problems and complications, and formulate solutions to unblock the progress of the project
+Can balance pragmatism, excellence, and agility with good logic
+Can prioritize and organize many concurrent threads across different initiatives whilst balancing risk.
+
+You’ll drive the following responsibilities:
+
+
+Developing and validating models to answer complex investment questions
+Creating and deploying new ML systems and experiments in a production environment
+Partnering with senior investors to ensure alignment with Bridgewater’s investment understanding
+Collaborating with engineers to drive productionization of new methodologies
+
+Position Requirements:
+
+
+Excellent quantitative background in machine learning, statistics, and experimental design
+Proven track-record of building ML training and inference pipelines with unique ML models for regression problems
+Strong knowledge of the latest ML statistical techniques and ability to pragmatically apply to problems
+Capability to efficiently deploy and scale validated models
+
+Minimum Qualifications:
+
+
+Degree from an accredited undergraduate institution with excellent academic track-record in Computer Science, Statistics or related field. Advanced degree preferred.
+Exceptional experience in R / Python with particularly track-record writing performant and maintainable code
+Working knowledge of causal inference and C/C++ preferred, but not required
+
+Bridgewater Associates Company Overview
+
+
+Bridgewater Associates is a premier asset management firm, focused on delivering unique insight and partnership for the most sophisticated global institutional investors. Our investment process is driven by a tireless pursuit to understand how the world's markets and economies work - using cutting edge technology to validate and execute on timeless and universal investment principles.
+
+
+Powering this engine requires a diverse community of investment professionals, technologists, managers and other specialists. The firm attracts independent thinkers who share a commitment to achieving excellence in their respective lines of work and operating in our unique culture. Bridgewater was founded in 1975 and its principal offices are located in Westport, CT - an hour outside New York City.
+
+
+One of our core priorities at Bridgewater is to enable our employees to build a great life and career, and we believe our benefits are an important extension of that philosophy. Bridgewater offers a competitive suite of benefits including health insurance with 100% premium coverage, a 401(k) plan with generous employer match, fully paid paternal leave, a competitive PTO package, workplace flexibility, adoption and egg-freezing assistance, wellness offerings such as on-site gyms, free meals, healthy snacks, and meditation rooms, and an engaged and active community that includes company events, affinity networks and extracurricular interest groups.
+
+
+Bridgewater reserves the right to change its current benefits program at any time, in a manner that is consistent with applicable federal and state regulations.
+
+
+This job description is not a contract and confers no contractual rights, privileges, or benefits on any applicant or potential applicant. Bridgewater has the right to change any and all terms of this job description, including, but not limited to, job responsibilities, qualifications and benefits. Nothing in this job description constitutes an offer or guarantee of employment.
