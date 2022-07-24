@@ -21,19 +21,19 @@ class Solution(object):
         """
         nums.sort()
         N, result = len(nums), []
-        
+
         if N < 3:
             return []
-        
+
         for i in range(N):
             if i >= 1 and nums[i] == nums[i-1]:
                 continue
-                
-            target = -1 * nums[i] 
+
+            target = -1 * nums[i]
             left, right = i+1, N-1
-            
-            while left<right:
-                if nums[left]+nums[right] == target:
+
+            while left < right:
+                if nums[left] + nums[right] == target:
                     result.append([nums[i], nums[left], nums[right]])
                     left += 1
                     while left<right and nums[left] == nums[left-1]:

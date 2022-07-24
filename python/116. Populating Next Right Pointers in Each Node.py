@@ -1,22 +1,86 @@
-# Definition for binary tree with next pointer.
-# class TreeLinkNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-#         self.next = None
+"""
+116. Populating Next Right Pointers in Each Node
+Medium
+
+You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
+
+struct Node {
+  int val;
+  Node *left;
+  Node *right;
+  Node *next;
+}
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+ 
+
+Example 1:
+
+
+Input: root = [1,2,3,4,5,6,7]
+Output: [1,#,2,3,#,4,5,6,7,#]
+Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
+Example 2:
+
+Input: root = []
+Output: []
+"""
+
+# Definition for a Node.
+# class Node:
+#     def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#         self.next = next
+
 
 class Solution:
-    # @param root, a tree link node
-    # @return nothing
+    def connect(self, root: 'Node') -> 'Node':
+        """truly O(1) space
+        O(1) space if not counting recursion stack"""
+        head = root
+        while head and head.left: 
+            node = head
+            while node: 
+                node.left.next = node.right
+                if node.next: 
+                    node.right.next = node.next.left
+                node = node.next
+            head = head.left 
+
+        return root
+
+
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        """O(logN) space"""
+        
+        def helper(node):
+            """Connect node's children"""
+            if node and node.left: 
+                node.left.next = node.right
+                if node.next: 
+                    node.right.next = node.next.left
+                helper(node.left) 
+                helper(node.right)
+        
+        helper(root)
+
+        return root
+
+
+class Solution:
+
     def connect(self, root):
+        # @param root, a tree link node
+        # @return nothing
         
-        # 这道题实际上是树的层序遍历的应用，既然是遍历，就有递归和非递归两种方法，最好两种方法都要掌握，
-        # 都要会写。下面先来看递归的解法，由于是完全二叉树，所以若节点的左子结点存在的话，其右子节点必定
-        # 存在，所以左子结点的next指针可以直接指向其右子节点，对于其右子节点的处理方法是，判断其父节点的
-        # next是否为空，若不为空，则指向其next指针指向的节点的左子结点，若为空则指向None
-        
-        if not root: return
+        if not root: 
+            return
         if root.left:
             root.left.next = root.right
         if root.right:

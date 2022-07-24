@@ -8,7 +8,8 @@ class Solution(object):
         # 这题相对于I来说更加容易，因为不限制交易次数，
         # 我们在第i天买入，如果发现i + 1天比i高，那么就可以累加到利润里面。
         
-        if len(prices) <= 1: return 0
+        if len(prices) <= 1: 
+            return 0
         
         profit = 0
         

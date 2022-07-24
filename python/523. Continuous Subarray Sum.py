@@ -44,14 +44,10 @@ class Solution(object):
         for i, n in enumerate(nums):
             cumsum += n
             if k:
-                # remainder
-                r = cumsum % k
-            else:
-                r = cumsum
-                
-            if r not in d: 
-                d[r] = i
-            elif d[r] + 2 <= i: 
+                cumsum %= k
+            if cumsum not in d: 
+                d[cumsum] = i
+            elif d[cumsum] + 2 <= i: 
                 return True
         return False
 

@@ -26,11 +26,13 @@ class Solution(object):
             res += preorder_traverse(root.right, val-root.val)
             return res
             
-        if not root: return 0
-        ans = preorder_traverse(root, num)
-        ans += self.pathSum(root.left, num)
-        ans += self.pathSum(root.right, num)
-        return ans
+        if not root: 
+            return 0
+        count = preorder_traverse(root, num)
+        count += self.pathSum(root.left, num)
+        count += self.pathSum(root.right, num)
+        
+        return count
         
         
         
