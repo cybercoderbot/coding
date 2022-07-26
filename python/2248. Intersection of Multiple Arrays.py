@@ -25,5 +25,4 @@ class Solution:
         res = set(nums[0])
         for x in nums[1:]:
             res = res & set(x)
-
         return sorted(list(res))

@@ -12,7 +12,6 @@ Find the shortest path starting from node s and ending at node t. Generate step-
 Return the step-by-step directions of the shortest path from node s to node t.
 
  
-
 Example 1:
 Input: root = [5,1,2,3,null,6,4], startValue = 3, destValue = 6
 Output: "UURL"

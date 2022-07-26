@@ -1,38 +1,52 @@
-class Solution(object):
-    def summaryRanges(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[str]
-        """
+"""
+228. Summary Ranges
+Easy
 
-        # 这道题给定我们一个有序数组，让我们总结区间，具体来说就是让我们找出连续的序列，
-        # 然后首尾两个数字之间用个“->"来连接，那么我只需遍历一遍数组即可，每次检查下一个数
-        # 是不是递增的，如果是，则继续往下遍历，如果不是了，我们还要判断此时是一个数还是一个序列，
-        # 一个数直接存入结果，序列的话要存入首尾数字和箭头“->"。我们需要两个变量i和d，其中i是连续序列
-        # 起始数字的位置，d是连续数列的长度，当d为1时，说明只有一个数字，若大于1，则是一个连续序列
+You are given a sorted unique integer array nums.
 
-        # i, n = 0, len(nums)
-        # ans = []
-        # while i < n:
-        #     d = 1
-        #     while i+d<n and nums[i+d] - nums[i] == d:
-        #         d += 1
-        #     if d <= 1:
-        #         s = str(nums[i])
-        #     else:
-        #         s = str(nums[i]) + "->" + str(nums[i+d-1])
-        #     ans.append(s)
-        #     i += d
-        # return ans
+A range [a,b] is the set of all integers from a to b (inclusive).
 
-        i, n = 0, len(nums)
-        ans = []
-        while i < n:
-            i0, s = i, str(nums[i])
-            while i+1 < n and nums[i+1] - nums[i] == 1:
-                i += 1
-            if i > i0:
-                s += "->" + str(nums[i])
-            ans.append(s)
-            i += 1
-        return ans
+Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.
+
+Each range [a,b] in the list should be output as:
+
+"a->b" if a != b
+"a" if a == b
+ 
+
+Example 1:
+
+Input: nums = [0,1,2,4,5,7]
+Output: ["0->2","4->5","7"]
+Explanation: The ranges are:
+[0,2] --> "0->2"
+[4,5] --> "4->5"
+[7,7] --> "7"
+Example 2:
+
+Input: nums = [0,2,3,4,6,8,9]
+Output: ["0","2->4","6","8->9"]
+Explanation: The ranges are:
+[0,0] --> "0"
+[2,4] --> "2->4"
+[6,6] --> "6"
+[8,9] --> "8->9"
+"""
+
+
+class Solution:
+
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        nums.append(-1)
+        start, res = nums[0], []
+
+        for pre, cur in zip(nums[:-1], nums[1:]):
+            if cur - pre == 1:
+                continue
+            elif start != pre:
+                res.append(str(start) + "->" + str(pre))
+            else:
+                res.append(str(start))
+            start = pre = cur
+
+        return res

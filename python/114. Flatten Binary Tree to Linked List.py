@@ -1,26 +1,84 @@
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+"""
+114. Flatten Binary Tree to Linked List
+Medium
+
+Given the root of a binary tree, flatten the tree into a "linked list":
+
+The "linked list" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.
+The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+ 
+
+Example 1:
+Input: root = [1,2,5,3,4,null,6]
+Output: [1,null,2,null,3,null,4,null,5,null,6]
+
+This solution is inspired by this thread (and a few other similar ones). The original solution is concise, efficient and reasonably easy to understand. The only shortcoming is that a global-ish variable is used. Below alternative implementation aims to overcome this weakness.
+
+An inner function fn is defined to flatten the sub-tree rooted at node to a linked list. The input variable tail is to be added to the linked list. In this way, we can call fn twice
+
+head = fn(node.right, tail) #returned head of linked list is to be used as tail in below call
+head = fn(node.left, head)
+node.right = head
+node.left = None
+
+This will organize the tree as the desired linked list. 
+Below implementation is an even shorter summary of above thought.
+"""
+
+
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        def dfs(node, tail):
+            """Return head of flattened binary tree"""
+            if not node:
+                return tail
+
+            left = node.left
+            tail = dfs(node.right, tail)
+            node.left = None
+            node.right = dfs(left, tail)
+
+            return node
+
+        dfs(node=root, tail=None)
+
+
+class Solution:
+    """simple preorder traversal by recursion"""
+
+    def dfs(self, root):
+        if self.pre:
+            self.pre.right = root
+            self.pre.left = None
+
+        self.pre = root
+        right = root.right
+
+        if root.left:
+            self.dfs(root.left)
+        if right:
+            self.dfs(right)
+
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        if root is None:
+            return
+        self.pre = None
+        self.dfs(root)
+
 
 class Solution(object):
-    def flatten(self, root):
+    def flatten(self, root: TreeNode) -> None:
         """
-        :type root: TreeNode
         :rtype: void Do not return anything, modify root in-place instead.
         """
 
-        # 这道题要求把二叉树展开成链表，根据展开后形成的链表的顺序分析出是使用先序遍历，
-        # 那么只要是数的遍历就有递归和非递归的两种方法来求解，这里我们也用两种方法来求解。
-        # 下面我们再来看非迭代版本的实现，这个方法是从根节点开始出发，先检测其左子结点是否存在，
-        # 如存在则将根节点和其右子节点断开，将左子结点及其后面所有结构一起连到原右子节点的位置，
-        # 把原右子节点连到元左子结点最后面的右子节点之后。
-
         # Non-recursive preorder traversal
-        # in the flattened tree, each node's right child points to the next node of a pre-order traversal.
-        current = TreeNode(None)
+        # In the flattened tree, each node's right child points to the next node of a pre-order traversal.
+
+        cur = TreeNode(None)
         stack = [root]
 
         while stack:
@@ -28,6 +86,6 @@ class Solution(object):
             if node:
                 stack.append(node.right)
                 stack.append(node.left)
-                current.right = node
-                current.left = None
-                current = node
+                cur.right = node
+                cur.left = None
+                cur = node

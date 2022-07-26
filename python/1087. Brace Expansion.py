@@ -11,7 +11,6 @@ For example, if s = "a{b,c}", the first character is always 'a', but the second 
 
 Return all words that can be formed in this manner, sorted in lexicographical order.
 
- 
 
 Example 1:
 Input: s = "{a,b}c{d,e}f"

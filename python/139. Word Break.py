@@ -1,18 +1,57 @@
-'''
-Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented 
-into a space-separated sequence of one or more dictionary words. You may assume the dictionary does not contain duplicate 
-words.
+"""
+139. Word Break
+Medium
 
-For example, given
-s = "leetcode",
-dict = ["leet", "code"].
+Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
 
-Return true because "leetcode" can be segmented as "leet code".
+Note that the same word in the dictionary may be reused multiple times in the segmentation.
 
-UPDATE (2017/1/4):
-The wordDict parameter had been changed to a list of strings (instead of a set of strings). Please reload the code 
-definition to get the latest changes. 
-'''
+ 
+
+Example 1:
+Input: s = "leetcode", wordDict = ["leet","code"]
+Output: true
+Explanation: Return true because "leetcode" can be segmented as "leet code".
+
+Example 2:
+Input: s = "applepenapple", wordDict = ["apple","pen"]
+Output: true
+Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+Note that you are allowed to reuse a dictionary word.
+"""
+
+
+"""
+The idea is the following:
+
+d is an array that contains booleans
+
+d[i] is True if there is a word in the dictionary that ends at ith index of s AND d is also True at the beginning of the word
+
+Example:
+
+s = "leetcode"
+
+words = ["leet", "code"]
+
+d[3] is True because there is "leet" in the dictionary that ends at 3rd index of "leetcode"
+
+d[7] is True because there is "code" in the dictionary that ends at the 7th index of "leetcode" AND d[3] is True
+
+The result is the last index of d.
+"""
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        M = len(s)
+        dp = [False] * M
+        for i in range(M):
+            for w in wordDict:
+                N = len(w)
+                if w == s[i-N+1:i+1] and (dp[i-N] or i+1 == N):
+                    dp[i] = True
+        return dp[-1]
 
 
 class Solution(object):

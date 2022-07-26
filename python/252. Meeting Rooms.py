@@ -4,7 +4,6 @@ Easy
 
 Given an array of meeting time intervals where intervals[i] = [starti, endi], determine if a person could attend all meetings.
 
- 
 Example 1:
 Input: intervals = [[0,30],[5,10],[15,20]]
 Output: false
@@ -17,6 +16,7 @@ Output: true
 
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
+        """Sort intervals"""
         intervals.sort()
         # sorted(intervals, key=lambda x: x[0])
         return all(pre[1] <= nxt[0] for pre, nxt in zip(intervals[:-1], intervals[1:]))

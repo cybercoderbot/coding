@@ -27,6 +27,13 @@ Left and right sub-array become left and right sub-tree respectively.
 
 """
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
 
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
@@ -40,6 +47,24 @@ class Solution:
             left = build(low, mid)
             right = build(mid+1, high)
 
-            return TreeNode(nums[mid], left, right)
+            return TreeNode(val=nums[mid], left=left, right=right)
+
+        return build(0, len(nums))
+
+
+class Solution:
+    def arrayToBST(self, nums: List[int]) -> TreeNode:
+        nums.sort()
+
+        def build(low, high):
+            """Return BST using nums[low:high]"""
+            if low == high:
+                return None
+
+            mid = (low + high) // 2
+            left = build(low, mid)
+            right = build(mid+1, high)
+
+            return TreeNode(val=nums[mid], left=left, right=right)
 
         return build(0, len(nums))

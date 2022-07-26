@@ -8,8 +8,6 @@ A target index is an index i such that nums[i] == target.
 
 Return a list of the target indices of nums after sorting nums in non-decreasing order. If there are no target indices, return an empty list. The returned list must be sorted in increasing order.
 
- 
-
 Example 1:
 Input: nums = [1,2,5,2,3], target = 2
 Output: [1,2]
@@ -42,10 +40,10 @@ class Solution:
 
         num = 0
         start = 0
-        for n in nums:
-            if n < target:
+        for x in nums:
+            if x < target:
                 start += 1
-            elif n == target:
+            elif x == target:
                 num += 1
 
         return list(range(start, start+num))

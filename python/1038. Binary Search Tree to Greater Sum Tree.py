@@ -19,6 +19,10 @@ Example 2:
 Input: root = [0,null,1]
 Output: [1,null,1]
 
+"""
+
+"""
+Solution:
 
 We need to do the work from biggest to smallest, right to left.
 pre will record the previous value the we get, which the total sum of bigger values.
@@ -29,6 +33,22 @@ Complexity
 Time O(n)
 Space O(height)
 """
+
+
+class Solution:
+    pre = 0
+
+    def bstToGst(self, root: TreeNode) -> TreeNode:
+        if root.right:
+            self.bstToGst(root.right)
+
+        self.pre += root.val
+        root.val = self.pre
+
+        if root.left:
+            self.bstToGst(root.left)
+
+        return root
 
 
 class Solution:
@@ -43,19 +63,4 @@ class Solution:
             return res
 
         reversedInorder(root, 0)
-        return root
-
-
-class Solution:
-    val = 0
-
-    def bstToGst(self, root: TreeNode) -> TreeNode:
-        if root.right:
-            self.bstToGst(root.right)
-
-        self.val += root.val
-        root.val = self.val
-
-        if root.left:
-            self.bstToGst(root.left)
         return root

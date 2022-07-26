@@ -33,6 +33,7 @@ And simply iterate through the binary strings while putting the flipped bit of i
 
 	for(int i=0; i<nums.size(); i++) 
 		ans+= nums[i][i]=='0' ? '1' : '0';
+        
 I have created this image explaining the process for test case ["111", "001", "010"] :
 """
 

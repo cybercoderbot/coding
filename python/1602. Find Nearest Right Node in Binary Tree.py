@@ -4,8 +4,6 @@ Medium
 
 Given the root of a binary tree and a node u in the tree, return the nearest node on the same level that is to the right of u, or return null if u is the rightmost node in its level.
 
-
-
 Example 1:
 Input: root = [1,2,3,null,4,5,6], u = 4
 Output: 5
@@ -24,13 +22,13 @@ Traverse the tree and return the node to the right of u.
 class Solution:
     def findNearestRightNode(self, root: TreeNode, u: TreeNode) -> TreeNode:
         """
-        BFS by level
+        BFS traverse the tree by level and return the node to the right of u.
         - Time complexity O(N)
         - Space complexity O(N)
-
         """
-       if not root:
-            return []
+
+        if not root:
+            return None
 
         queue = [root]
         while queue:
@@ -45,6 +43,8 @@ class Solution:
                 level.append(node.right)
                 level.append(node.left)
             queue = level
+
+        retuen None
 
 
 class Solution:
@@ -71,6 +71,8 @@ class Solution:
             if node.left:
                 queue.append((node.left, depth+1))
 
+        return None
+
 
 class Solution:
     def findNearestRightNode(self, root: TreeNode, u: TreeNode) -> TreeNode:
@@ -80,7 +82,7 @@ class Solution:
         - Space complexity O(N)
         """
 
-       seen = {}
+        seen = {}
         stack = [(root, 0)]
         while stack:
             node, depth = stack.pop()
@@ -92,3 +94,4 @@ class Solution:
             if node.right:
                 stack.append((node.right, depth+1))
 
+        return None

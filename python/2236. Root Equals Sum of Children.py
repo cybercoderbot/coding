@@ -6,8 +6,6 @@ You are given the root of a binary tree that consists of exactly 3 nodes: the ro
 
 Return true if the value of the root is equal to the sum of the values of its two children, or false otherwise.
 
- 
-
 Example 1:
 Input: root = [10,4,6]
 Output: true

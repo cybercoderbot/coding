@@ -6,8 +6,6 @@ Given the root of a binary tree and an integer targetSum, return true if the tre
 
 A leaf is a node with no children.
 
- 
-
 Example 1:
 Input: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
 Output: true
@@ -30,21 +28,24 @@ Explanation: Since the tree is empty, there are no root-to-leaf paths.
 """
 
 
-# Adding an iterative implementation
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], target: int) -> bool:
+        """
+        Iteration
+        Use stack to store [node, presum] pair while traversing the tree
+        """
         stack = [(root, 0)]
         while stack:
-            node, val = stack.pop()
+            node, presum = stack.pop()
             if node:
-                val += node.val
-                if not node.left and not node.right and val == target:
+                presum += node.val
+                if not node.left and not node.right and presum == target:
                     return True
 
                 if node.right:
-                    stack.append((node.right, val))
+                    stack.append((node.right, presum))
                 if node.left:
-                    stack.append((node.left, val))
+                    stack.append((node.left, presum))
 
         return False
 
@@ -53,13 +54,15 @@ class Solution:
     def hasPathSum(self, root: TreeNode, target: int) -> bool:
 
         def dfs(node, x):
-            # null node
             if not node:
                 return False
-            # leaf node
+
             elif not node.left and not node.right:
                 return node.val == x
+
             else:
-                return dfs(node.left, x-node.val) or dfs(node.right, x-node.val)
+                left = dfs(node.left, x-node.val)
+                right = dfs(node.right, x-node.val)
+                return left or right
 
         return dfs(root, target)

@@ -2,8 +2,6 @@
 189. Rotate Array
 Given an array, rotate the array to the right by k steps, where k is non-negative.
 
- 
-
 Example 1:
 
 Input: nums = [1,2,3,4,5,6,7], k = 3
@@ -45,6 +43,10 @@ Then, we copy the new array to the original one.
 
 class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
+        """
+        temp[(i + k) % N] = nums[i]
+        nums[:] = temp
+        """
         N = len(nums)
         temp = [0] * N
 

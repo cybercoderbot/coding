@@ -1,33 +1,65 @@
-class Solution(object):
-    def numIslands(self, grid):
-        """
-        :type grid: List[List[str]]
-        :rtype: int
-        """
+"""
+200. Number of Islands
+Medium
 
-        # 这道求岛屿数量的题的本质是求矩阵中连续区域的个数，很容易想到需要用深度优先搜索DFS来解，
-        # 对于一个为‘1’且未被访问过的位置，我们递归进入其上下左右位置上为‘1’的数，并将其grid对应值赋为
-        # v (visited)，继续进入其所有相连的邻位置，这样可以将这个连通区域所有的数找出来，并将其对应的
-        # grid中的值赋v，找完次区域后，我们将结果count自增1，然后我们在继续找下一个为‘1’且未被访问过的位置，
-        # 以此类推直至遍历完整个原数组即可得到最终结果
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+
+Example 1:
+
+Input: grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+Output: 1
+
+Example 2:
+Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+Output: 3
+"""
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        """
+        Iterate through each of the cell. If it is an island (1):
+        1) Increase the res by 1
+        2) DFS to mark all adjacent islands
+        """
 
         if not grid:
             return 0
 
-        count = 0
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] == '1':
-                    self.dfs(grid, i, j)
-                    count += 1
-        return count
+        M, N = len(grid), len(grid[0])
+        res = 0
+        for i, j in product(range(M), range(N)):
+            if grid[i][j] == '1':
+                res += 1
+                # Mark all neighbors of this node as visited
+                self.markVisited(grid, i, j)
+        return res
 
-    def dfs(self, grid, i, j):
-        if i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] != '1':
+    def markVisited(self, grid, i, j):
+        """Change visited nodes to #"""
+
+        M, N = len(grid), len(grid[0])
+        inbound = 0 <= i < M and 0 <= j < N
+        if not inbound or grid[i][j] != '1':
             return
 
-        grid[i][j] = 'v'
-        self.dfs(grid, i+1, j)
-        self.dfs(grid, i-1, j)
-        self.dfs(grid, i, j+1)
-        self.dfs(grid, i, j-1)
+        grid[i][j] = '#'
+        self.markVisited(grid, i+1, j)
+        self.markVisited(grid, i-1, j)
+        self.markVisited(grid, i, j+1)
+        self.markVisited(grid, i, j-1)
+
+        return

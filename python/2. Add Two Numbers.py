@@ -8,8 +8,6 @@ Add the two numbers and return the sum as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
- 
-
 Example 1:
 Input: l1 = [2,4,3], l2 = [5,6,4]
 Output: [7,0,8]
@@ -45,26 +43,5 @@ class Solution:
             node.next = ListNode(carry % 10)
             node = node.next
             carry //= 10
-
-        return dummy.next
-
-
-class Solution:
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-
-        dummy = node = ListNode(0)
-        carry = 0
-        while l1 or l2 or carry:
-            val1 = l1.val if l1 else 0
-            val2 = l2.val if l2 else 0
-            valsum = val1 + val2 + carry
-            carry = valsum // 10
-
-            nextnode = ListNode(valsum % 10)
-            node.next = nextnode
-            node = nextnode
-
-            l1 = l1.next if l1 else None
-            l2 = l2.next if l2 else None
 
         return dummy.next

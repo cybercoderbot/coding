@@ -8,8 +8,6 @@ i + minJump <= j <= min(i + maxJump, s.length - 1), and
 s[j] == '0'.
 Return true if you can reach index s.length - 1 in s, or false otherwise.
 
- 
-
 Example 1:
 Input: s = "011010", minJump = 2, maxJump = 3
 Output: true
@@ -27,14 +25,18 @@ Output: false
 class Solution:
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
         """BFS"""
+
         queue, left = [0], 0
         for i in queue:
             if i == len(s)-1:
                 return True
-            low = max(left+1, i+minJump)
-            high = min(i+maxJump+1, len(s))
+
+            low = max(left + 1, i + minJump)
+            high = min(i + maxJump + 1, len(s))
+
             for j in range(low, high):
                 if s[j] == "0":
                     queue.append(j)
             left = max(left, i + maxJump)
+
         return False

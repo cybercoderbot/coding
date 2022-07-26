@@ -29,11 +29,16 @@ Output: [1]
 
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        """
+        left -> right -> root
+        """
 
         if not root:
             return []
-        else:
-            return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val]
+
+        left = self.postorderTraversal(root.left)
+        right = self.postorderTraversal(root.right)
+        return left + right + [root.val]
 
 
 class Solution:
@@ -41,7 +46,7 @@ class Solution:
 
         def postorder(node):
             if not node:
-                return
+                return []
             postorder(node.left)
             postorder(node.right)
             res.append(node.val)

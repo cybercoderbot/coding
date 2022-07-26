@@ -33,28 +33,26 @@ Explanation:
 There is only one non-empty subarray, which is [1].
 The alternating subarray sum is 1.
 
+"""
 
-
-
+"""
+Solution
 At each index we have 3 options to append the new number num = nums[i] to the subarray:
 
 Add num to the subarray that ends with - . In that case we add. Math.max(lastMinus + num, ...)
 Add num to the subarray that ends with+. Int that case we substract it. lastPlus - num
-Start a new subarray. Because every subarray starts with +, the only way is to just take the num. Math.max(..., num)
-
-"""
+Start a new subarray. Because every subarray starts with +, the only way is to just take the num. Math.max(..., num)"""
 
 
 class Solution:
     def maximumAlternatingSubarraySum(self, nums: List[int]) -> int:
 
-        res = -float('inf')
-        lastMinus, lastPlus = -float('inf'), -float('inf')
+        res = lastMinus = lastPlus = -inf
 
-        for n in nums:
+        for x in nums:
             temp = lastPlus
-            lastPlus = max(lastMinus + n, n)
-            lastMinus = temp - n
+            lastPlus = max(lastMinus + x, x)
+            lastMinus = temp - x
             res = max(res, lastMinus, lastPlus)
 
         return res

@@ -7,7 +7,6 @@ Write a function to find the longest common prefix string amongst an array of st
 If there is no common prefix, return an empty string "".
 
  
-
 Example 1:
 
 Input: strs = ["flower","flow","flight"]
@@ -28,6 +27,7 @@ class Solution:
         """
         if not strs:
             return ""
+
         shortest = min(strs, key=len)
 
         for i, c in enumerate(shortest):

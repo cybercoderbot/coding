@@ -36,7 +36,7 @@ lRUCache.get(4);    // return 4
 
 class LRUCache(object):
 
-    # OrderedDict有序字典法
+    # OrderedDict
     # https://www.kunxi.org/blog/2014/05/lru-cache-in-python/
 
     # class collections.OrderedDict([items])

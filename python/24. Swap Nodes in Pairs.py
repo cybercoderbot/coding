@@ -19,7 +19,6 @@ Output: [1]
 
 """
 
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -59,8 +58,8 @@ class Solution(object):
         if not head or not head.next:
             return head
 
-        new_start = head.next.next
+        newhead = head.next.next
         head, head.next = head.next, head
-        head.next.next = self.swapPairs(new_start)
+        head.next.next = self.swapPairs(newhead)
 
         return head

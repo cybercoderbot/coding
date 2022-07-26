@@ -2,14 +2,11 @@
 1268. Search Suggestions System
 Medium
 
-
 You are given an array of strings products and a string searchWord.
 
 Design a system that suggests at most three product names from products after each character of searchWord is typed. Suggested products should have common prefix with searchWord. If there are more than three products with a common prefix return the three lexicographically minimums products.
 
 Return a list of lists of the suggested products after each character of searchWord is typed.
-
- 
 
 Example 1:
 Input: products = ["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mouse"
@@ -40,18 +37,18 @@ Hash table
 
 
 class Solution:
-    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
-        mp = defaultdict(list)
-        products = sorted(products)
+    def suggestedProducts(self, products: List[str], word: str) -> List[List[str]]:
+        m = defaultdict(list)
+        products.sort()
         for prod in products:
             for i in range(len(prod)):
-                mp[prod[:i+1]].append(prod)
+                m[prod[:i+1]].append(prod)
 
-        ans = []
-        N = len(searchWord)
+        res = []
+        N = len(word)
         for i in range(N):
-            ans.append(mp[searchWord[:i+1]][:3])
-        return ans
+            res.append(m[word[:i+1]][:3])
+        return res
 
 
 """
@@ -61,15 +58,15 @@ class Solution:
 
 
 class Solution:
-    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+    def suggestedProducts(self, products: List[str], word: str) -> List[List[str]]:
         products.sort()
-        ans = []
+        res = []
         N = len(products)
         low, high = 0, N-1
-        for i, c in enumerate(searchWord):
+        for i, c in enumerate(word):
             while low < N and (len(products[low]) <= i or products[low][i] < c):
                 low += 1
             while high >= 0 and (len(products[high]) <= i or c < products[high][i]):
                 high -= 1
-            ans.append(products[low: min(low+3, high+1)])
-        return ans
+            res.append(products[low: min(low+3, high+1)])
+        return res

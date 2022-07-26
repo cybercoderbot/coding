@@ -22,16 +22,44 @@ Output: false
 #         self.right = right
 
 
-def isReflective(t1, t2):
-    if not t1 and not t2:
+class Solution:
+    def isSymmetric(self, root):
+        """Iterative Solution"""
+
+        if root is None:
+            return True
+
+        stack = [(root.left, root.right)]
+        while stack:
+            left, right = stack.pop()
+            if left is None and right is None:
+                continue
+            if left is None or right is None:
+                return False
+            if left.val == right.val:
+                stack.append((left.left, right.right))
+                stack.append((left.right, right.left))
+            else:
+                return False
+
         return True
-    if not t1 or not t2:
-        return False
-    if t1.val != t2.val:
-        return False
-    return isReflective(t1.left, t2.right) and isReflective(t1.right, t2.left)
+
+
+class Solution:
+    def isReflective(self, root: Optional[TreeNode]) -> bool:
+
+        if not t1 and not t2:
+            return True
+        if not t1 or not t2:
+            return False
+
+        left = self.isReflective(t1.left, t2.right)
+        right = self.isReflective(t1.right, t2.left)
+
+        return t1.val == t2.val and left and right
 
 
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        return isReflective(root, root)
+        """Recursive Solution"""
+        return self.isReflective(root, root)

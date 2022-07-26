@@ -22,7 +22,6 @@ Input: list1 = [], list2 = [0]
 Output: [0]
 """
 
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -32,39 +31,42 @@ Output: [0]
 
 class Solution:
 
-    # Solution 1: iteration
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        Solution 1: Iteration
+        """
 
-        # maintain an unchanging reference to node ahead of the return node.
         dummy = ListNode(-1)
-        pre = dummy
+        node = dummy
 
         while list1 and list2:
             if list1.val <= list2.val:
-                pre.next = list1
+                node.next = list1
                 list1 = list1.next
             else:
-                pre.next = list2
+                node.next = list2
                 list2 = list2.next
-            pre = pre.next
+            node = node.next
 
-        # At least one of list1 and list2 can still have nodes at this point, so connect
-        # the non-null list to the end of the merged list.
-        pre.next = list1 or list2
+        node.next = list1 or list2
 
         return dummy.next
 
-    # Solution 2: recursion
+
+class Solution:
 
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        Solution 2: Recursion
+        """
 
-        if not list1:
-            return list2
-        elif not list2:
-            return list1
+        if not list1 or not list2:
+            return list2 or list1
+
         elif list1.val < list2.val:
             list1.next = self.mergeTwoLists(list1.next, list2)
             return list1
+
         else:
             list2.next = self.mergeTwoLists(list1, list2.next)
             return list2

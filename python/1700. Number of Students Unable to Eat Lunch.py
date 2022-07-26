@@ -12,12 +12,12 @@ This continues until none of the queue students want to take the top sandwich an
 
 You are given two integer arrays students and sandwiches where sandwiches[i] is the type of the ith sandwich in the stack (i = 0 is the top of the stack) and students[j] is the preference of the jth student in the initial queue (j = 0 is the front of the queue). Return the number of students that are unable to eat.
 
- 
+
 
 Example 1:
 
 Input: students = [1,1,0,0], sandwiches = [0,1,0,1]
-Output: 0 
+Output: 0
 Explanation:
 - Front student leaves the top sandwich and returns to the end of the line making students = [1,0,0,1].
 - Front student leaves the top sandwich and returns to the end of the line making students = [0,0,1,1].
@@ -34,28 +34,30 @@ Input: students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1]
 Output: 3
 
 
-Solution:
-Count students' preference of food to count.
-Now we iterate the food one by one,
-and see if any one in the left students queue will take it.
-
-We stop at sandwiches[i] if no one wants it, then N - i students are unable to eat.
-
-Complexity
-Time O(N)
-Space O(2)
-
 """
 
 
 class Solution:
     def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        """
+        Count students' preference of food to count.
+        Now we iterate the food one by one,
+        and see if any one in the left students queue will take it.
 
-        freq = collections.Counter(students)
-        N, i = len(students), 0
+        We stop at sandwiches[i] if no one wants it, then N-i students are unable to eat.
 
-        while i < N and freq[sandwiches[k]]:
-            freq[sandwiches[i]] -= 1
+        Complexity
+        Time O(N)
+        Space O(2)
+        """
+
+        counts = collections.Counter(students)
+        i, N = 0, len(students)
+
+        while i < N:
+            if not counts[sandwiches[i]]:
+                break
+            counts[sandwiches[i]] -= 1
             i += 1
 
         return N - i

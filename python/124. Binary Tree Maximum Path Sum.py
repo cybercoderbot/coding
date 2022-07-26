@@ -8,7 +8,6 @@ The path sum of a path is the sum of the node's values in the path.
 
 Given the root of a binary tree, return the maximum path sum of any non-empty path.
 
- 
 
 Example 1:
 Input: root = [1,2,3]
@@ -28,7 +27,7 @@ class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         """
         Algorithm:
-        Traverse the tree and at each node retrieve its max path sum of left node and right node. 
+        Traverse the tree and retrieve each node's max path sum of left and right node. 
         Compute the max path sum pass the current node and store it in ans.
 
         Time complexity O(N) 
@@ -39,13 +38,17 @@ class Solution:
             """Returns max path starting at node"""
             if node is None:
                 return 0
-            left = max(0, traverse(node.left))
-            right = max(0, traverse(node.right))
+
+            left = max(traverse(node.left), 0)
+            right = max(traverse(node.right), 0)
+
             res.append(left + node.val + right)
+
             return max(left, right) + node.val
 
         res = []
         traverse(root)
+
         return max(res)
 
 
@@ -57,15 +60,18 @@ class Solution:
 
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
-        self.res = float("-inf")
+        # res: max path starting at root
+        self.res = -inf
 
         def traverse(node):
             """Returns max path starting at node"""
             if node is None:
                 return 0
-            left = max(0, traverse(node.left))
-            right = max(0, traverse(node.right))
+
+            left = max(traverse(node.left), 0)
+            right = max(traverse(node.right), 0)
             self.res = max(self.res, left + node.val + right)
+
             return max(left, right) + node.val
 
         traverse(root)
@@ -74,34 +80,42 @@ class Solution:
 
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
-        ans = [float("-inf")]
+        # res: max path starting at root
+        res = [-inf]
 
         def traverse(node):
             """Returns max path starting at node"""
             if node is None:
                 return 0
-            left = max(0, traverse(node.left))
-            right = max(0, traverse(node.right))
-            ans[0] = max(ans[0], left + node.val + right)
+
+            left = max(traverse(node.left), 0)
+            right = max(traverse(node.right), 0)
+            res[0] = max(res[0], left + node.val + right)
+
             return max(left, right) + node.val
 
         traverse(root)
-        return ans[0]
+
+        return res[0]
 
 
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
-        ans = float("-inf")
+        # res: max path starting at root
+        res = -inf
 
         def traverse(node):
             """Returns max path starting at node"""
-            nonlocal ans
+            nonlocal res
             if node is None:
                 return 0
-            left = max(0, traverse(node.left))
-            right = max(0, traverse(node.right))
-            ans = max(ans, left + node.val + right)
+
+            left = max(traverse(node.left), 0)
+            right = max(traverse(node.right), 0)
+            res = max(res, left + node.val + right)
+
             return max(left, right) + node.val
 
         traverse(root)
-        return ans
+
+        return res

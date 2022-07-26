@@ -4,8 +4,6 @@ Medium
 
 Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
 
- 
-
 Example 1:
 Input: root = [3,9,20,null,null,15,7]
 Output: [[3],[9,20],[15,7]]
@@ -45,7 +43,7 @@ class Solution:
                 if node.right:
                     level.append(node.right)
 
-            queue = level
             res.append(vals)
+            queue = level
 
         return res

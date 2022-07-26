@@ -15,8 +15,6 @@ int fromNode (not available to correctBinaryTree)
 int toNode (not available to correctBinaryTree)
 After the binary tree rooted at root is parsed, the TreeNode with value of fromNode will have its right child pointer pointing to the TreeNode with a value of toNode. Then, root is passed to correctBinaryTree.
 
- 
-
 Example 1:
 Input: root = [1,2,3], fromNode = 2, toNode = 3
 Output: [1,null,3]

@@ -6,8 +6,6 @@ Given the root of a binary tree, return the number of uni-value subtrees.
 
 A uni-value subtree means all nodes of the subtree have the same value.
 
- 
-
 Example 1:
 Input: root = [5,1,5,5,5,null,5]
 Output: 4
@@ -35,7 +33,11 @@ class Solution:
     def countUnivalSubtrees(self, root: Optional[TreeNode]) -> int:
 
         def isUnival(node, parent):
+            """
+            Return if a subtree is unival
+            """
             nonlocal res
+
             if not node:
                 return True
 
@@ -48,5 +50,6 @@ class Solution:
             return left and right and node.val == parent
 
         res = 0
-        isUnival(root, None)
+        isUnival(node=root, parent=None)
+
         return res

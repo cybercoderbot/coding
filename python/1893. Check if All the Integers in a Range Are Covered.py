@@ -8,7 +8,6 @@ Return true if each integer in the inclusive range [left, right] is covered by a
 
 An integer x is covered by an interval ranges[i] = [starti, endi] if starti <= x <= endi.
 
-
 Example 1:
 Input: ranges = [[1,2],[3,4],[5,6]], left = 2, right = 5
 Output: true

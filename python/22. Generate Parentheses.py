@@ -2,7 +2,7 @@
 22. Generate Parentheses
 Medium
 
-Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+Given N pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
  
 Example 1:
@@ -18,22 +18,28 @@ Output: ["()"]
 class Solution:
     def generateParenthesis(self, N: int) -> List[str]:
 
-        def backtrack(candidate, left, right):
+        def backtrack(candidate, opening, closing):
+            """
+            Populate res while backtracking
+            opening: number of "(" already tried
+            closing: number of ")" already tried
+            """
             if len(candidate) == 2 * N:
                 res.append("".join(candidate))
-                return
 
-            if left < N:
+            if opening < N:
                 candidate.append("(")
-                backtrack(candidate, left+1, right)
+                backtrack(candidate, opening+1, closing)
                 candidate.pop()
 
-            if right < left:
+            if closing < opening:
                 candidate.append(")")
-                backtrack(candidate, left, right+1)
+                backtrack(candidate, opening, closing+1)
                 candidate.pop()
+
+            return
 
         res = []
-        backtrack([], 0, 0)
+        backtrack(candidate=[], opening=0, closing=0)
 
         return res

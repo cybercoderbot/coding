@@ -48,17 +48,23 @@ Return the largest of such value.
 
 class Solution:
     def longestZigZag(self, root: TreeNode) -> int:
+        """
+        Traverse the tree and compute the length of zigzag path ending at a node. 
+        Return the largest of such value.
+        Store (node, length, isLeft) in stack when traversing the tree
+        """
         res = 0
-        # (node, length, child)
         stack = [(root, 0, None)]
         while stack:
-            node, n, left = stack.pop()
+            node, path, left = stack.pop()
             if node:
-                res = max(res, n)
+                res = max(res, path)
                 if left:
-                    n1, n2 = 1, n+1
+                    path1, path2 = 1, path+1
                 else:
-                    n1, n2 = n+1, 1
-                stack.append((node.left,  n1, 1))
-                stack.append((node.right, n2, 0))
+                    path1, path2 = path+1, 1
+
+                stack.append((node.left,  path1, True))
+                stack.append((node.right, path2, False))
+
         return res

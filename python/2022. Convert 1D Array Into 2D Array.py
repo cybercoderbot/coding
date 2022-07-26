@@ -32,12 +32,14 @@ It is impossible to fit 2 elements in a 1x1 2D array, so return an empty 2D arra
 
 class Solution:
     def construct2DArray(self, nums: List[int], M: int, N: int) -> List[List[int]]:
+        """
+        res.append(nums[i:i+N]) row by row
+        """
 
-        if len(nums) != M*N:
+        if len(nums) != M * N:
             return []
 
         res = []
         for i in range(0, len(nums), N):
             res.append(nums[i:i+N])
-
         return res

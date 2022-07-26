@@ -43,18 +43,24 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        """
+        BFS for level order traverse
+        Record (node, presum) when traversing the tree
+        res += presum when reaching leaf node
+        """
+
         res = 0
         stack = [(root, 0)]
 
         while stack:
-            node, val = stack.pop()
-            val = 10*val + node.val
-            if not (node.left or node.right):
-                res += val
+            node, presum = stack.pop()
+            presum = 10*presum + node.val
+            if not node.left and not node.right:
+                res += presum
             if node.left:
-                stack.append((node.left, val))
+                stack.append((node.left, presum))
             if node.right:
-                stack.append((node.right, val))
+                stack.append((node.right, presum))
 
         return res
 
@@ -62,16 +68,18 @@ class Solution:
 class Solution:
     def sumNumbers(self, root: TreeNode) -> int:
 
-        def dfs(node, val):
+        def pathsum(node, presum):
             """Return sum of node-to-leaf numbers"""
             if not node:
                 return 0
 
-            val = 10*val + node.val
+            presum = 10*presum + node.val
 
-            if not (node.left or node.right):
-                return val
+            if not node.left and not node.right:
+                return presum
             else:
-                return dfs(node.left, val) + dfs(node.right, val)
+                left = pathsum(node.left, presum)
+                right = pathsum(node.right, presum)
+                return left + right
 
-        return dfs(root, 0)
+        return pathsum(node=root, presum=0)

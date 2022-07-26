@@ -8,8 +8,6 @@ Consider each adjacent pair of elements [freq, val] = [nums[2*i], nums[2*i+1]] (
 
 Return the decompressed list.
 
- 
-
 Example 1:
 Input: nums = [1,2,3,4]
 Output: [2,4,4,4]
@@ -26,14 +24,16 @@ Output: [1,3,3]
 class Solution:
     def decompressRLElist(self, nums: List[int]) -> List[int]:
         """
-        Loop through nums by 2 steps. nums[i] gives freq while nums[i+1] gives the value.
+        Loop through nums by 2 steps. 
+        nums[i] is freq while nums[i+1] is the value.
+
         Time complexity O(N)
         Space complexity O(N)
         """
         res = []
         for i in range(0, len(nums), 2):
-            freq, val = nums[i], [nums[i+1]]
-            res.extend(freq * val)  # repetition & value
+            freq, val = nums[i], nums[i+1]
+            res.extend(freq * [val])
         return res
 
 
@@ -42,6 +42,6 @@ class Solution:
 
         res = []
         for x in range(0, len(nums), 2):
-            for y in range(nums[x]):
+            for _ in range(nums[x]):
                 res.append(nums[x+1])
         return res

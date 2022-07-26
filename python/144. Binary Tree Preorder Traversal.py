@@ -22,15 +22,16 @@ Output: [1]
 
 
 class Solution(object):
-    def preorderTraversal(self, root):
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
-        :type root: TreeNode
-        :rtype: List[int]
+        root -> left -> right
         """
         if not root:
             return []
-        else:
-            return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
+
+        left = self.preorderTraversal(root.left)
+        right = self.preorderTraversal(root.right)
+        return [root.val] + left + right
 
 
 class Solution:
@@ -57,6 +58,7 @@ class Solution:
             node = stack.pop()
             if node:
                 res.append(node.val)
+                # right -> left
                 stack.append(node.right)
                 stack.append(node.left)
         return res

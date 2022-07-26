@@ -4,7 +4,6 @@ Easy
 
 Given two string arrays words1 and words2, return the number of strings that appear exactly once in each of the two arrays.
 
- 
 
 Example 1:
 Input: words1 = ["leetcode","is","amazing","as","is"], words2 = ["amazing","leetcode","is"]
@@ -20,8 +19,8 @@ Example 2:
 Input: words1 = ["b","bb","bbb"], words2 = ["a","aa","aaa"]
 Output: 0
 Explanation: There are no strings that appear in each of the two arrays.
-Example 3:
 
+Example 3:
 Input: words1 = ["a","ab"], words2 = ["a","a","a","ab"]
 Output: 1
 Explanation: The only string that appears exactly once in each of the two arrays is "ab".

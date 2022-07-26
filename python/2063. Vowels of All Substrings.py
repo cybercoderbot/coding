@@ -8,8 +8,6 @@ A substring is a contiguous (non-empty) sequence of characters within a string.
 
 Note: Due to the large constraints, the answer may not fit in a signed 32-bit integer. Please be careful during the calculations.
 
- 
-
 Example 1:
 Input: word = "aba"
 Output: 6

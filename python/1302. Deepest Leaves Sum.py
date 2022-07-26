@@ -26,7 +26,8 @@ Output: 19
 class Solution:
     def deepestLeavesSum(self, root: TreeNode) -> int:
         """
-        Level-order traverse the tree and keep track of sum at each level.
+        Level-order traverse the tree and keep track of sum for each level.
+        Sum of last level: sum of leaves
 
         Time complexity O(N)
         Space complexity O(1)

@@ -25,18 +25,9 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
+        """Only one transaction"""
 
-        # 这是卖股票的第一个题目，根据题意我们知道只能进行一次交易，但需要获得最大的利润，
-        # 所以我们需要在最低价买入，最高价卖出，当然买入一定要在卖出之前。
-
-        # 对于这一题，我们只需要遍历一次数组，通过一个变量记录当前最低价格，
-        # 同时算出此次交易利润，并与当前最大值比较就可以了。
-
-        low = float('inf')
+        low = inf
         res = 0
         for cur in prices:
             low = min(low, cur)

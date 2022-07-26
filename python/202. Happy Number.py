@@ -11,8 +11,6 @@ Repeat the process until the number equals 1 (where it will stay), or it loops e
 Those numbers for which this process ends in 1 are happy.
 Return true if n is a happy number, and false if not.
 
- 
-
 Example 1:
 Input: n = 19
 Output: true
@@ -22,22 +20,21 @@ Explanation:
 62 + 82 = 100
 12 + 02 + 02 = 1
 
-
 Example 2:
 Input: n = 2
 Output: false
 """
 
-# Algorithm:
-# Compute the next number following the "happy number" rule and check
-
-# if the number reaches 1 (True)
-# if the number has appeared before (False)
-# Implementation:
-
 
 class Solution:
     def isHappy(self, n: int) -> bool:
+        """
+        Compute the next number following the "happy number" rule and check
+
+        If the number reaches 1 (True)
+        If the number has appeared before (False)
+        """
+
         seen = set()
         while n not in seen:
             seen.add(n)

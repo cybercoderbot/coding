@@ -38,23 +38,34 @@ Output: []
 
 class Solution:
     def pathSum(self, root: Optional[TreeNode], target: int) -> List[List[int]]:
+        """
+        Record each node's parent {node: parent} while traversing the tree
+        Use stack to store [node, presum] pair
+        When reach to leaf, get leaf->root path
+        Reverse path, get root->leaf path
+        """
+        if not root:
+            return []
+
         res = []
-        if root:
-            parent = {root: None}
-            stack = [(root, 0)]
-            while stack:
-                node, val = stack.pop()
-                val += node.val
-                if node.left:
-                    parent[node.left] = node
-                    stack.append((node.left, val))
-                if node.right:
-                    parent[node.right] = node
-                    stack.append((node.right, val))
-                if not (node.left or node.right) and val == target:
-                    path = []
-                    while node:
-                        path.append(node.val)
-                        node = parent[node]
-                    res.append(path[::-1])
+        parent = {root: None}
+        stack = [(root, 0)]
+        while stack:
+            node, presum = stack.pop()
+            presum += node.val
+
+            if node.left:
+                parent[node.left] = node
+                stack.append((node.left, presum))
+            if node.right:
+                parent[node.right] = node
+                stack.append((node.right, presum))
+
+            if not node.left and not node.right and presum == target:
+                path = []
+                while node:
+                    path.append(node.val)
+                    node = parent[node]
+                res.append(path[::-1])
+
         return res

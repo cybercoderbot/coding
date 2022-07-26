@@ -9,7 +9,6 @@ Given an input string s and a pattern p, implement regular expression matching w
 The matching should cover the entire input string (not partial).
 
  
-
 Example 1:
 
 Input: s = "aa", p = "a"

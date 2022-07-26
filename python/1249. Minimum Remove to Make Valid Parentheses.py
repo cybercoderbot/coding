@@ -32,8 +32,14 @@ Explanation: An empty string is also valid.
 
 class Solution:
     def minRemoveToMakeValid(self, s):
+        """
+        Iterate through the list, and push it to stack if '(' or ')'
+        Record positions of imbalanced parens i
+        set chars[i] -> ""
+        """
+
         stack = []
-        strlist = list(s)
+        chars = list(s)
 
         for i, c in enumerate(s):
             if c == '(':
@@ -42,8 +48,11 @@ class Solution:
                 if stack:
                     stack.pop()
                 else:
-                    strlist[i] = ""
+                    # invalid "("
+                    chars[i] = ""
 
+        # invalid ")"
         for i in stack:
-            strlist[i] = ""
-        return '' .join(strlist)
+            chars[i] = ""
+
+        return ''.join(chars)

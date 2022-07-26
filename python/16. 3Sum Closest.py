@@ -23,8 +23,10 @@ Output: 0
 
 
 class Solution:
-    # @return an integer
     def threeSumClosest(self, nums, target):
+        """
+        3Sum -> sort array
+        """
 
         nums.sort()
         res = nums[0] + nums[1] + nums[2]

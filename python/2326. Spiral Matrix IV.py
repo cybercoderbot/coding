@@ -10,8 +10,6 @@ Generate an m x n matrix that contains the integers in the linked list presented
 
 Return the generated matrix.
 
- 
-
 Example 1:
 Input: m = 3, n = 5, head = [3,0,2,6,8,1,7,9,4,2,5,5,0]
 Output: [[3,0,2,6,8],[5,0,-1,-1,1],[5,2,4,9,7]]
@@ -33,10 +31,18 @@ The last space in the matrix is set to -1.
 #         self.val = val
 #         self.next = next
 
+
 class Solution:
     def spiralMatrix(self, M: int, N: int, head: Optional[ListNode]) -> List[List[int]]:
+        """
+        1) Initial: di, dj = 0, 1
+        2) If out of bound: di, dj = dj, -di
+        3) Update: i, j = i+di, j+dj
 
-        i, j, di, dj = 0, 0, 0, 1
+        """
+
+        i, j = 0, 0
+        di, dj = 0, 1
         res = [[-1]*N for _ in range(M)]
 
         node = head

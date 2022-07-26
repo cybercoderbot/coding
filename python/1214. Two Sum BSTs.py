@@ -15,17 +15,20 @@ Output: false
 """
 
 
-def inorder(node):
-    """Return inorder traversal of binary tree."""
+def inorder(node: TreeNode)-> List[int]:
+    """
+    Return array of inorder traversal of binary tree.
+    Inorder: left -> root -> right
+    """
     res, stack = [], []
     while stack or node:
         if node:
             stack.append(node)
             node = node.left
         else:
-            node = stack.pop()
-            res.append(node.val)
-            node = node.right
+            parent = stack.pop()
+            res.append(parent.val)
+            node = parent.right
     return res
 
 
@@ -38,17 +41,20 @@ class Solution:
         Space complexity O(M+N)
         """
 
-        tree1 = inorder(root1)
-        tree2 = inorder(root2)
+        # inorder traverse: nums sorted in ascending order
+        nums1 = inorder(root1)
+        nums2 = inorder(root2)
 
-        M, N = len(tree1), len(tree2)
+        M, N = len(nums1), len(nums2)
+
+        # left point in nums1 and right pointer in nums2
         low, high = 0, N-1
 
         while low < M and high >= 0:
 
-            if tree1[low] + tree2[high] == target:
+            if nums1[low] + nums2[high] == target:
                 return True
-            elif tree1[low] + tree2[high] < target:
+            elif nums1[low] + nums2[high] < target:
                 low += 1
             else:
                 high -= 1

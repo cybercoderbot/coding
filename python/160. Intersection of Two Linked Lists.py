@@ -53,8 +53,25 @@ Explanation: The two lists do not intersect, so return null.
 #         self.next = None
 
 
+"""
+The idea is if you switch head, the possible difference between length would be countered. 
+On the second traversal, they either hit or miss. 
+1. If they meet, p or q would be the node we are looking for, 
+2. If they didn't meet, they will hit the end at the same iteration, p == q == None, 
+return either one of them is the same, None
+"""
+
+
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        """
+        Traverse list A and B.
+        Switch head when reaching end 
+
+        1. If they meet, p or q would be the node we are looking for
+        2. If they didn't meet, they will hit the end, p=q=None
+
+        """
 
         p, q = headA, headB
 

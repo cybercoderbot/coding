@@ -28,24 +28,27 @@ Output: 5
 
 class Solution:
     def calculate(self, s):
-        num = 0
+        """
+        Use a stack to record s
+        """
+        x = 0
         stack = []
         sign = "+"
 
         for i, c in enumerate(s):
             if c.isdigit():
-                num = 10 * num + int(c)
+                x = 10 * x + int(c)
 
             if c in "+-*/" or i == len(s) - 1:
                 if sign == "+":
-                    stack.append(num)
+                    stack.append(x)
                 elif sign == "-":
-                    stack.append(-num)
+                    stack.append(-x)
                 elif sign == "*":
-                    stack.append(stack.pop()*num)
+                    stack.append(stack.pop() * x)
                 else:
-                    stack.append(int(stack.pop()/num))
-                num = 0
+                    stack.append(int(stack.pop() / x))
+                x = 0
                 sign = c
 
         return sum(stack)

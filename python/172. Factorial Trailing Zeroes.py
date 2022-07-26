@@ -42,6 +42,9 @@ Since multiple of 2 is more than multiple of 5, the number of zeros is dominant 
 class Solution:
 
     def trailingZeroes(self, n: int) -> int:
+        """
+        Num of 0's -> num of 2's and num of 5's -> num of 5's
+        """
         res = 0
         while n > 0:
             res += n//5

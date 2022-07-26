@@ -28,8 +28,8 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 
 class Solution:
     def isPalindrome(self, string: str) -> bool:
-        newstr = [c.lower() for c in string if c.isalnum()]
-        return newstr == newstr[::-1]
+        lowerAlnums = [c.lower() for c in string if c.isalnum()]
+        return lowerAlnums == lowerAlnums[::-1]
 
 
 class Solution:

@@ -8,8 +8,6 @@ A word is defined as a sequence of non-space characters. The words in s will be 
 
 Your code must solve the problem in-place, i.e. without allocating extra space.
 
- 
-
 Example 1:
 Input: s = ["t","h","e"," ","s","k","y"," ","i","s"," ","b","l","u","e"]
 Output: ["b","l","u","e"," ","i","s"," ","s","k","y"," ","t","h","e"]

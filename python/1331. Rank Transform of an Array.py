@@ -29,16 +29,19 @@ Output: [5,3,4,2,8,6,7,1,3]
 
 class Solution:
     def arrayRankTransform(self, arr: List[int]) -> List[int]:
+        """
+        m = {x:i+1} in sorted set of arr
+        """
 
-        arrs = sorted(set(arr))
+        sort = sorted(set(arr))
         m = defaultdict(int)
 
-        for i, n in enumerate(arrs):
-            if n not in m:
-                m[n] = i+1
+        for i, x in enumerate(sort):
+            if x not in m:
+                m[x] = i+1
 
-        for j, n in enumerate(arr):
-            arr[j] = m[n]
+        for j, x in enumerate(arr):
+            arr[j] = m[x]
 
         return arr
 

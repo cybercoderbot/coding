@@ -1,47 +1,90 @@
+"""
+222. Count Complete Tree Nodes
+Medium
+
+Given the root of a complete binary tree, return the number of the nodes in the tree.
+
+According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
+
+Design an algorithm that runs in less than O(n) time complexity.
+
+
+
+Example 1:
+Input: root = [1,2,3,4,5,6]
+Output: 6
+Example 2:
+
+Input: root = []
+Output: 0
+Example 3:
+
+Input: root = [1]
+Output: 1
+"""
+
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
 
 class Solution(object):
-    def countNodes(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
 
-        # 这道题给定了一棵完全二叉树，让我们求其节点的个数。让我们来看看维基百科上对二者的定义：
-
-        # 完全二叉树：对于一颗二叉树，假设其深度为d（d>1）。除了第d层外，其它各层的节点数目均已达最大值，
-        # 且第d层所有节点从左向右连续地紧密排列，这样的二叉树被称为完全二叉树
-
-        # 满二叉树：对于上述的完全二叉树，如果去掉其第d层的所有节点，那么剩下的部分就构成一个满二叉树
-        # （此时该满二叉树的深度为d-1）
-
-        # 通过上面的定义，我们可以看出二者的关系是，满二叉树一定是完全二叉树，
-        # 而完全二叉树不一定是满二叉树。那么这道题给的完全二叉树就有可能是满二叉树，若是满二叉树，节点个数很好求，
-        # 为2的h次方-1，h为该满二叉树的高度。这道题可以用递归和非递归两种方法来解。我们先来看递归的方法，思路是
-        # 分别找出以当前节点为根节点的左子树和右子树的高度并对比，如果相等，则说明是满二叉树，直接返回节点个数，
-        # 如果不相等，则节点个数为左子树的节点个数加上右子树的节点个数再加1(根节点)，其中左右子树节点个数的计算
-        # 可以使用递归来计算
+    def countNodes(self, root: TreeNode) -> int:
 
         if not root:
             return 0
 
-        hleft = hright = 0
-        pleft = pright = root
+        height1 = height2 = 0
+        p1 = p2 = root
+        while p1:
+            height1 += 1
+            p1 = p1.left
 
-        while pleft:
-            hleft += 1
-            pleft = pleft.left
+        while p2:
+            height2 += 1
+            p2 = p2.right
 
-        while pright:
-            hright += 1
-            pright = pright.right
+        if height1 == height2:
+            return pow(2, height1)-1
+        else:
+            left = self.countNodes(root.left)
+            right = self.countNodes(root.right)
+            return left + right + 1
 
-        if hleft == hright:
-            return pow(2, hleft)-1
 
-        return self.countNodes(root.left) + self.countNodes(root.right) + 1
+"""
+Solution: Essentially, at any node,
+
+compute its height h;
+compute the height of its right child
+
+2.1) if it is h-1, then we know the left sub-tree is perfectly balanced whose nodes can be computed using its height;
+2.2) it it is h-2 then we know the right sub-tree is perfectly balanced;
+
+"""
+
+
+class Solution:
+    def countNodes(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        height1 = self.height(root)
+        height2 = self.height(root.right)
+
+        if height2 == height1-1:
+            return pow(2, height1-1) + self.countNodes(root.right)
+        else:
+            return pow(2, height1-2) + self.countNodes(root.left)
+
+    def height(self, node: TreeNode) -> int:
+        """Return height of given node"""
+        res = 0
+        while node:
+            res += 1
+            node = node.left
+        return res

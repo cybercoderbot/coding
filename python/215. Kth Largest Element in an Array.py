@@ -21,14 +21,26 @@ Output: 4
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
+        # O(NlogN) time
         return sorted(nums)[-k]
 
-    # O(nlgn) time
     def findKthLargest1(self, nums, k):
-        return sorted(nums)[k-1]
+        # O(NlogN) time
+        return sorted(nums, reverse=True)[k-1]
 
     def findKthLargest(self, nums: List[int], k: int) -> int:
         return heapq.nlargest(k, nums)[-1]
+
+    def findKthLargest4(self, nums, k):
+        """
+        Min Heap, O(k+(N-k)logk) time
+        """
+        heap = []
+        for x in nums:
+            heapq.heappush(heap, x)
+        for _ in range(len(nums)-k):
+            heapq.heappop(heap)
+        return heapq.heappop(heap)
 
     # O(nk) time, bubble sort idea, TLE
     def findKthLargest2(self, nums, k):
@@ -49,20 +61,11 @@ class Solution:
             nums[tmp], nums[i-1] = nums[i-1], nums[tmp]
         return nums[len(nums)-k]
 
-    # O(k+(n-k)lgk) time, min-heap
-    def findKthLargest4(self, nums, k):
-        heap = []
-        for num in nums:
-            heapq.heappush(heap, num)
-        for _ in xrange(len(nums)-k):
-            heapq.heappop(heap)
-        return heapq.heappop(heap)
-
     def findKthLargest(self, nums, k):
         heap = nums[:k]
         heapify(heap)
-        for n in nums[k:]:
-            heappushpop(heap, n)
+        for x in nums[k:]:
+            heappushpop(heap, x)
         return heap[0]
 
     # O(k+(n-k)lgk) time, min-heap

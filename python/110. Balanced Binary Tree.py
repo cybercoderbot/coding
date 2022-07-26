@@ -38,16 +38,20 @@ class Solution:
     def height(self, root: TreeNode) -> int:
         if not root:
             return 0
-        return max(self.height(root.left), self.height(root.right)) + 1
+
+        left, right = self.height(root.left), self.height(root.right)
+        return max(left, right) + 1
 
     def isBalanced(self, root: TreeNode) -> bool:
         if not root:
             return True
 
-        rootBalanced = abs(self.height(root.left) -
-                           self.height(root.right)) <= 1
+        left = self.isBalanced(root.left)
+        right = self.isBalanced(root.right)
+        balanced = abs(self.height(root.left) -
+                       self.height(root.right)) <= 1
 
-        return rootBalanced and self.isBalanced(root.left) and self.isBalanced(root.right)
+        return balanced and left and right
 
 
 class Solution:

@@ -49,22 +49,5 @@ class Solution:
 
 
 class Solution:
-    def timeRequiredToBuy(self, nums: List[int], k: int) -> int:
-
-        res = 0
-        target = nums[k]
-
-        for i, x in enumerate(nums):
-            if i > k and x >= target:  # (1)
-                res += (target - 1)
-            elif x < target:     # (2)
-                res += x
-            else:  # (3)
-                res += target
-
-        return res
-
-
-class Solution:
     def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
         return sum(min(tickets[k]-int(i > k), x) for i, x in enumerate(tickets))

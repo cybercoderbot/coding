@@ -45,6 +45,15 @@ Traverse the tree depth-first in preorder and collect lonely nodes.
 
 class Solution:
     def getLonelyNodes(self, root: TreeNode) -> List[int]:
+        """
+        Traverse the tree depth-first in preorder and collect lonely nodes.
+
+        not node.right -> res.append(node.left.val)
+        not node.left  -> res.append(node.right.val)
+
+        - Time complexity O(N)
+        - Space complexity O(N)
+        """
 
         res = []
         queue = [root]

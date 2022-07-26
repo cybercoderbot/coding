@@ -36,14 +36,20 @@ Output: 4
 #         self.left = None
 #         self.right = None
 
+
 class Solution:
     def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+        """
+        Preorder treverse the tree
+        Keep a pair of (src, dst) in the queue
+        Constantly check if src == target.
+        If yes, return dst
+        """
         queue = [(original, cloned)]
-
         while queue:
-            s, t = queue.pop(0)
-            if s == target:
-                return t
-            if s:
-                queue.append((s.left, t.left))
-                queue.append((s.right, t.right))
+            src, dst = queue.pop(0)
+            if src == target:
+                return dst
+            if src:
+                queue.append((src.left, dst.left))
+                queue.append((src.right, dst.right))

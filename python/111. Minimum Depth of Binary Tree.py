@@ -8,7 +8,7 @@ The minimum depth is the number of nodes along the shortest path from the root n
 
 Note: A leaf is a node with no children.
 
- 
+
 
 Example 1:
 Input: root = [3,9,20,null,null,15,7]
@@ -29,11 +29,17 @@ class Solution:
         if not root.right:
             return self.minDepth(root.left) + 1
 
-        return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+        left, right = self.minDepth(root.left), self.minDepth(root.right)
+        return min(left, right) + 1
 
 
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
+        """
+        Iteration
+        Use stack to store (node, depth) pair while traversing the tree
+        """
+
         if not root:
             return 0
 
@@ -49,6 +55,10 @@ class Solution:
 
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
+        """
+        Iteration
+        Use stack to store nodes. Increase depth when move to next level
+        """
         if not root:
             return 0
 

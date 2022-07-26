@@ -98,6 +98,44 @@ Explanation: The next greater element for each value of nums1 is as follows:
 
 
 class Solution:
+
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        """
+        Time complexity: O(N), N = num of elements in nums2
+        Space complexity: O(N)
+        """
+        res = []
+        stack = []
+        m = {}
+
+        for x in nums2:
+            while stack and x > stack[-1]:
+                m[stack[-1]] = x
+                stack.pop()
+            stack.append(x)
+
+        # unmatched vals
+        for x in stack:
+            m[x] = -1
+
+        for x in nums1:
+            res.append(m[x])
+
+        return res
+
+
+class Solution:
+    def nextGreaterElement(self, nums1, nums2):
+        stack, m = [], {}
+        for x in nums2:
+            while stack and stack[-1] < x:
+                m[stack.pop()] = x
+            stack.append(x)
+
+        return [m.get(x, -1) for x in nums1]
+
+
+class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         if not nums2:
             return None
@@ -125,44 +163,6 @@ class Solution:
             res.append(m[nums1[i]])
 
         return res
-
-
-class Solution:
-
-    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        """
-        Time complexity: O(N), N = num of elements in nums2
-        Space complexity: O(N)
-        """
-        res = []
-        stack = []
-        m = {}
-
-        for x in nums2:
-            while stack and x > stack[-1]:
-                m[stack[-1]] = x
-                stack.pop()
-            stack.append(x)
-
-        # unmatched vals
-        for x in stack:
-            m[x] = -1
-
-        for n in nums1:
-            res.append(m[n])
-
-        return res
-
-
-class Solution:
-    def nextGreaterElement(self, nums1, nums2):
-        stack, m = [], {}
-        for x in nums2:
-            while stack and stack[-1] < x:
-                m[stack.pop()] = x
-            stack.append(x)
-
-        return [m.get(x, -1) for x in nums1]
 
 
 """

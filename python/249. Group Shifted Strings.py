@@ -10,7 +10,6 @@ We can keep shifting the string to form a sequence.
 For example, we can keep shifting "abc" to form the sequence: "abc" -> "bcd" -> ... -> "xyz".
 Given an array of strings strings, group all strings[i] that belong to the same shifting sequence. You may return the answer in any order.
 
- 
 
 Example 1:
 
@@ -21,7 +20,7 @@ Example 2:
 Input: strings = ["a"]
 Output: [["a"]]
  
- """
+"""
 
 
 class Solution:
@@ -43,8 +42,12 @@ class Solution:
     """
 
     def groupStrings(self, strings: List[str]) -> List[List[str]]:
+        """
+        Time complexity O(N)
+        Space complexity O(N)
+        """
 
-        def get_hashkey(string: str):
+        def hashkey(string: str):
             key = []
             for c1, c2 in zip(string[:-1], string[1:]):
                 mod = (ord(c2) - ord(c1)) % 26 + ord('a')
@@ -54,12 +57,7 @@ class Solution:
         groups = collections.defaultdict(list)
 
         for s in strings:
-            key = get_hashkey(s)
+            key = hashkey(s)
             groups[key].append(s)
 
         return list(groups.values())
-
-
-# Analysis
-# Time complexity O(N)
-# Space complexity O(N)

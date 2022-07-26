@@ -22,18 +22,16 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 """
 
 
-"""
-Based on the recursive formula:
-
-f(0) = nums[0]
-f(1) = max(num[0], num[1])
-f(k) = max(f(k-2) + nums[k], f(k-1))
-"""
-
-
 class Solution:
 
     def rob(self, nums: List[int]) -> int:
+        """
+        Recursive formula:
+
+        f(0) = nums[0]
+        f(1) = max(num[0], num[1])
+        f(k) = max(f(k-2) + nums[k], f(k-1))
+        """
 
         if not nums:
             return 0

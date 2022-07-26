@@ -29,4 +29,5 @@ class Solution:
         """
         N = len(arr) // 20
         timmed = sorted(arr)[N:-N]
-        return sum(timmed)/(len(arr)-2*N)
+
+        return sum(timmed)/len(timmed)
