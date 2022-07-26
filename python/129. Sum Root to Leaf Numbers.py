@@ -43,38 +43,35 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        res = 0 
+        res = 0
         stack = [(root, 0)]
 
-        while stack: 
+        while stack:
             node, val = stack.pop()
-            val = 10*val + node.val 
-            if not (node.left or node.right): 
-                res += val 
-            if node.left: 
+            val = 10*val + node.val
+            if not (node.left or node.right):
+                res += val
+            if node.left:
                 stack.append((node.left, val))
-            if node.right: 
+            if node.right:
                 stack.append((node.right, val))
-                
-        return res 
-    
 
-    
+        return res
+
+
 class Solution:
     def sumNumbers(self, root: TreeNode) -> int:
-        
+
         def dfs(node, val):
             """Return sum of node-to-leaf numbers"""
-            if not node: 
+            if not node:
                 return 0
 
             val = 10*val + node.val
 
-            if not (node.left or node.right): 
-                return val 
+            if not (node.left or node.right):
+                return val
             else:
                 return dfs(node.left, val) + dfs(node.right, val)
-            
+
         return dfs(root, 0)
-
-

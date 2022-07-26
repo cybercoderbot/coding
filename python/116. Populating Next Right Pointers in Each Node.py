@@ -42,32 +42,31 @@ class Solution:
         """truly O(1) space
         O(1) space if not counting recursion stack"""
         head = root
-        while head and head.left: 
+        while head and head.left:
             node = head
-            while node: 
+            while node:
                 node.left.next = node.right
-                if node.next: 
+                if node.next:
                     node.right.next = node.next.left
                 node = node.next
-            head = head.left 
+            head = head.left
 
         return root
-
 
 
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
         """O(logN) space"""
-        
+
         def helper(node):
             """Connect node's children"""
-            if node and node.left: 
+            if node and node.left:
                 node.left.next = node.right
-                if node.next: 
+                if node.next:
                     node.right.next = node.next.left
-                helper(node.left) 
+                helper(node.left)
                 helper(node.right)
-        
+
         helper(root)
 
         return root
@@ -78,8 +77,8 @@ class Solution:
     def connect(self, root):
         # @param root, a tree link node
         # @return nothing
-        
-        if not root: 
+
+        if not root:
             return
         if root.left:
             root.left.next = root.right
@@ -88,7 +87,6 @@ class Solution:
                 root.right.next = root.next.left
             else:
                 root.right.next = None
-            
+
         self.connect(root.left)
         self.connect(root.right)
-        

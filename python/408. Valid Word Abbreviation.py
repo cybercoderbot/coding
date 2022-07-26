@@ -44,14 +44,15 @@ At the end, check if i and j have both reached the end of word and abbr.
 
 """
 
+
 class Solution:
     def validWordAbbreviation(self, word, abbr):
         i, j = 0, 0
         N1, N2 = len(word), len(abbr)
-        
+
         while i < N1 and j < N2:
             if abbr[j].isalpha():
-                if word[i] !=  abbr[j]:
+                if word[i] != abbr[j]:
                     return False
                 i += 1
                 j += 1
@@ -63,8 +64,5 @@ class Solution:
                     tmp += abbr[j]
                     j += 1
                 i += int(tmp)
-                
+
         return i == len(word) and j == len(abbr)
-
-
-    

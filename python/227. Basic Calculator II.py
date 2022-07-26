@@ -23,17 +23,19 @@ Example 3:
 Input: s = " 3+5 / 2 "
 Output: 5
 
-"""       
+"""
+
+
 class Solution:
     def calculate(self, s):
         num = 0
         stack = []
         sign = "+"
-        
+
         for i, c in enumerate(s):
             if c.isdigit():
                 num = 10 * num + int(c)
-                
+
             if c in "+-*/" or i == len(s) - 1:
                 if sign == "+":
                     stack.append(num)
@@ -45,6 +47,5 @@ class Solution:
                     stack.append(int(stack.pop()/num))
                 num = 0
                 sign = c
-                
+
         return sum(stack)
-        

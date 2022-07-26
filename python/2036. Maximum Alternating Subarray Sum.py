@@ -50,12 +50,11 @@ class Solution:
 
         res = -float('inf')
         lastMinus, lastPlus = -float('inf'), -float('inf')
-        
+
         for n in nums:
             temp = lastPlus
             lastPlus = max(lastMinus + n, n)
             lastMinus = temp - n
             res = max(res, lastMinus, lastPlus)
-            
+
         return res
-        

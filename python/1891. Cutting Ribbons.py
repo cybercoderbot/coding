@@ -54,14 +54,15 @@ and summing the number of ribbons that can be made with the mid value. Then chan
 
 """
 
+
 class Solution:
     def maxLength(self, ribbons: List[int], k: int) -> int:
         # The min length of the ribbon that we can cut is 1
         left = 1
         # The max length of the ribbon can be the max val in the list
         right = max(ribbons)
-        
-        # In this binary search, we are trying to go through the origin list and figure out which 
+
+        # In this binary search, we are trying to go through the origin list and figure out which
         # integer (from 1 -> ribbon of max length) is the deired length for the the target k pieces
         while left <= right:
             mid = (left + right) // 2
@@ -74,11 +75,7 @@ class Solution:
             if res >= k:
                 left = mid+1
             else:
-            # If lesser than k, then there could be a value lesser than the mid that could satisfy the condition
+                # If lesser than k, then there could be a value lesser than the mid that could satisfy the condition
                 right = mid-1
 
         return right
-
-
-
-

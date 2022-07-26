@@ -29,34 +29,35 @@ Output: [""]
 
 from collections import deque
 
+
 def isValid(string):
     count = 0
     for c in string:
-        if c == '(': 
-            count +=1                
-        elif c == ')': 
+        if c == '(':
+            count += 1
+        elif c == ')':
             count -= 1
-            if count < 0: 
+            if count < 0:
                 return False
     return count == 0
 
 
 class Solution:
     def removeInvalidParentheses(self, s: str) -> List[str]:
-                    
+
         res = []
-        
+
         # BFS Solution
         visited = {s}
-        queue = deque([(s, 0)])                
+        queue = deque([(s, 0)])
         found, nmin = False, len(s)
-        
+
         while queue:
             current, nchanges = queue.popleft()
-            
+
             if found and nmin < nchanges:
                 break
-                       
+
             # validate current
             if isValid(current):
                 # add to res
@@ -67,10 +68,10 @@ class Solution:
                 for i in range(len(current)):
                     candidate = current[:i] + current[i+1:]
 
-                    # we might create duplicate string -> s='())' 
+                    # we might create duplicate string -> s='())'
                     # when we remove i=1 or i=2 and result in the same s
                     if candidate not in visited:
                         queue.append((candidate, nchanges+1))
                         visited.add(candidate)
-                            
+
         return res

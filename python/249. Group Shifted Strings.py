@@ -24,10 +24,6 @@ Output: [["a"]]
  """
 
 
-
-
-
-        
 class Solution:
     """
     Complexity
@@ -45,29 +41,25 @@ class Solution:
     complexity is O(N*K).
 
     """
+
     def groupStrings(self, strings: List[str]) -> List[List[str]]:
-        
+
         def get_hashkey(string: str):
             key = []
             for c1, c2 in zip(string[:-1], string[1:]):
                 mod = (ord(c2) - ord(c1)) % 26 + ord('a')
                 key.append(chr(mod))
             return ''.join(key)
-                
-        
+
         groups = collections.defaultdict(list)
-        
+
         for s in strings:
             key = get_hashkey(s)
             groups[key].append(s)
-            
+
         return list(groups.values())
 
 
-    
 # Analysis
 # Time complexity O(N)
 # Space complexity O(N)
-
-
-        

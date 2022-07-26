@@ -1,12 +1,12 @@
 #  653. Two Sum IV - Input is a BST
 # DescriptionHintsSubmissionsDiscussSolution
 
-# Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is 
+# Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is
 # equal to the given target.
 
 # Example 1:
 
-# Input: 
+# Input:
 #     5
 #    / \
 #   3   6
@@ -19,7 +19,7 @@
 
 # Example 2:
 
-# Input: 
+# Input:
 #     5
 #    / \
 #   3   6
@@ -58,6 +58,3 @@ class Solution(object):
             if n.right:
                 q.append(n.right)
         return False
-        
-        
-        

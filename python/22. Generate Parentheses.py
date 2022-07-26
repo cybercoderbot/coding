@@ -15,27 +15,25 @@ Output: ["()"]
 """
 
 
-
 class Solution:
     def generateParenthesis(self, N: int) -> List[str]:
-        
+
         def backtrack(candidate, left, right):
             if len(candidate) == 2 * N:
                 res.append("".join(candidate))
                 return
-            
+
             if left < N:
                 candidate.append("(")
                 backtrack(candidate, left+1, right)
                 candidate.pop()
-                
+
             if right < left:
                 candidate.append(")")
                 backtrack(candidate, left, right+1)
                 candidate.pop()
-          
+
         res = []
         backtrack([], 0, 0)
-        
+
         return res
-    

@@ -26,15 +26,15 @@ class Solution:
     def longestPalindrome(self, s: str) -> int:
         pairs = 0
         unpaired = set()
-        
+
         for c in s:
             if c in unpaired:
                 pairs += 1
                 unpaired.remove(c)
             else:
                 unpaired.add(c)
-        
+
         if unpaired:
             return pairs * 2 + 1
         else:
-            return pairs * 2 
+            return pairs * 2

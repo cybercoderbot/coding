@@ -31,7 +31,6 @@ Note that because m = 0, there are no elements in nums1. The 0 is only there to 
 """
 
 
-
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
@@ -40,12 +39,6 @@ class Solution:
         # Write the elements of num2 into the end of nums1.
         for i in range(n):
             nums1[i + m] = nums2[i]
-        
+
         # Sort nums1 list in-place.
         nums1.sort()
-
-
-
-
-
-        

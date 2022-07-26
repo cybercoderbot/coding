@@ -35,34 +35,32 @@ class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
         M, N = len(image), len(image[0])
         original = image[sr][sc]
-        
-        if original != color: 
+
+        if original != color:
             stack = [(sr, sc)]
-            while stack: 
+            while stack:
                 x, y = stack.pop()
-                image[x][y] = color 
+                image[x][y] = color
                 neighbors = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
-                for i, j in neighbors: 
-                    if 0 <= i < M and 0 <= j < N and image[i][j] == original: 
+                for i, j in neighbors:
+                    if 0 <= i < M and 0 <= j < N and image[i][j] == original:
                         stack.append((i, j))
         return image
-        
-        
 
 
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        
-        def dfs(x, y): 
-            if 0 <= x < M and 0 <= y < N and image[x][y] == original: 
+
+        def dfs(x, y):
+            if 0 <= x < M and 0 <= y < N and image[x][y] == original:
                 image[x][y] = color
                 neighbors = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
                 for i, j in neighbors:
                     dfs(i, j)
-        
+
         original = image[sr][sc]
         M, N = len(image), len(image[0])
-        if original != color: 
+        if original != color:
             dfs(sr, sc)
-            
-        return image 
+
+        return image

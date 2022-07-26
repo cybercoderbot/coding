@@ -37,32 +37,27 @@ repeat the whole process until all conditions exhausted.
 """
 
 
-
 class Solution(object):
     def fourSum(self, nums, target):
         res, N = [], len(nums)
         nums.sort()
-        
+
         for i in range(N):
             for j in range(i+1, N):
                 k, m = j+1, N-1
-                
-                while k<m:
+
+                while k < m:
                     sums = nums[i]+nums[j]+nums[k]+nums[m]
-                    
-                    if sums == target: 
-                        tmp = [nums[i],nums[j],nums[k],nums[m]]
+
+                    if sums == target:
+                        tmp = [nums[i], nums[j], nums[k], nums[m]]
                         if tmp not in res:
                             res.append(tmp)
                         k += 1
                         m -= 1
-                    elif sums > target: 
+                    elif sums > target:
                         m -= 1
                     else:
                         k += 1
-                                    
 
         return res
-
-
-

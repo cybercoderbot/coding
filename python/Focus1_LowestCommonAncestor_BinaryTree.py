@@ -21,15 +21,14 @@ Note that the linked lists must retain their original structure after the functi
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        
+
         p, q = headA, headB
-        
+
         while p != q:
             p = p.next if p else headB
             q = q.next if q else headA
-            
+
         return p
-        
 
 
 """
@@ -70,18 +69,17 @@ return the node.
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if p.val > q.val: 
+        if p.val > q.val:
             p, q = q, p
 
         node = root
-        while node: 
-            if node.val < p.val: 
+        while node:
+            if node.val < p.val:
                 node = node.right
-            elif p.val <= node.val <= q.val: 
+            elif p.val <= node.val <= q.val:
                 return node
-            else: 
+            else:
                 node = node.left
-
 
 
 """
@@ -120,17 +118,16 @@ Output: 1
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
 
-        if not root or root in (p, q): 
+        if not root or root in (p, q):
             return root
 
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
         if left and right:
-            return root 
+            return root
         else:
             return left or right
-
 
 
 """
@@ -141,14 +138,13 @@ Given the root of a binary tree, return the lowest common ancestor (LCA) of two 
 If either node p or q does not exist in the tree, return null. All values of the nodes in the tree 
 are unique.
 """
-    
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
 
 
 # 1 Breadth First Search
@@ -169,7 +165,7 @@ class Solution:
                 parents[node.right.val] = node
                 queue.append(node.right)
 
-        if p.val not in parents or q.val not in parents: 
+        if p.val not in parents or q.val not in parents:
             return None
 
         ancestors = set()
@@ -183,17 +179,17 @@ class Solution:
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        
+
         def lca(node):
             """Return LCA of p and q in sub-tree rooted at node (if found)."""
 
-            if node: 
+            if node:
                 left, x = lca(node.left)
                 right, y = lca(node.right)
 
-                if node in (p, q): 
+                if node in (p, q):
                     return node, x+y+1
-                if left and right: 
+                if left and right:
                     return node, x+y
 
                 if left:
@@ -202,14 +198,13 @@ class Solution:
                     return right, y
 
             return None, 0
-            
+
         res, count = lca(root)
 
         if count == 2:
             return res
         else:
             return None
-
 
 
 """
@@ -235,7 +230,7 @@ class Solution:
         while p1 != p2:
             p1 = p1.parent if p1 else q
             p2 = p2.parent if p2 else p
-            
+
         return p1
 
 
@@ -245,15 +240,14 @@ class Solution:
         while q:
             visited.add(q.val)
             q = q.parent
-        
+
         while p:
-            if p.val in visited: 
+            if p.val in visited:
                 return p
             visited.add(p.val)
             p = p.parent
 
         return None
-
 
 
 """
@@ -264,23 +258,23 @@ Given the root of a binary tree and an array of TreeNode objects nodes, return t
 of all the nodes in nodes. All the nodes will exist in the tree, and all values of the tree's nodes are unique.
 """
 
+
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', nodes: 'List[TreeNode]') -> 'TreeNode':
         """Return LCA of all nodes."""
-        
+
         nodes = set(nodes)
-        
-        if not root or root in nodes: 
-            return root 
+
+        if not root or root in nodes:
+            return root
 
         left = self.lowestCommonAncestor(root.left, nodes)
         right = self.lowestCommonAncestor(root.right, nodes)
 
         if left and right:
-            return root 
+            return root
         else:
             return left or right
-
 
 
 """
@@ -303,29 +297,29 @@ The lowest common ancestor of a set S of nodes, is the node A with the largest d
 # if left > right, move to left node;
 # if left < right, move to right node.
 
+
 class Solution:
     def lcaDeepestLeaves(self, root: TreeNode) -> TreeNode:
         # Analysis
         # Time complexity O(N)
         # Space complexity O(N)
-        
+
         def height(node):
             """Return height of tree rooted at node."""
-            if not node: 
-                return 0 
+            if not node:
+                return 0
             return max(height(node.left), height(node.right)) + 1
-        
+
         node = root
-        while node: 
+        while node:
             left = height(node.left)
             right = height(node.right)
 
-            if left == right: 
+            if left == right:
                 return node
-            elif left > right: 
+            elif left > right:
                 node = node.left
-            else: 
-                node = node.right 
+            else:
+                node = node.right
 
         return node
-                

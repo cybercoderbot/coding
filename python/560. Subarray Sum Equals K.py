@@ -19,12 +19,13 @@ Input: nums = [1,2,3], k = 3
 Output: 2
 """
 
+
 class Solution:
     def subarraySum(self, nums: List[int], target: int) -> int:
-  
+
         hmap = defaultdict(int)
         hmap[0] = 1
-        
+
         res, cumsum = 0, 0
         for n in nums:
             cumsum += n

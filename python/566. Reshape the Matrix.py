@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Solution(object):
     def matrixReshape(self, nums, r, c):
         """
@@ -12,11 +13,11 @@ class Solution(object):
         #     return np.reshape(nums, (r,c)).tolist()
         # except:
         #     return nums
-            
+
         h, w = len(nums), len(nums[0])
-        if h * w != r * c: 
+        if h * w != r * c:
             return nums
-            
+
         ans = []
         for x in range(r):
             row = []
@@ -24,6 +25,3 @@ class Solution(object):
                 row.append(nums[(x * c + y) / w][(x * c + y) % w])
             ans.append(row)
         return ans
-        
-        
-        

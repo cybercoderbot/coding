@@ -21,6 +21,7 @@ The average value of nodes on level 0 is 3,  on level 1 is 14.5, and on level 2 
 #         self.left = None
 #         self.right = None
 
+
 class Solution(object):
     def averageOfLevels(self, root):
         """
@@ -28,17 +29,15 @@ class Solution(object):
         :rtype: List[float]
         """
         info = []
+
         def dfs(node, depth=0):
             if not node:
                 return
             if len(info) <= depth:
-                info.append([0,0])
+                info.append([0, 0])
             info[depth][0] += node.val
             info[depth][1] += 1
             dfs(node.left, depth+1)
             dfs(node.right, depth+1)
         dfs(root)
         return [s / float(c) for s, c in info]
-    
-    
-    

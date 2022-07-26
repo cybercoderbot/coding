@@ -24,7 +24,7 @@ Solution:
 Just go through the intervals sorted by start coordinate and either combine the current interval with the 
 previous one if they overlap, or add it to the output by itself if they don't.
 
-"""            
+"""
 
 
 class Solution(object):
@@ -33,17 +33,17 @@ class Solution(object):
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
-        if len(intervals) == 0: 
+        if len(intervals) == 0:
             return []
-        
+
         intervals.sort(key=lambda x: x[0])
 
         res = [intervals[0]]
         for pair in intervals[1:]:
-            if pair[0] <= res[-1][1]: 
+            if pair[0] <= res[-1][1]:
                 # [[1,4], [4,5]] -> [1,5]
                 res[-1][1] = max(pair[1], res[-1][1])
-            else: 
+            else:
                 res.append(pair)
-                
+
         return res

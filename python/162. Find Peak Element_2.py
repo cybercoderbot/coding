@@ -39,15 +39,14 @@ Test cases:
      """
 
 
-
 class Solution:
-        
+
     def findPeakElement(self, nums):
         left, right = 0, len(nums)-1
 
         # condition 3
         while left < right-1:
-            mid = (left+right) //2
+            mid = (left+right) // 2
             if nums[mid] > max(nums[mid+1], nums[mid-1]):
                 return mid
 
@@ -61,4 +60,3 @@ class Solution:
             return left
         else:
             return right
-        

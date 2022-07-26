@@ -15,6 +15,7 @@ Input: 3
 Output: False
 '''
 
+
 class Solution(object):
     def judgeSquareSum(self, c):
         """
@@ -23,13 +24,5 @@ class Solution(object):
         """
         def is_square(N):
             return int(N**.5)**2 == N
-        
+
         return any(is_square(c - x*x) for x in range(int(c**.5) + 1))
-        
-        
-        
-        
-        
-        
-        
-        

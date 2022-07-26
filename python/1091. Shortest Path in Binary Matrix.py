@@ -38,25 +38,26 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: int
         """
-        if not grid or not grid[0] or (grid[0][0] + grid[-1][-1]) > 0: 
+        if not grid or not grid[0] or (grid[0][0] + grid[-1][-1]) > 0:
             return -1
-        
+
         visited = set((0, 0))
         queue = collections.deque([(0, 0, 1)])
-        neighbors = [(0, 1), (1, 0), (-1, 0), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
-        M, N = len(grid), len(grid[0]) 
-        
+        neighbors = [(0, 1), (1, 0), (-1, 0), (0, -1),
+                     (1, 1), (-1, -1), (1, -1), (-1, 1)]
+        M, N = len(grid), len(grid[0])
+
         while queue:
             x, y, pathlen = queue.popleft()
-            if (x, y) == (M-1, N-1): 
+            if (x, y) == (M-1, N-1):
                 return pathlen
-            
+
             for dx, dy in neighbors:
                 p, q = x+dx, y+dy
-                is_inbound = 0 <= p < M and 0 <= q < N 
+                is_inbound = 0 <= p < M and 0 <= q < N
                 not_visited = (p, q) not in visited
                 if is_inbound and not_visited and grid[p][q] == 0:
                     visited.add((p, q))
                     queue.append((p, q, pathlen + 1))
-            
+
         return -1

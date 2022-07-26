@@ -11,12 +11,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        
+
         # 这道题给定了一棵完全二叉树，让我们求其节点的个数。让我们来看看维基百科上对二者的定义：
 
         # 完全二叉树：对于一颗二叉树，假设其深度为d（d>1）。除了第d层外，其它各层的节点数目均已达最大值，
         # 且第d层所有节点从左向右连续地紧密排列，这样的二叉树被称为完全二叉树
-        
+
         # 满二叉树：对于上述的完全二叉树，如果去掉其第d层的所有节点，那么剩下的部分就构成一个满二叉树
         # （此时该满二叉树的深度为d-1）
 
@@ -29,23 +29,19 @@ class Solution(object):
 
         if not root:
             return 0
-            
+
         hleft = hright = 0
         pleft = pright = root
-        
+
         while pleft:
             hleft += 1
             pleft = pleft.left
-        
+
         while pright:
             hright += 1
             pright = pright.right
-        
-        if hleft==hright:
+
+        if hleft == hright:
             return pow(2, hleft)-1
-        
+
         return self.countNodes(root.left) + self.countNodes(root.right) + 1
-        
-        
-        
-        

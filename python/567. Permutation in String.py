@@ -27,8 +27,8 @@ runtime: O(n*k)
 """
 
 
+from collections import Counter
 
-from collections import Counter   
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
@@ -36,8 +36,7 @@ class Solution:
         d1 = Counter(s1)
         K, N = len(s1), len(s2)
         for i in range(N-K+1):          # O(n)
-            d2 = Counter(s2[i:i+K]) # O(k)
+            d2 = Counter(s2[i:i+K])  # O(k)
             if d1 == d2:
                 return True
         return False
-

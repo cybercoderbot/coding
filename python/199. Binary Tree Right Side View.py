@@ -42,24 +42,24 @@ Traverse the tree and put the rightmost node of each level to a container.
 #         self.val = val
 #         self.left = left
 #         self.right = right
-        
+
 # recursive preorder dfs
 class Solution:
     def rightSideView(self, root: TreeNode) -> List[int]:
-        
-        def traverse(node, i): 
+
+        def traverse(node, i):
             """Traverse the tree depth-first"""
-            if not node: 
-                return 
-            if i == len(res): 
+            if not node:
+                return
+            if i == len(res):
                 res.append(node.val)
-                
+
             traverse(node.right, i+1)
             traverse(node.left, i+1)
-            
+
         res = []
         traverse(root, 0)
-        return res 
+        return res
 
 
 # iterative preorder dfs
@@ -69,30 +69,30 @@ class Solution:
         stack = [(root, 0)]
         while stack:
             node, i = stack.pop()
-            if node: 
-                if i == len(res): 
+            if node:
+                if i == len(res):
                     res.append(node.val)
                 stack.append((node.left, i+1))
                 stack.append((node.right, i+1))
-        return res 
+        return res
 
 
 # bfs
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
 
-        if not root: 
+        if not root:
             return []
-        
+
         res = []
         queue1 = [root]
-        while queue1: 
+        while queue1:
             qnext = []
-            for node in queue1: 
+            for node in queue1:
                 # Add child nodes of the current level for the next level
-                if node.left: 
+                if node.left:
                     queue2.append(node.left)
-                if node.right: 
+                if node.right:
                     queue2.append(node.right)
 
             # The current level is finished.
@@ -102,5 +102,4 @@ class Solution:
             # go to next level
             queue1 = queue2
 
-        return res 
-
+        return res

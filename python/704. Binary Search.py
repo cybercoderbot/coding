@@ -7,6 +7,7 @@ Given an array of integers nums which is sorted in ascending order, and an integ
 You must write an algorithm with O(log n) runtime complexity.
 """
 
+
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         left, right = 0, len(nums) - 1

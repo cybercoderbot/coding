@@ -36,15 +36,15 @@ def solve(nums):
     if nums[0] == MAXVAL:
         return [nums[0]] + solve(nums[1:])
     else:
-        index = nums[::-1].index(MAXVAL) 
+        index = nums[::-1].index(MAXVAL)
         nums[0], nums[-(index+1)] = nums[-(index+1)], nums[0]
         return nums
-            
+
 
 class Solution:
     def maximumSwap(self, num: int) -> int:
-        
+
         nums = [int(n) for n in str(num)]
         swapped = solve(nums)
-        		
+
         return int(''.join(str(x) for x in swapped))

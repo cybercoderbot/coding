@@ -39,23 +39,22 @@ Output: []
 class Solution:
     def pathSum(self, root: Optional[TreeNode], target: int) -> List[List[int]]:
         res = []
-        if root: 
+        if root:
             parent = {root: None}
             stack = [(root, 0)]
-            while stack: 
+            while stack:
                 node, val = stack.pop()
-                val += node.val 
-                if node.left: 
+                val += node.val
+                if node.left:
                     parent[node.left] = node
                     stack.append((node.left, val))
-                if node.right: 
-                    parent[node.right] = node 
+                if node.right:
+                    parent[node.right] = node
                     stack.append((node.right, val))
-                if not (node.left or node.right) and val == target: 
+                if not (node.left or node.right) and val == target:
                     path = []
-                    while node: 
+                    while node:
                         path.append(node.val)
                         node = parent[node]
                     res.append(path[::-1])
-        return res 
-        
+        return res

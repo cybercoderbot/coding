@@ -27,34 +27,31 @@ Output: [8,9,9,9,0,0,0,1]
 """
 
 
-
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        
         """
         Time complexity O(M+N)
         Space complexity O(max(M, N))
         """
         dummy = node = ListNode()
         carry = 0
-        while l1 or l2 or carry: 
-            if l1: 
+        while l1 or l2 or carry:
+            if l1:
                 carry += l1.val
                 l1 = l1.next
-            if l2: 
-                carry += l2.val 
-                l2 = l2.next 
-            node.next = ListNode(carry%10)
+            if l2:
+                carry += l2.val
+                l2 = l2.next
+            node.next = ListNode(carry % 10)
             node = node.next
-            carry //= 10 
+            carry //= 10
 
-        return dummy.next 
-
+        return dummy.next
 
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        
+
         dummy = node = ListNode(0)
         carry = 0
         while l1 or l2 or carry:
@@ -62,12 +59,12 @@ class Solution:
             val2 = l2.val if l2 else 0
             valsum = val1 + val2 + carry
             carry = valsum // 10
-            
+
             nextnode = ListNode(valsum % 10)
             node.next = nextnode
             node = nextnode
-            
+
             l1 = l1.next if l1 else None
             l2 = l2.next if l2 else None
-            
+
         return dummy.next

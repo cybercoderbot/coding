@@ -21,30 +21,30 @@ Output: [1,2,3]
 """
 
 
-def flattenTree(node): 
+def flattenTree(node):
     """ Return head & tail of flattened tree. """
-    leftHead = rightTail = node 
+    leftHead = rightTail = node
 
-    if node.left: 
+    if node.left:
         leftHead, leftTail = flattenTree(node.left)
-        leftTail.right = node 
+        leftTail.right = node
         node.left = leftTail
 
     if node.right:
         rightHead, rightTail = flattenTree(node.right)
         node.right = rightHead
-        rightHead.left = node 
+        rightHead.left = node
 
-    return leftHead, rightTail 
-        
+    return leftHead, rightTail
+
 
 class Solution:
     def treeToDoublyList(self, root: 'Node') -> 'Node':
-        if not root: 
-            return 
-        
+        if not root:
+            return
+
         head, tail = flattenTree(root)
         head.left = tail
-        tail.right = head 
+        tail.right = head
 
-        return head 
+        return head

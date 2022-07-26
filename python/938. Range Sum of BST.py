@@ -39,7 +39,7 @@ class Solution:
         if root.val < high:
             res += self.rangeSumBST(root.right, low, high)
         if low <= root.val <= high:
-            res += root.val     
+            res += root.val
         return res
 
 
@@ -54,13 +54,14 @@ class Solution:
         else:
             return root.val + self.rangeSumBST(root.left, L, R) + self.rangeSumBST(root.right, L, R)
 
+
 class Solution:
     def rangeSumBST(self, root: TreeNode, L: int, R: int) -> int:
         if not root:
             return 0
         return self.rangeSumBST(root.left, L, R) + \
-                self.rangeSumBST(root.right, L, R) + \
-                (root.val if L <= root.val <= R else 0)
+            self.rangeSumBST(root.right, L, R) + \
+            (root.val if L <= root.val <= R else 0)
 
 
 class Solution:
@@ -73,7 +74,5 @@ class Solution:
         if root.val < R:
             res += self.rangeSumBST(root.right, L, R)
         if L <= root.val <= R:
-            res += root.val     
+            res += root.val
         return res
-
-

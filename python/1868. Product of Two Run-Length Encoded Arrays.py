@@ -36,7 +36,6 @@ prodNums = [2,2,2,6,9,9], which is compressed into the run-length encoded array 
 class Solution:
     def findRLEArray(self, encoded1: List[List[int]], encoded2: List[List[int]]) -> List[List[int]]:
 
-
         i, j = 0, 0
         M, N = len(encoded1), len(encoded2)
         res = []
@@ -63,7 +62,3 @@ class Solution:
                 res[-1][1] += freq3
 
         return res
-
-
-
-        

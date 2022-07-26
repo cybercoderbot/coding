@@ -6,7 +6,6 @@ class NumArray(object):
         :type nums: List[int]
         """
         self.nums = nums
-        
 
     def sumRange(self, i, j):
         """
@@ -20,5 +19,3 @@ class NumArray(object):
 # Your NumArray object will be instantiated and called as such:
 # obj = NumArray(nums)
 # param_1 = obj.sumRange(i,j)
-
-

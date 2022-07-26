@@ -4,10 +4,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        
+
         # 解法: 栈（Stack）
         # 时间复杂度 O(n)
-        
+
         # 对于循环数组的处理，将nums数组遍历两次，然后还是坐标i对len(nums)取余，取出数字，
         # 如果此时栈不为空，且栈顶元素小于当前数字，说明当前数字就是栈顶元素的右边第一个较大数，
         # 那么建立二者的映射，并且去除当前栈顶元素，最后如果i小于n，则把i压入栈。
@@ -22,10 +22,3 @@ class Solution(object):
                 ans[stack.pop()] = nums[i]
             stack.append(i)
         return ans
-        
-        
-        
-        
-        
-        
-        

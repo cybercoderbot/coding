@@ -54,36 +54,35 @@ Space Complexity: O(N^2), the additional space used in the depth first search by
 
 class Solution:
     def largestIsland(self, grid: List[List[int]]) -> int:
-        N = len(grid) 
-        index = 2 
+        N = len(grid)
+        index = 2
         area = defaultdict(int)
-        for r in range(N): 
-            for c in range(N): 
-                if grid[r][c] == 1: 
+        for r in range(N):
+            for c in range(N):
+                if grid[r][c] == 1:
                     stack = [(r, c)]
                     grid[r][c] = index
-                    while stack: 
+                    while stack:
                         x, y = stack.pop()
                         area[index] += 1
-                        for i, j in (x-1, y), (x, y-1), (x, y+1), (x+1, y): 
-                            if 0 <= i < N and 0 <= j < N and grid[i][j] == 1: 
+                        for i, j in (x-1, y), (x, y-1), (x, y+1), (x+1, y):
+                            if 0 <= i < N and 0 <= j < N and grid[i][j] == 1:
                                 stack.append((i, j))
                                 grid[i][j] = index
                     index += 1
-                    
+
         res = max(area.values(), default=0)
-        for x in range(N): 
-            for y in range(N): 
-                if grid[x][y] == 0: 
+        for x in range(N):
+            for y in range(N):
+                if grid[x][y] == 0:
                     candidate = 1
                     seen = set()
-                    for i, j in (x-1, y), (x, y-1), (x, y+1), (x+1, y): 
-                        if 0 <= i < N and 0 <= j < N and grid[i][j] and grid[i][j] not in seen: 
+                    for i, j in (x-1, y), (x, y-1), (x, y+1), (x+1, y):
+                        if 0 <= i < N and 0 <= j < N and grid[i][j] and grid[i][j] not in seen:
                             seen.add(grid[i][j])
                             candidate += area[grid[i][j]]
                     res = max(res, candidate)
-        return res 
-
+        return res
 
 
 class Solution(object):
@@ -115,10 +114,7 @@ class Solution(object):
         for r in xrange(N):
             for c in xrange(N):
                 if grid[r][c] == 0:
-                    seen = {grid[nr][nc] for nr, nc in neighbors(r, c) if grid[nr][nc] > 1}
+                    seen = {grid[nr][nc]
+                            for nr, nc in neighbors(r, c) if grid[nr][nc] > 1}
                     res = max(res, 1 + sum(area[i] for i in seen))
         return res
-
-
-
-

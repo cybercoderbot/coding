@@ -36,12 +36,12 @@ class Solution:
             arr.append(arr[-1].next)
         return arr[len(arr)//2]
 
+    # Solution 2
 
-    # Solution 2    
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         slow = fast = head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-            
+
         return slow

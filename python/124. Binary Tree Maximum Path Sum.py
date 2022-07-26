@@ -24,7 +24,6 @@ Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 
 """
 
 
-
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         """
@@ -35,20 +34,20 @@ class Solution:
         Time complexity O(N) 
         Space complexity O(N)
         """
-        
+
         def traverse(node):
             """Returns max path starting at node"""
-            if node is None: 
+            if node is None:
                 return 0
-            left  = max(0, traverse(node.left ))
+            left = max(0, traverse(node.left))
             right = max(0, traverse(node.right))
             res.append(left + node.val + right)
             return max(left, right) + node.val
-        
+
         res = []
         traverse(root)
         return max(res)
-        
+
 
 # There are a few tricks to save the space usage:
 # use a instance variable self.ans;
@@ -59,15 +58,16 @@ class Solution:
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         self.res = float("-inf")
-        
+
         def traverse(node):
             """Returns max path starting at node"""
-            if node is None: return 0
-            left  = max(0, traverse(node.left ))
+            if node is None:
+                return 0
+            left = max(0, traverse(node.left))
             right = max(0, traverse(node.right))
             self.res = max(self.res, left + node.val + right)
             return max(left, right) + node.val
-        
+
         traverse(root)
         return self.res
 
@@ -75,15 +75,16 @@ class Solution:
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         ans = [float("-inf")]
-        
+
         def traverse(node):
             """Returns max path starting at node"""
-            if node is None: return 0
-            left  = max(0, traverse(node.left ))
+            if node is None:
+                return 0
+            left = max(0, traverse(node.left))
             right = max(0, traverse(node.right))
             ans[0] = max(ans[0], left + node.val + right)
             return max(left, right) + node.val
-        
+
         traverse(root)
         return ans[0]
 
@@ -91,15 +92,16 @@ class Solution:
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         ans = float("-inf")
-        
+
         def traverse(node):
             """Returns max path starting at node"""
             nonlocal ans
-            if node is None: return 0
-            left  = max(0, traverse(node.left ))
+            if node is None:
+                return 0
+            left = max(0, traverse(node.left))
             right = max(0, traverse(node.right))
             ans = max(ans, left + node.val + right)
             return max(left, right) + node.val
-        
+
         traverse(root)
         return ans

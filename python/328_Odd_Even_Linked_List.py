@@ -10,15 +10,16 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        
+
         # Use two pointers
         # odd points to odd nodes
         # even points to even nodes
-        
-        if not head: return head
+
+        if not head:
+            return head
         odd = head
         even = even_head = head.next
-        
+
         while even and even.next:
             odd.next = even.next
             odd = odd.next
@@ -26,8 +27,3 @@ class Solution(object):
             even = even.next
         odd.next = even_head
         return head
-    
-    
-    
-    
-    

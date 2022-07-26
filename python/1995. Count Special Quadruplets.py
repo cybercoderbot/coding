@@ -90,36 +90,34 @@ class Solution:
     def countQuadruplets(self, nums: List[int]) -> int:
         count, N = 0, len(nums)
         m = defaultdict(int)
-        
-        for i in range(N): 
-                            
-            for j in range(i+1, N): 
+
+        for i in range(N):
+
+            for j in range(i+1, N):
                 count += m[nums[j] - nums[i]]
-                
-            for k in range(i): 
+
+            for k in range(i):
                 m[nums[k] + nums[i]] += 1
 
-                
-        return count 
-
+        return count
 
 
 class Solution:
     def countQuadruplets(self, nums: List[int]) -> int:
-        res, N = 0,len(nums)
-        count = defaultdict(int) # type: int, default = 0
-        
+        res, N = 0, len(nums)
+        count = defaultdict(int)  # type: int, default = 0
+
         # find a + b == d - c, and a < b < c < d
         for i in range(N - 1, 0, -1):
-            # res += the numbers of cases which a + b == d - c. 
+            # res += the numbers of cases which a + b == d - c.
             # a: nums[j], b: nums[i], c: previous nums[i]
             for j in range(i - 1, -1, -1):
                 res += count[nums[i] + nums[j]]
-            
+
             # count d - c, d: nums[j], c: nums[i], start from the end of nums, because a < b < c < d
             for j in range(l - 1, i, -1):
                 count[nums[j] - nums[i]] += 1
-        
+
         return res
 
 
@@ -128,60 +126,65 @@ class Solution:
     def countQuadruplets(self, nums: List[int]) -> int:
         count, N = 0, len(nums)
         m = defaultdict(int)
-        
-        for i in range(N-1, 0, -1): 
-            
-            # res += the numbers of cases which a + b == d - c. 
-            # a: nums[j], b: nums[i], c: previous nums[i]
-            for j in range(i-1, -1, -1): 
-                count += m[nums[i] + nums[j]]
-                
 
-            # count d - c, 
+        for i in range(N-1, 0, -1):
+
+            # res += the numbers of cases which a + b == d - c.
+            # a: nums[j], b: nums[i], c: previous nums[i]
+            for j in range(i-1, -1, -1):
+                count += m[nums[i] + nums[j]]
+
+            # count d - c,
             # d: nums[j], c: nums[i], start from the end of nums, because a < b < c < d
-            for k in range(N-1, i, -1): 
+            for k in range(N-1, i, -1):
                 m[nums[k] - nums[i]] += 1
-                
-        return count 
+
+        return count
 
 
 class Solution:
     def countQuadruplets(self, nums: List[int]) -> int:
         res = 0
         l = len(nums)
-        
+
         count = defaultdict(lambda: 0)
         count[nums[l-1] - nums[l-2]] = 1
-        
+
         for b in range(l - 3, 0, -1):
             for a in range(b - 1, -1, -1):
                 res += count[nums[a] + nums[b]]
-            
+
             for x in range(l - 1, b, -1):
                 count[nums[x] - nums[b]] += 1
-        
+
         return res
 
 
 class Solution {
-public:
-    int countQuadruplets(vector<int>& nums) {
-        int res = 0;
-        int len = nums.size();
-        
-        unordered_map<int, int> count;
-        count[nums[len-1] - nums[len-2]] = 1;
-        
-        for (int b = len - 3; b >= 1; b--) {
-            for (int a = b - 1; a >= 0; a--) {
-                res += count[nums[a] + nums[b]];
+    public:
+    int countQuadruplets(vector < int > & nums) {
+        int res = 0
+        int len = nums.size()
+
+        unordered_map < int, int > count
+        count[nums[len-1] - nums[len-2]] = 1
+
+        for (int b=len - 3
+             b >= 1
+             b--) {
+            for (int a=b - 1
+                 a >= 0
+                 a--) {
+                res += count[nums[a] + nums[b]]
             }
-            
-            for (int x = len - 1; x > b; x--) {
-                count[nums[x] - nums[b]]++;
+
+            for (int x=len - 1
+                 x > b
+                 x--) {
+                count[nums[x] - nums[b]]++
             }
         }
-        
-        return res;
+
+        return res
     }
-};
+}

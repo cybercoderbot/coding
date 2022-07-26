@@ -59,6 +59,7 @@ Test cases:
 
 """
 
+
 class Solution(object):
     def findPeakElement(self, nums):
         """

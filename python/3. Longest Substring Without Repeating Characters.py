@@ -33,22 +33,20 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 """
 
 
-
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str
         :rtype: int
         """
-        
+
         # 解题思路：Sliding window
         # 变量left和right分别记录子串的起点和终点
         # 字典count存储当前子串中各字符的个数
         # 从左向右逐字符遍历原始字符串，每次将right + 1
         # 当新增字符c的计数 > 1时，向右移动起点left，并将s[left]在字典中的计数-1，直到count[c]<=1为止
         # 更新最大长度
-        
-                
+
         res = left = right = 0
         count = {}
         for c in s:
@@ -59,8 +57,3 @@ class Solution(object):
                 left += 1
             res = max(res, right - left)
         return res
-        
-        
-        
-        
-        

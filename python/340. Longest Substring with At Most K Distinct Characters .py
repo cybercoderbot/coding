@@ -18,7 +18,7 @@ class Solution(object):
            in order to find the longest substring T, we need to locate the smallest location, and remove it 
            from the dictionary, and then record the return value.
         """
-    
+
         # Use dictionary d to keep track of (character, location) pair,
         # where location is the rightmost location that the character appears at
         d = {}
@@ -32,7 +32,3 @@ class Solution(object):
                 left += 1
             ans = max(i - left + 1, ans)
         return ans
-        
-        
-        
-        

@@ -32,11 +32,11 @@ Example 3:
 
 Input: nums = [23,2,6,4,7], k = 13
 Output: false
-"""        
+"""
 
 
-# Idea: if sum(nums[i:j]) % k == 0 for some i < j, then sum(nums[:j]) % k == sum(nums[:i]) % k. 
-# So we just need to use a dictionary to keep track of sum(nums[:i]) % k and the corresponding index i. 
+# Idea: if sum(nums[i:j]) % k == 0 for some i < j, then sum(nums[:j]) % k == sum(nums[:i]) % k.
+# So we just need to use a dictionary to keep track of sum(nums[:i]) % k and the corresponding index i.
 # Once some later sum(nums[:i']) % k == sum(nums[:i]) % k and i' - i > 1, we return True.
 
 # Time complexity: O(n), space complexity: O(min(k, n)) if k != 0, else O(n).
@@ -48,7 +48,7 @@ class Solution():
         :type k: int
         :rtype: bool
         """
-        hmap = {0:-1}
+        hmap = {0: -1}
         cumsum = 0
         for i, n in enumerate(nums):
             cumsum += n

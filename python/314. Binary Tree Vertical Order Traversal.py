@@ -33,8 +33,8 @@ Output: [[4],[9,5],[3,0,1],[8,2],[7]]
 #         self.right = None
 
 
-
 from collections import defaultdict
+
 
 class Solution:
     def verticalOrder(self, root: TreeNode) -> List[List[int]]:
@@ -48,17 +48,17 @@ class Solution:
                 colTable[col].append(node.val)
                 queue.append((col-1, node.left))
                 queue.append((col+1, node.right))
-                        
+
         return [colTable[x] for x in sorted(colTable.keys())]
 
 
 class Solution(object):
-    
+
     def verticalOrder(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
-        
+
         this problem seemed very hard but actually once you draw a picture on a paper or in your brain, it becomes pretty clear.
         - for the left  node, you set its index as index - 1
         - for the right node, you set its index as index + 1
@@ -68,9 +68,8 @@ class Solution(object):
         - keep track of min and max index and store into solution list and return it
         """
 
-        if not(root): 
+        if not(root):
             return []
-
 
         MIN, MAX = 0, 0
         table = {}

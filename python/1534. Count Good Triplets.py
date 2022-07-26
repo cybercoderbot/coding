@@ -32,7 +32,7 @@ Explanation: No triplet satisfies all conditions.
 
 class Solution:
     def countGoodTriplets(self, nums: List[int], a: int, b: int, c: int) -> int:
-        
+
         count, N = 0, len(nums)
 
         for i in range(N):
@@ -41,8 +41,8 @@ class Solution:
                     ok_a = abs(nums[i] - nums[j]) <= a
                     ok_b = abs(nums[j] - nums[k]) <= b
                     ok_c = abs(nums[i] - nums[k]) <= c
-                    
+
                     if (ok_a and ok_b and ok_c):
                         count += 1
-                        
+
         return count

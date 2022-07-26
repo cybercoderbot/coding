@@ -40,7 +40,7 @@ We use an extra array in which we place every element of the array at its correc
 i.e. the number at index i in the original array is placed at the index (i + k) % length of array (i+k)% length of array. 
 Then, we copy the new array to the original one.
     
-"""    
+"""
 
 
 class Solution:
@@ -50,6 +50,5 @@ class Solution:
 
         for i in range(N):
             temp[(i + k) % N] = nums[i]
-            
+
         nums[:] = temp
-        

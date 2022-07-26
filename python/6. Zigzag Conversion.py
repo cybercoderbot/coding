@@ -34,20 +34,19 @@ Output: "A"
 """
 
 
-
 class Solution:
     def convert(self, s: str, nrows: int) -> str:
-        if nrows == 1: 
-            return s 
-        
+        if nrows == 1:
+            return s
+
         res = [""] * nrows
         i, down = 0, 1
-        
-        for c in s: 
+
+        for c in s:
             res[i] += c
             i += down
-            if i == 0 or i == nrows-1: 
+            if i == 0 or i == nrows-1:
                 down *= -1
-                
+
         # res = ["PAHN", "APLSIIG", "YIR"]
         return "".join(res)

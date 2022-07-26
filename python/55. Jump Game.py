@@ -5,9 +5,8 @@ class Solution(object):
         :rtype: bool
         """
 
-        # Idea is to work backwards from the last index. Keep track of the smallest index that can 
+        # Idea is to work backwards from the last index. Keep track of the smallest index that can
         # "jump" to the last index. Check whether the current index can jump to this smallest index.
-
 
         n = len(nums)
         last = n-1
@@ -16,8 +15,3 @@ class Solution(object):
             if nums[i] + i >= last:
                 last = i
         return last == 0
-        
-        
-        
-        
-        

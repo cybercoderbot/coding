@@ -27,7 +27,6 @@ Output: ["1"]
 
 class Solution:
     def binaryTreePaths(self, root: TreeNode) -> List[str]:
-
         """
         We initiate the stack by a root node and then at each step we pop out one node and its path. 
         If the poped node is a leaf, one update the list of all paths. 
@@ -39,13 +38,13 @@ class Solution:
         - Space complexity : O(N) as we could keep up to the entire tree.
 
         """
-        
+
         if not root:
             return []
-        
+
         paths = []
         stack = [(root, str(root.val))]
-        
+
         while stack:
             node, path = stack.pop()
 
@@ -55,8 +54,5 @@ class Solution:
                 stack.append((node.left, path + '->' + str(node.left.val)))
             if node.right:
                 stack.append((node.right, path + '->' + str(node.right.val)))
-        
+
         return paths
-
-
-        

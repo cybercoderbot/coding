@@ -26,8 +26,8 @@ Output: "cbad"
 
 
 # Solution
-# This is in fact an easy custom sorting application. Here, the relative order of characters are defined by their 
-# positions in S. For those characters who don't appear in S, their order is not defined. As a result, 
+# This is in fact an easy custom sorting application. Here, the relative order of characters are defined by their
+# positions in S. For those characters who don't appear in S, their order is not defined. As a result,
 # one could use any value for them. Here, I've chosen 26, but it is really okay to use any value for them.
 
 class Solution:

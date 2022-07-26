@@ -5,12 +5,10 @@ class NumMatrix(object):
         :type matrix: List[List[int]]
         """
         self.matrix = matrix
-        
+
         for row in self.matrix:
-            for j in range(1,len(row)):
+            for j in range(1, len(row)):
                 row[j] += row[j-1]
-                
-        
 
     def update(self, i, j, val):
         """
@@ -20,15 +18,14 @@ class NumMatrix(object):
         :rtype: void
         """
         original = self.matrix[i][j]
-        
-        if j>0:
+
+        if j > 0:
             original -= self.matrix[i][j-1]
-        
+
         diff = val - original
         c = len(self.matrix[0])
         for k in range(j, c):
             self.matrix[i][k] += diff
-        
 
     def sumRegion(self, i1, j1, i2, j2):
         """
@@ -50,6 +47,3 @@ class NumMatrix(object):
 # obj = NumMatrix(matrix)
 # obj.update(row,col,val)
 # param_2 = obj.sumRegion(row1,col1,row2,col2)
-
-
-

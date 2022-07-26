@@ -22,7 +22,6 @@ Explanation: There is no common prefix among the input strings.
 
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        
         """
         :type strs: List[str]
         :rtype: str
@@ -35,5 +34,4 @@ class Solution:
             for other in strs:
                 if other[i] != c:
                     return shortest[:i]
-        return shortest 
-        
+        return shortest

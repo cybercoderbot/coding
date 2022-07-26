@@ -50,18 +50,17 @@ Space Complexity: O(n^2). for the hashmap. There could be up to O(n^2) distinct 
 """
 
 
-
 class Solution:
     def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
-        
+
         count = 0
         m = collections.defaultdict(int)
         for x in nums1:
             for y in nums2:
                 m[x + y] += 1
-                
+
         for z in nums3:
             for w in nums4:
                 count += m[-(z + w)]
-                
+
         return count

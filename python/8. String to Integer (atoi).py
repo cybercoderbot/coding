@@ -86,24 +86,23 @@ Return the number capped within [-2**31, 2**31-1].
 
 class Solution:
     def myAtoi(self, s: str) -> int:
-        left = -1 
-        for i, c in enumerate(s): 
-            if left == -1: 
-                if c in "+-" or c.isdigit(): 
-                    left = i 
-                elif not c.isspace(): 
+        left = -1
+        for i, c in enumerate(s):
+            if left == -1:
+                if c in "+-" or c.isdigit():
+                    left = i
+                elif not c.isspace():
                     return 0
-            elif not c.isdigit(): 
-                break 
-        else: 
+            elif not c.isdigit():
+                break
+        else:
             i = len(s)
-            
+
         right = i
-        res = 0 
-        if 0 <= left and (left+1 < right or s[left].isdigit()): 
+        res = 0
+        if 0 <= left and (left+1 < right or s[left].isdigit()):
             res = int(s[left:right])
-            
+
         MIN, MAX = -2**31, 2**31-1
 
         return max(MIN, min(MAX, res))
-        

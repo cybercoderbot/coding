@@ -27,7 +27,6 @@ Output: [1]
 #         self.next = next
 # class Solution:
 #     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        
 
 
 """
@@ -38,6 +37,7 @@ To go from pre -> a -> b -> b.next to pre -> b -> a -> b.next, we need to change
 Instead of thinking about in what order I change them, I just change all three at once.
 
 """
+
 
 class Solution(object):
     def swapPairs(self, head):
@@ -50,13 +50,13 @@ class Solution(object):
             b = a.next
             pre.next, b.next, a.next = b, a, b.next
             pre = a
-            
+
         return dummy.next
 
-        
+
 class Solution(object):
     def swapPairs(self, head):
-        if not head or not head.next: 
+        if not head or not head.next:
             return head
 
         new_start = head.next.next
@@ -64,13 +64,3 @@ class Solution(object):
         head.next.next = self.swapPairs(new_start)
 
         return head
-
-
-
-
-
-
-
-
-
-        

@@ -21,10 +21,11 @@ Input: x = 120
 Output: 21
 """
 
+
 class Solution:
     def reverse(self, x: int) -> int:
 
-        sign = (x>0) - (x<0)
+        sign = (x > 0) - (x < 0)
         num = int(str(abs(x))[::-1])
         in_range = num.bit_length() < 32
 

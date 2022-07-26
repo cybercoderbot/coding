@@ -2,17 +2,16 @@ class Solution:
     # @param {integer[]} nums
     # @return {string}
     def largestNumber(self, num):
-        
+
         # 解题思路：排序（Sort）
         # 排序思路：对于两个备选数字a和b:
         # 如果str(a) + str(b) > str(b) + str(a)，则a在b之前，否则b在a之前
         # 按照此原则对原数组从大到小排序即可
         # 时间复杂度O（nlogn）
 
-        num = sorted([str(x) for x in num], cmp = self.compare)
+        num = sorted([str(x) for x in num], cmp=self.compare)
         ans = ''.join(num).lstrip('0')
         return ans if ans else '0'
-        
 
     def compare(self, a, b):
         # return [1, -1][a + b > b + a]
@@ -20,8 +19,7 @@ class Solution:
             return -1
         else:
             return 1
-        
-        
+
     """
     # build-in function
     def largestNumber1(self, nums):

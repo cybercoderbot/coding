@@ -31,22 +31,19 @@ Explanation: An empty string is also valid.
 
 
 class Solution:
-    def minRemoveToMakeValid(self, s) :
+    def minRemoveToMakeValid(self, s):
         stack = []
         strlist = list(s)
-        
+
         for i, c in enumerate(s):
             if c == '(':
                 stack.append(i)
             elif c == ')':
                 if stack:
                     stack.pop()
-                else:   
+                else:
                     strlist[i] = ""
-        
+
         for i in stack:
             strlist[i] = ""
         return '' .join(strlist)
-
-
-        

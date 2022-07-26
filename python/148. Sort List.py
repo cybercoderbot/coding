@@ -26,7 +26,6 @@ class Solution(object):
         mid.next = None
         return self.merge(self.sortList(head), self.sortList(rhead))
 
-
     def merge(self, lhead, rhead):
         # dummy node
         dummy = ListNode(0)
@@ -46,7 +45,6 @@ class Solution(object):
 
         return dummy.next
 
-
     def get_mid(self, head):
         if not head or not head.next:
             return head
@@ -55,8 +53,3 @@ class Solution(object):
             slow = slow.next
             fast = fast.next.next
         return slow
-        
-        
-        
-        
-        

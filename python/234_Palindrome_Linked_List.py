@@ -16,32 +16,26 @@ class Solution(object):
         # 等快指针走完时，慢指针的位置就是中点。我们还需要用栈，每次慢指针走一步，都把值存入栈中，
         # 等到达中点时，链表的前半段都存入栈中了，由于栈的后进先出的性质，就可以和后半段链表按照
         # 回文对应的顺序比较了。代码如下：
-        
+
         if not head or not head.next:
             return True
-            
+
         slow = fast = head
-        
+
         stack = []
         stack.append(head.val)
-        
+
         while fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
             stack.append(slow.val)
-            
-        if not fast.next: stack.pop()
-        
+
+        if not fast.next:
+            stack.pop()
+
         while slow.next:
             slow = slow.next
             if slow.val != stack.pop():
                 return False
-        
+
         return True
-            
-            
-            
-            
-            
-            
-        

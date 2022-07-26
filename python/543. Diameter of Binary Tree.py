@@ -21,24 +21,24 @@ Input: root = [1,2]
 Output: 1
 """
 
+
 def traverse(node):
     """Return length+1 and diameter rooted at node"""
-    if not node: 
+    if not node:
         return 0, 0
-    
+
     depth1, diameter1 = traverse(node.left)
     depth2, diameter2 = traverse(node.right)
     depth = max(depth1, depth2) + 1
     res = max(diameter1, diameter2, depth1+depth2)
-    
-    return depth, res 
 
-        
+    return depth, res
+
+
 class Solution:
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
         depth, diameter = traverse(root)
         return diameter
-    
 
 
 class Solution(object):
@@ -46,17 +46,17 @@ class Solution(object):
         """
         :type root: TreeNode
         :rtype: int
-        """        
+        """
         def depth(node):
             nonlocal res
-            if not node: 
+            if not node:
                 return 0
             left = depth(node.left)
             right = depth(node.right)
             res = max(res, left+right)
-            
+
             return max(left, right) + 1
-            
+
         res = 0
         depth(root)
         return res

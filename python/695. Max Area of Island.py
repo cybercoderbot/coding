@@ -23,44 +23,42 @@ Output: 0
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        M, N = len(grid), len(grid[0]) 
-        
-        def dfs(x, y): 
+        M, N = len(grid), len(grid[0])
+
+        def dfs(x, y):
             """Return island area."""
             area = 1
-            grid[x][y] = 0 # mark as visited 
+            grid[x][y] = 0  # mark as visited
             for i, j in (x-1, y), (x, y-1), (x, y+1), (x+1, y):
-                if 0 <= i < M and 0 <= j < N and grid[i][j]: 
+                if 0 <= i < M and 0 <= j < N and grid[i][j]:
                     area += dfs(i, j)
-            return area 
-        
+            return area
+
         res = 0
         for x in range(M):
-            for y in range(N): 
-                if grid[x][y]: 
+            for y in range(N):
+                if grid[x][y]:
                     res = max(res, dfs(x, y))
-        return res 
-    
-    
-    
+        return res
+
+
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         M, N = len(grid), len(grid[0])
         res = 0
         for r in range(M):
-            for c in range(N): 
-                if grid[r][c]: 
+            for c in range(N):
+                if grid[r][c]:
                     area = 1
                     grid[r][c] = 0
                     stack = [(r, c)]
-                    while stack: 
+                    while stack:
                         x, y = stack.pop()
                         neighbors = [(x-1, y), (x, y-1), (x, y+1), (x+1, y)]
                         for i, j in neighbors:
-                            if 0 <= i < M and 0 <= j < N and grid[i][j]: 
+                            if 0 <= i < M and 0 <= j < N and grid[i][j]:
                                 area += 1
-                                grid[i][j] = 0 
+                                grid[i][j] = 0
                                 stack.append((i, j))
                     res = max(res, area)
-        return res 
-        
+        return res

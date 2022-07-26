@@ -36,9 +36,9 @@ Explanation: In the canonical path, multiple consecutive slashes are replaced by
 
 class Solution(object):
     def simplifyPath(self, path):
-        
+
         tokens = path.split("/")
-        
+
         stack = []
         for t in tokens:
             if t in ['', '.']:
@@ -48,5 +48,5 @@ class Solution(object):
                     stack.pop()
             else:
                 stack.append(t)
-                
+
         return '/' + '/'.join(stack)

@@ -18,17 +18,16 @@ Output: [5]
 """
 
 
-
 class Solution(object):
     def reverseBetween(self, head, left, right):
         dummy = ListNode(0)
         dummy.next = head
-        
+
         prev, cur = dummy, head
         for _ in range(left - 1):
             cur = cur.next
             prev = prev.next
-        
+
         for _ in range(right - left):
             temp = cur.next
             cur.next = temp.next
@@ -36,4 +35,3 @@ class Solution(object):
             prev.next = temp
 
         return dummy.next
-        

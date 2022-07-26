@@ -20,14 +20,13 @@ Output: true
 """
 
 
-
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         return len(set(nums)) != len(nums)
-    
+
     def containsDuplicate(self, nums: List[int]) -> bool:
-        
-        seen = set() 
+
+        seen = set()
         for x in nums:
             if x in seen:
                 return True

@@ -4,7 +4,7 @@ Hard
 
 Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where:
 
-'.' Matches any single character.​​​​
+'.' Matches any single character.
 '*' Matches zero or more of the preceding element.
 The matching should cover the entire input string (not partial).
 
@@ -37,23 +37,24 @@ This problem can be solved using dynamic programming. Define dfs(i, j) to repres
 
 """
 
-def dfs(s, p, i, j): 
+
+def dfs(s, p, i, j):
     """Return True if s[i:] matches p[j:]"""
     M, N = len(s), len(p)
 
-    if j == N: 
+    if j == N:
         return i == M
 
     match = i < M and p[j] in (s[i], ".")
     # match = i < M and (s[i] == p[j] or p[j] == ".")
 
-    if j+1 < N and p[j+1] == "*": 
+    if j+1 < N and p[j+1] == "*":
         return dfs(s, p, i, j+2) or (match and dfs(s, p, i+1, j))
-    else: 
+    else:
         return match and dfs(s, p, i+1, j+1)
+
 
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         """dynamic programming"""
         return dfs(s, p, 0, 0)
-        

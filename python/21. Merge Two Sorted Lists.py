@@ -34,7 +34,7 @@ class Solution:
 
     # Solution 1: iteration
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        
+
         # maintain an unchanging reference to node ahead of the return node.
         dummy = ListNode(-1)
         pre = dummy
@@ -45,7 +45,7 @@ class Solution:
                 list1 = list1.next
             else:
                 pre.next = list2
-                list2 = list2.next            
+                list2 = list2.next
             pre = pre.next
 
         # At least one of list1 and list2 can still have nodes at this point, so connect
@@ -54,10 +54,10 @@ class Solution:
 
         return dummy.next
 
-
     # Solution 2: recursion
+
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        
+
         if not list1:
             return list2
         elif not list2:
@@ -68,5 +68,3 @@ class Solution:
         else:
             list2.next = self.mergeTwoLists(list1, list2.next)
             return list2
-            
-        

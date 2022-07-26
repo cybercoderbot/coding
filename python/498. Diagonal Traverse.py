@@ -18,25 +18,26 @@ Output: [1,2,3,4]
 
 class Solution:
     def findDiagonalOrder(self, matrix: List[List[int]]) -> List[int]:
-        if not matrix: return [] # edge case 
-        
+        if not matrix:
+            return []  # edge case
+
         res = []
-        M, N = len(matrix), len(matrix[0]) # dimension 
+        M, N = len(matrix), len(matrix[0])  # dimension
         i = j = 0
-        for _ in range(M * N): 
+        for _ in range(M * N):
             res.append(matrix[i][j])
-            if (i+j) % 2 == 0: # moving up 
-                if j == N-1: 
+            if (i+j) % 2 == 0:  # moving up
+                if j == N-1:
                     i += 1
-                elif i == 0: 
+                elif i == 0:
                     j += 1
-                else: 
+                else:
                     i, j = i-1, j+1
-            else: 
-                if i == M-1: 
+            else:
+                if i == M-1:
                     j += 1
-                elif j == 0: 
+                elif j == 0:
                     i += 1
-                else: 
+                else:
                     i, j = i+1, j-1
-        return res 
+        return res

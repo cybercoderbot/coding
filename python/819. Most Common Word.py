@@ -39,9 +39,9 @@ class Solution(object):
 
         counts = Counter()
         banned = set(banned)
-        
-        for w in words:            
+
+        for w in words:
             if w not in banned:
                 counts[w] += 1
-            
+
         return max(counts, key=counts.get)

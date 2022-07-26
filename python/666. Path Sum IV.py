@@ -31,22 +31,21 @@ The path sum is (3 + 1) = 4.
 class Solution:
     def pathSum(self, nums: List[int]) -> int:
         tree = {}
-        for n in nums: 
+        for n in nums:
             depth, pos, val = (int(x) for x in str(n))
             tree[depth, pos] = val
-        
+
         res = 0
         stack = [(1, 1, 0)]
-        while stack: 
+        while stack:
             depth, pos, val = stack.pop()
             val += tree[depth, pos]
-            depth1 = depth+1 
+            depth1 = depth+1
             pleft, pright = 2*pos-1, 2*pos
-            if (depth1, pleft) not in tree and (depth1, pright) not in tree: 
-                res += val # leaf
-            if (depth1, pleft) in tree: 
+            if (depth1, pleft) not in tree and (depth1, pright) not in tree:
+                res += val  # leaf
+            if (depth1, pleft) in tree:
                 stack.append((depth1, pleft, val))
-            if (depth1, pright) in tree: 
+            if (depth1, pright) in tree:
                 stack.append((depth1, pright, val))
-        return res 
-        
+        return res

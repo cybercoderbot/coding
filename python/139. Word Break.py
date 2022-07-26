@@ -25,7 +25,7 @@ class Solution(object):
         # 解题思路：
         # BFS（广度优先搜索）
         # 将当前单词拆分为前后两半，若前缀可以在字典dict中找到，则将后缀加入队列。
-        
+
         # if s in wordDict: return True
 
         queue = [s]
@@ -40,5 +40,3 @@ class Solution(object):
                 if prefix in wordDict and suffix not in queue:
                     queue.append(suffix)
         return False
-        
-        
