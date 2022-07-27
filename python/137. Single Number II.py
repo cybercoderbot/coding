@@ -18,9 +18,9 @@ Output: 99
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        for n in nums:
-            if nums.count(n) == 1:
-                return n
+        for x in nums:
+            if nums.count(x) == 1:
+                return x
 
 
 class Solution:

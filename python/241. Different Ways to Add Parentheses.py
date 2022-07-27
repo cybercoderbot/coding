@@ -11,70 +11,52 @@ Example 1:
 Input: expression = "2-1-1"
 Output: [0,2]
 Explanation:
-((2-1)-1) = 0 
+((2-1)-1) = 0
 (2-(1-1)) = 2
 
 Example 2:
 Input: expression = "2*3-4*5"
 Output: [-34,-14,-10,-10,10]
 Explanation:
-(2*(3-(4*5))) = -34 
-((2*3)-(4*5)) = -14 
-((2*(3-4))*5) = -10 
-(2*((3-4)*5)) = -10 
+(2*(3-(4*5))) = -34
+((2*3)-(4*5)) = -14
+((2*(3-4))*5) = -10
+(2*((3-4)*5)) = -10
 (((2*3)-4)*5) = 10
 """
 
 
 class Solution:
-    def diffWaysToCompute(self, expression: str) -> List[int]:
-        """
-        Memorize the results
-        """
-        if input.isdigit():
-            return [int(input)]
-        if input in memo:
-            return memo[input]
+    def diffWaysToCompute(self, s: str) -> List[int]:
+
+        if s.isdigit():
+            return [int(s)]
 
         res = []
-        for i in range(len(input)):
-            if input[i] in "-+*":
-                res1 = self.diffWaysToCompute(input[:i])
-                res2 = self.diffWaysToCompute(input[i+1:])
-                for j in res1:
-                    for k in res2:
-                        res.append(self.helper(j, k, input[i]))
-        memo[input] = res
+        for i in range(len(s)):
+            if s[i] in "-+*":
+                left = self.diffWaysToCompute(s[:i])
+                right = self.diffWaysToCompute(s[i+1:])
+                res.extend(eval(str(x)+s[i]+str(y))
+                           for x in left for y in right)
         return res
-
-    def helper(self, m, n, op):
-        if op == "+":
-            return m + n
-        elif op == "-":
-            return m - n
-        else:
-            return m * n
 
 
 class Solution:
-    def diffWaysToCompute(self, expression: str) -> List[int]:
-        m = {}
-        return self.dfs(input, m)
+    def diffWaysToCompute(self, s: str, m={}) -> List[int]:
 
-    def dfs(self, input, m):
-        if input in m:
-            return m[input]
-
-        if input.isdigit():
-            m[input] = int(input)
-            return [int(input)]
+        if s.isdigit():
+            return [int(s)]
 
         res = []
-        for i, c in enumerate(input):
+        for i, c in enumerate(s):
             if c in "+-*":
-                l = self.diffWaysToCompute(input[:i])
-                r = self.diffWaysToCompute(input[i+1:])
-                res.extend(eval(str(x)+c+str(y)) for x in l for y in r)
-        m[input] = res
+                left = self.diffWaysToCompute(s[: i])
+                right = self.diffWaysToCompute(s[i+1:])
+                res.extend(self.compute(left, right, c))
 
         return res
+
+
+def compute(self, left, right, op):
+    return [eval(str(x)+op+str(y)) for x in left for y in right]

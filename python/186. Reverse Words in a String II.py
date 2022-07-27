@@ -35,14 +35,14 @@ class Solution:
         """
 
         N = len(s)
-        self.reverse(s, 0, N-1)
+        self.reverse(s=s, i=0, j=N-1)
 
         left = 0
         for i, c in enumerate(s):
             if c == " ":
-                self.reverse(s, left, i - 1)
+                self.reverse(s=s, i=left, j=i-1)
                 left = i + 1
-        self.reverse(s, left, N-1)
+        self.reverse(s=s, i=left, j=N-1)
 
 
 class Solution:
@@ -65,12 +65,12 @@ class Solution:
         """
 
         N = len(s)
-        self.reverse(s, 0, N-1)
+        self.reverse(s=s, i=0, j=N-1)
 
         low = 0
         for i in range(N+1):
             if i == N or s[i] == " ":
-                self.reverse(s, low, i-1)
+                self.reverse(s=s, li=ow, j=i-1)
                 low = i + 1
 
         return

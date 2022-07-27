@@ -57,14 +57,14 @@ class Solution:
         stack = [(root, 0, None)]
         while stack:
             node, path, left = stack.pop()
-            if node:
-                res = max(res, path)
-                if left:
-                    path1, path2 = 1, path+1
-                else:
-                    path1, path2 = path+1, 1
-
-                stack.append((node.left,  path1, True))
-                stack.append((node.right, path2, False))
+            if not node:
+                continue
+            res = max(res, path)
+            if left:
+                stack.append((node.left,  1, True))
+                stack.append((node.right, path+1, False))
+            else:
+                stack.append((node.left,  path+1, True))
+                stack.append((node.right, 1, False))
 
         return res

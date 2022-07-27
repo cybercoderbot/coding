@@ -53,3 +53,18 @@ class Solution:
             if src:
                 queue.append((src.left, dst.left))
                 queue.append((src.right, dst.right))
+
+
+class Solution:
+    def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+
+        if not original or not cloned:
+            return None
+
+        if original == target:
+            return cloned
+
+        left = self.getTargetCopy(original.left, cloned.left, target)
+        right = self.getTargetCopy(original.right, cloned.right, target)
+
+        return left or right

@@ -21,36 +21,52 @@ Output: []
 """
 
 
-class Solution(object):
-    def wordBreak(self, s, wordDict):
-        """
-        :type s: str
-        :type wordDict: List[str]
-        :rtype: List[str]
-        """
+"""
+Define fn(i) to be the sentences formed by s[i:]. Then, the recursion satisfies
 
-        # 解题思路: 记忆化搜索
-        # 在搜索过程中，使用字典ansDict将已经搜索过的子句的拆解方案记录下来，从而实现DFS的剪枝。
+fn(i) = [[word] + x for x in fn(i + len(word)] for word in wordDict if s[i:].startswith(word)
+"""
 
-        ansDict = {}
 
-        def dfs(s):
-            ans = []
-            if s in wordDict:
-                ans.append(s)
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        wordDict = set(wordDict)  # edit: better performance
 
-            for i in range(len(s) - 1):
-                prefix, suffix = s[:i+1], s[i+1:]
-                if prefix not in wordDict:
-                    continue
-                # rest = []
-                if suffix in ansDict:
-                    rest = ansDict[suffix]
-                else:
-                    rest = dfs(suffix)
-                for n in rest:
-                    ans.append(prefix + ' ' + n)
-            ansDict[s] = ans
-            return ans
+        @lru_cache(None)
+        def search(i):
+            """Return sentences of s[i:]"""
+            if i == len(s):
+                return [[]]
 
-        return dfs(s)
+            res = []
+            for j in range(i+1, len(s)+1):
+                if s[i:j] in wordDict:
+                    res.extend([s[i:j]] + x for x in search(j))
+            return res
+
+        words = search(i=0)
+        return [" ".join(x) for x in words]
+
+
+"""
+The bottom-up implementation is very easy to go TLE. The reason is that it doesn't a lot of unnecessary calculations while top-down only does what's required.
+"""
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+
+        @lru_cache(None)
+        def search(i):
+            """Return sentences from s[:i]"""
+            if i == 0:
+                return [[]]
+
+            res = []
+            for word in wordDict:
+                start = i-len(word)
+                if s[start:i] == word:
+                    res.extend([x + [word] for x in search(start)])
+            return res
+
+        return [" ".join(x) for x in search(i=len(s))]

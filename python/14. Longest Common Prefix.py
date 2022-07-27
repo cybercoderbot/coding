@@ -22,8 +22,8 @@ Explanation: There is no common prefix among the input strings.
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         """
-        :type strs: List[str]
-        :rtype: str
+        Find the word with minimum length
+        Compare otehrs against it
         """
         if not strs:
             return ""

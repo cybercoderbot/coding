@@ -44,29 +44,28 @@ class Solution:
         Time complexity O(MN)
         Space complexity O(MN)
         """
-        m, n = len(grid), len(grid[0])  # dimensions
+        M, N = len(grid), len(grid[0])  # dimensions
 
-        @cache
-        def fn(i, j):
+        @lru_cache(None)
+        def arriveAt(i, j):
             """Return number of unique paths arriving at (i, j)."""
             if grid[i][j] or i < 0 or j < 0:
                 return 0
             if i == j == 0:
                 return 1
-            return fn(i-1, j) + fn(i, j-1)
+            return arriveAt(i-1, j) + arriveAt(i, j-1)
 
-        return fn(m-1, n-1)
+        return arriveAt(M-1, N-1)
 
 
 class Solution:
     def uniquePathsWithObstacles(self, grid: List[List[int]]) -> int:
-        m, n = len(grid), len(grid[0])
-        dp = [0]*n
+        M, N = len(grid), len(grid[0])
+        dp = [0] * N
         dp[0] = 1
-        for i in range(m):
-            for j in range(n):
-                if grid[i][j]:
-                    dp[j] = 0
-                elif j:
-                    dp[j] += dp[j-1]
+        for i, j in product(range(M), range(N)):
+            if grid[i][j]:
+                dp[j] = 0
+            elif j:
+                dp[j] += dp[j-1]
         return dp[-1]
