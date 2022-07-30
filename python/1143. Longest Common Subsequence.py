@@ -29,9 +29,7 @@ Explanation: There is no such common subsequence, so the result is 0.
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         """
-        https://leetcode.com/problems/longest-common-subsequence/discuss/351689/JavaPython-3-Two-DP-codes-of-O(mn)-and-O(min(m-n))-spaces-w-picture-and-analysis
-        Time: O(mn) 
-        Space: O(min(m, n)) 
+        Time: O(M*N), Space: O(min(M, N)) 
         """
         M, N = len(text1), len(text2)
         dp = [[0] * (N + 1) for _ in range(M + 1)]
