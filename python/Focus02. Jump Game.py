@@ -17,7 +17,6 @@ class Solution:
 
 
 class Solution:
-
     def jump(self, nums: List[int]) -> int:
         """
         45. Jump Game II. 
@@ -64,14 +63,14 @@ class Solution:
 
 
 class Solution:
-    def minJumps(self, arr: List[int]) -> int:
+    def minJumps(self, nums: List[int]) -> int:
         """
         1345. Jump Game IV
         In one step you can jump from index i to index:
 
-        1) i + 1 where: i + 1 < arr.length.
+        1) i + 1 where: i + 1 < nums.length.
         2) i - 1 where: i - 1 >= 0.
-        3) j where: arr[i] == arr[j] and i != j.
+        3) j where: nums[i] == nums[j] and i != j.
 
         Construct graph and BFS traverse the graph to find the end of array.
         """
@@ -122,3 +121,39 @@ class Solution:
             left = max(left, i + maxJump)
 
         return False
+
+
+class Solution:
+    def oddEvenJumps(self, nums: List[int]) -> int:
+        """
+        975. Odd Even Jump
+        Jump to smallest indexes at odd-numbered jumps.
+        Jump to largeest indexes at even-numbered jumps.
+        Return the number of good starting indices (reach end)
+        """
+        N = len(nums)
+
+        stack = []
+        small = [-1] * N
+        for i, x in sorted(enumerate(nums), key=lambda x: -x[1]):
+            while stack and stack[-1] < i:
+                small[stack.pop()] = i
+            stack.append(i)
+
+        stack = []
+        large = [-1] * N
+        for i, x in sorted(enumerate(nums), key=lambda x: x[1]):
+            while stack and stack[-1] < i:
+                large[stack.pop()] = i
+            stack.append(i)
+
+        odd = [0] * N
+        even = [0] * N
+        odd[-1] = even[-1] = 1
+        for i in range(N-1, -1, -1):
+            if 0 <= large[i]:
+                odd[i] = even[large[i]]
+            if 0 <= small[i]:
+                even[i] = odd[small[i]]
+
+        return sum(odd)
