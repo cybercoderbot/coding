@@ -8,8 +8,6 @@ Permute the characters of s so that they match the order that order was sorted. 
 
 Return any permutation of s that satisfies this property.
 
- 
-
 Example 1:
 Input: order = "cba", s = "abcd"
 Output: "cbad"
@@ -25,12 +23,14 @@ Output: "cbad"
 """
 
 
-# Solution
-# This is in fact an easy custom sorting application. Here, the relative order of characters are defined by their
-# positions in S. For those characters who don't appear in S, their order is not defined. As a result,
-# one could use any value for them. Here, I've chosen 26, but it is really okay to use any value for them.
-
 class Solution:
     def customSortString(self, order: str, s: str) -> str:
-        hmap = {c: i for i, c in enumerate(order)}
-        return "".join(sorted(s, key=lambda x: hmap.get(x, 26)))
+        """ 
+        This is in fact an easy custom sorting application. 
+        Here, the relative order of characters are defined by their positions in s. 
+        For those characters who don't appear in s, their order is not defined. 
+        As a result, one could use any value for them. 
+        Here, I've chosen -1, but it is really okay to use any value for them.
+        """
+        d = {c: i for i, c in enumerate(order)}
+        return "".join(sorted(s, key=lambda x: d.get(x, -1)))

@@ -41,7 +41,7 @@ Doing so, one could get directly nodes (and not only their values), and hence sw
 
 
 class Solution:
-    def recoverTree(self, root: TreeNode):
+    def recoverTree(self, root: TreeNode) -> None:
         """
         :rtype: void Do not return anything, modify root in-place instead.
         """
@@ -64,6 +64,8 @@ class Solution:
             node = node.right
 
         x.val, y.val = y.val, x.val
+
+        return
 
 
 class Solution:

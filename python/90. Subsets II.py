@@ -6,8 +6,6 @@ Given an integer array nums of unique elements, return all possible subsets (the
 
 The solution set must not contain duplicate subsets. Return the solution in any order.
 
- 
-
 Example 1:
 Input: nums = [1,2,3]
 Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
@@ -45,21 +43,15 @@ class Solution:
             return
 
         res, cand = [], []
-        backtrack(0)
+        backtrack(i=0)
 
         return res
-
-
-"""
-Approach 2 - list comprehension 
-
-"""
 
 
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         """
-        Approach:  Cascading
+        Approach:  List comprehension / Cascading
 
         Let's start from empty subset in output list. At each step one takes new integer into consideration and generates new subsets from the existing ones.
 

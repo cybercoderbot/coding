@@ -16,7 +16,7 @@ Note:
 
 Only the space character ' ' is considered a whitespace character.
 Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.
- 
+
 
 Example 1:
 
@@ -58,13 +58,12 @@ Step 2: "4193 with words" (no characters read because there is neither a '-' nor
 Step 3: "4193 with words" ("4193" is read in; reading stops because the next character is a non-digit)
              ^
 The parsed integer is 4193.
-Since 4193 is in the range [-231, 231 - 1], the final result is 4193.
+Since 4193 is in the range [-2^31, 2^31 - 1], the final result is 4193.
 """
 
 
 """
-
-Define an anchor left which is to mark the beginning of a number (i.e. at the first digit or +/-). 
+Define an anchor left which is to mark the beginning of a number (digit or +/-).
 Loop through the string using an index i, for which
 
 1. if anchor left is not set yet
@@ -78,14 +77,13 @@ Loop through the string using an index i, for which
 If anchor left isn't set, there is no valid number.
 If anchor left is set, there is a valid number if i > left+1 or str[left].isdigit().
 Return the number capped within [-2**31, 2**31-1].
-
-
-
 """
 
 
 class Solution:
     def myAtoi(self, s: str) -> int:
+        MIN, MAX = -pow(2, 31), pow(2, 31)-1
+
         left = -1
         for i, c in enumerate(s):
             if left == -1:
@@ -102,7 +100,5 @@ class Solution:
         res = 0
         if 0 <= left and (left+1 < right or s[left].isdigit()):
             res = int(s[left:right])
-
-        MIN, MAX = -2**31, 2**31-1
 
         return max(MIN, min(MAX, res))

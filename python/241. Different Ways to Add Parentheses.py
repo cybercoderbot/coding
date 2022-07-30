@@ -6,7 +6,6 @@ Given a string expression of numbers and operators, return all possible results 
 
 The test cases are generated such that the output values fit in a 32-bit integer and the number of different results does not exceed 104.
 
-
 Example 1:
 Input: expression = "2-1-1"
 Output: [0,2]
@@ -33,16 +32,24 @@ class Solution:
             return [int(s)]
 
         res = []
+
+        def str2num(x, y, op):
+            return eval(str(x) + op + str(y))
+
         for i in range(len(s)):
             if s[i] in "-+*":
                 left = self.diffWaysToCompute(s[:i])
                 right = self.diffWaysToCompute(s[i+1:])
-                res.extend(eval(str(x)+s[i]+str(y))
-                           for x in left for y in right)
+                res.extend(str2num(x, y, s[i]) for x in left for y in right)
+
         return res
 
 
 class Solution:
+
+    def compute(self, left, right, op):
+        return [eval(str(x) + op + str(y)) for x in left for y in right]
+
     def diffWaysToCompute(self, s: str, m={}) -> List[int]:
 
         if s.isdigit():
@@ -56,7 +63,3 @@ class Solution:
                 res.extend(self.compute(left, right, c))
 
         return res
-
-
-def compute(self, left, right, op):
-    return [eval(str(x)+op+str(y)) for x in left for y in right]

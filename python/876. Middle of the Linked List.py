@@ -28,6 +28,7 @@ Explanation: Since the list has two middle nodes with values 3 and 4, we return 
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         slow = fast = head
+
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
@@ -37,7 +38,12 @@ class Solution:
 
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        arr = [head]
-        while arr[-1].next:
-            arr.append(arr[-1].next)
-        return arr[len(arr)//2]
+        """
+        Put all nodes into a list. Find the middle of the list
+        """
+        nodes = [head]
+
+        while nodes[-1].next:
+            nodes.append(nodes[-1].next)
+
+        return nodes[len(nodes)//2]

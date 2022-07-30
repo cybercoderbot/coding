@@ -10,8 +10,6 @@ You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is al
 
 You must write an algorithm that runs in O(log n) time.
 
-
-
 Example 1:
 Input: nums = [1,2,3,1]
 Output: 2
@@ -48,7 +46,7 @@ Conditions:
    (3) take the right half array if nums[mid] smaller than right neighbor
    (4) otherwise, take the left half
 
-Run time: O(logn)
+Run time: O(logN)
 Memory: constant
 Test cases:
      [1]

@@ -10,8 +10,6 @@ Return the maximum amount of water a container can store.
 
 Notice that you may not slant the container.
 
- 
-
 Example 1:
 Input: height = [1,8,6,2,5,4,8,3,7]
 Output: 49
@@ -71,7 +69,7 @@ Initially we consider the area constituting the exterior most lines. Now, to max
 
 Complexity Analysis
 
-Time complexity: O(n). Single pass.
+Time complexity: O(N). Single pass.
 
 Space complexity: O(1). Constant space is used.
 """
@@ -81,8 +79,7 @@ class Solution(object):
     def maxArea(self, height: List[int]) -> int:
         """
         Two pointers
-        Time complexity:  O(n)
-        Space complexity: O(1)
+        Time: O(N), Space: O(1)
         """
 
         N = len(height)

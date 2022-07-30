@@ -26,21 +26,19 @@ Output: false
 """
 
 
-"""
-Back
-Python backtracking, two maps
-
-
-Iterate through each substring in s and each character in p simultaneously, and try each possible mapping. Only recurse if either:
-
-The character in p has not been assigned a mapping
-The character in p has been assigned a mapping and it's equal to the substring under consideration
-
-"""
-
-
 class Solution:
     def wordPatternMatch(self, p: str, s: str) -> bool:
+        """
+        Backtracking via two maps
+
+        Iterate through each substring in s and each character in p simultaneously, 
+        and try each possible mapping. 
+
+        Only recurse if either:
+        1) The character in p has not been assigned a mapping
+        2) The character in p has been assigned a mapping and it's equal to the substring under consideration
+
+        """
 
         M, N = len(p), len(s)
         if M > N:
@@ -71,7 +69,7 @@ class Solution:
 
             return False
 
-        return backtrack(0, 0)
+        return backtrack(i=0, j=0)
 
 
 class Solution:
@@ -104,4 +102,5 @@ class Solution:
             return False
 
         m = defaultdict(int)
-        return backtrack(0, 0)
+
+        return backtrack(i=0, j=0)

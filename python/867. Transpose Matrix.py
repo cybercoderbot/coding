@@ -22,11 +22,11 @@ class Solution:
         """
         Filling in matrix elements
         """
-        m, n = len(A), len(A[0])
-        B = [[0]*m for _ in range(n)]
-        for i in range(m):
-            for j in range(n):
-                B[j][i] = A[i][j]
+        M, N = len(A), len(A[0])
+        B = [[0] * M for _ in range(N)]
+        for i, j in product(range(M), range(N)):
+            B[j][i] = A[i][j]
+
         return B
 
 

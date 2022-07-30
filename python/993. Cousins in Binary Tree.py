@@ -22,15 +22,12 @@ Output: false
 """
 
 
-"""
-Traverse the tree and collect depth and parent for the node with value x and y.
-"""
-
-
 class Solution:
     def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
         """
         Preorder DFS iteration
+        Traverse the tree and collect depth and parent for the node with value x and y.
+
         stack: (node, depth, parent)
         res[node] = (depth, parent)
         """
@@ -64,16 +61,19 @@ class Solution:
                 return
             if node.val in (x, y):
                 res[node.val] = (depth, parent)
+
             dfs(node.left, depth+1, node)
             dfs(node.right, depth+1, node)
 
+            return
+
         res = defaultdict(tuple)
-        dfs(root, 0, None)
+        dfs(node=root, depth=0, parent=None)
 
-        same_depth = res[x][0] == res[y][0]
-        not_same_parent = res[x][1] != res[y][1]
+        depth1, parent1 = res[x]
+        depth2, parent2 = res[y]
 
-        return same_depth and not_same_parent
+        return depth1 == depth2 and parent1 != parent2
 
 
 class Solution:

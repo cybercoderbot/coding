@@ -7,7 +7,6 @@ Write an efficient algorithm that searches for a value target in an m x n intege
 Integers in each row are sorted in ascending from left to right.
 Integers in each column are sorted in ascending from top to bottom.
  
-
 Example 1:
 Input: matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5
 Output: true
@@ -18,23 +17,21 @@ Output: false
 """
 
 
-"""
-Starting from the top-right corner, at any place i, j, compare matrix[i][j] with target.
-
-if matrix[i][j] == target, return True
-if matrix[i][j] < target, increment i
-if matrix[i][j] > target decrement j.
-If i, j falls outside of range, return False.
-
-"""
-
-
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         """
-        Time complexity O(max(M, N))
-        Space complexity O(1)
+        Starting from the top-right corner and compare matrix[i][j] with target.
+
+        1) if matrix[i][j] == target, return True
+        2) if matrix[i][j] < target, increment i
+        3) if matrix[i][j] > target decrement j.
+        If i, j falls outside of range, return False.
+
+
+        Time: O(max(M, N))
+        Space: O(1)
         """
+
         M, N = len(matrix), len(matrix[0])
         i, j = 0, N-1
 

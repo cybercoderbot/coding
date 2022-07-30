@@ -17,7 +17,7 @@ Output: true
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
         intervals.sort()
-        return all(pre[1] <= nxt[0] for pre, nxt in zip(intervals[:-1], intervals[1:]))
+        return all(x[1] <= y[0] for x, y in zip(intervals[:-1], intervals[1:]))
 
 
 class Solution:
@@ -92,10 +92,58 @@ class Solution:
 class Solution:
 
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        meetings = sorted(intervals, key=lambda x: x[0])
-        room = []
-        for m in meetings:
-            if room and m[0] >= room[0]:
-                room.pop()
-            heappush(room, m[1])
-        return len(room)
+        """
+        Sort intervals based on start time
+        """
+        intervals.sort(key=lambda x: x[0])
+
+        # stores the end time of intervals
+        rooms = []
+        for x in intervals:
+            if rooms and x[0] >= rooms[0]:
+                # means two intervals can use the same room
+                heapq.heapreplace(rooms, x[1])
+            else:
+                # a new room is allocated
+                heapq.heappush(rooms, x[1])
+
+        return len(rooms)
+
+
+class Solution:
+
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        """
+        Very similar with what we do in real life. Whenever you want to start a meeting, 
+        you go and check if any empty room available. If so take one of them. 
+        Otherwise, you need to find a new room someplace else (res += 1).  
+        After you finish the meeting, the room becomes available again (j += 1).
+
+        Think about j as a pointer to the first available room. 
+        """
+
+        starts = sorted(x[0] for x in intervals)
+        ends = sorted(x[1] for x in intervals)
+
+        res, j = 0, 0
+        for i in range(len(starts)):
+            if starts[i] < ends[j]:
+                res += 1
+            else:
+                j += 1
+        return res
+
+
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        if not intervals:
+            return 0
+
+        intervals.sort(key=lambda x: x[0])
+        rooms = [intervals[0][1]]
+        for x in intervals[1:]:
+            if x[0] >= rooms[-1]:
+                rooms.pop()
+            rooms.append(x[1])
+            rooms.sort(reverse=True)
+        return len(rooms)
