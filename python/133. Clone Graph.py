@@ -2,7 +2,6 @@
 133. Clone Graph
 Medium
 
-
 Given a reference of a node in a connected undirected graph.
 
 Return a deep copy (clone) of the graph.
@@ -14,7 +13,6 @@ class Node {
     public List<Node> neighbors;
 }
  
-
 Test case format:
 
 For simplicity, each node's value is the same as the node's index (1-indexed). For example, the first node with val == 1, the second node with val == 2, and so on. The graph is represented in the test case using an adjacency list.
@@ -35,7 +33,9 @@ class Node:
 
 
 """
-Recursively(deep) copy the nodes being traversed. A caveat is that the node needs to be put in seen before adding neighbors. Otherwise, endless recursive calls will be induced.
+Recursively (deep) copy the nodes being traversed. 
+A caveat is that the node needs to be put in seen before adding neighbors. 
+Otherwise, endless recursive calls will be induced.
 
 """
 
@@ -47,14 +47,15 @@ class Solution:
 
         # original -> clone mapping
         memo = {node: Node(node.val)}
-        stack = [node]
-        while stack:
-            n = stack.pop()
-            for nn in n.neighbors:
+        queue = [node]
+
+        while queue:
+            src = queue.pop(0)
+            for nn in src.neighbors:
                 if nn not in memo:
                     memo[nn] = Node(nn.val)
-                    stack.append(nn)
-                memo[n].neighbors.append(memo[nn])
+                    queue.append(nn)
+                memo[src].neighbors.append(memo[nn])
 
         return memo[node]
 
@@ -64,20 +65,20 @@ class Solution:
         if not node:
             return None
 
-        queue = deque([node])
-        clones = {node.val: Node(node.val, [])}
+        queue = [node]
+        memo = {node.val: Node(node.val, [])}
         while queue:
-            p = queue.popleft()
-            q = clones[p.val]
+            src = queue.pop(0)
+            dst = memo[src.val]
 
-            for nbr in p.neighbors:
-                if nbr.val not in clones:
-                    clones[nbr.val] = Node(nbr.val, [])
-                    queue.append(nbr)
+            for nn in src.neighbors:
+                if nn.val not in memo:
+                    memo[nn.val] = Node(nn.val, [])
+                    queue.append(nn)
 
-                q.neighbors.append(clones[nbr.val])
+                dst.neighbors.append(memo[nn.val])
 
-        return clones[node.val]
+        return memo[node.val]
 
 
 class Solution:
@@ -88,7 +89,8 @@ class Solution:
         def clone(node, memo):
             """Return deep-cloned graph."""
             if node not in memo:
-                cloned = memo[node] = Node(node.val)
+                cloned = Node(node.val)
+                memo[node] = cloned
                 cloned.neighbors = [clone(nn, memo) for nn in node.neighbors]
 
             return memo[node]

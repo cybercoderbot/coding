@@ -52,17 +52,19 @@ class Solution:
         N = 9
         rows = [set() for j in range(N)]
         cols = [set() for j in range(N)]
-        boxes = [set() for j in range(N)]
+        boxs = [set() for j in range(N)]
 
         for i, j in product(range(N), range(N)):
             x = board[i][j]
             k = i//3 * 3 + j//3
+
             if x == ".":
                 continue
-            if x in (rows[i] | cols[j] | boxes[k]):
+            if x in (rows[i] | cols[j] | boxs[k]):
                 return False
+
             rows[i].add(x)
             cols[j].add(x)
-            boxes[k].add(x)
+            boxs[k].add(x)
 
         return True

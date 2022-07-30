@@ -11,7 +11,6 @@ Output: 1
 Example 2:
 Input: root = [5,3,6,2,4,null,null,1], k = 3
 Output: 3
-
 """
 
 

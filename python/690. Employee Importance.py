@@ -51,13 +51,13 @@ class Solution:
         Time: O(N)
         Space: O(N)
         """
-        mp = {x.id: x for x in employees}
+        dic = {x.id: x for x in employees}
 
         res = 0
         queue = [id0]
 
         for ix in queue:
-            employee = mp[ix]
+            employee = dic[ix]
             res += employee.importance
             queue.extend(employee.subordinates)
         return res
@@ -66,19 +66,19 @@ class Solution:
 class Solution:
     def getImportance(self, employees: List['Employee'], id0: int) -> int:
         """
-        DFS
+        DFS search
         Time: O(N)
         Space: O(N)
         """
 
-        mp = {x.id: x for x in employees}
+        dic = {x.id: x for x in employees}
 
         res = 0
         stack = [id0]
 
         while stack:
             x = stack.pop()
-            employee = mp[x]
+            employee = dic[x]
             res += employee.importance
             stack.extend(employee.subordinates)
 

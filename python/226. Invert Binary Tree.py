@@ -1,5 +1,5 @@
 """
-226. Invert (left-right flip) Binary Tree
+226. Flip (left-right flip) Binary Tree
 Easy
 
 Given the root of a binary tree, invert the tree, and return its root.
@@ -32,8 +32,8 @@ class Solution:
         if not root:
             return None
 
-        left = self.invertTree(root.left)
-        right = self.invertTree(root.right)
+        left = self.flipTree(root.left)
+        right = self.flipTree(root.right)
 
         root.left, root.right = right, left
 

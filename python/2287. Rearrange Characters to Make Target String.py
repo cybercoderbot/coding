@@ -34,7 +34,7 @@ We can make at most one copy of "aaaaa", so we return 1.
 
 class Solution:
     def rearrangeCharacters(self, s: str, target: str) -> int:
-        freq = Counter(s)
+        freq = collections.Counter(s)
         return min(freq[k]//v for k, v in Counter(target).items())
 
 

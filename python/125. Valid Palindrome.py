@@ -6,7 +6,6 @@ A phrase is a palindrome if, after converting all uppercase letters into lowerca
 
 Given a string s, return true if it is a palindrome, or false otherwise.
 
-
 Example 1:
 
 Input: s = "A man, a plan, a canal: Panama"
@@ -28,24 +27,24 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 
 class Solution:
     def isPalindrome(self, string: str) -> bool:
-        lowerAlnums = [c.lower() for c in string if c.isalnum()]
-        return lowerAlnums == lowerAlnums[::-1]
+        lowers = [c.lower() for c in string if c.isalnum()]
+        return lowers == lowers[::-1]
 
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        left, right = 0, len(s)-1
+        i, j = 0, len(s)-1
 
-        while left < right:
-            while left < right and not s[left].isalnum():
-                left += 1
-            while left < right and not s[right].isalnum():
-                right -= 1
+        while i < j:
+            while i < j and not s[i].isalnum():
+                i += 1
+            while i < j and not s[j].isalnum():
+                i -= 1
 
-            if left < right and s[left].lower() != s[right].lower():
+            if i < j and s[i].lower() != s[j].lower():
                 return False
 
-            left += 1
-            right -= 1
+            i += 1
+            j -= 1
 
         return True

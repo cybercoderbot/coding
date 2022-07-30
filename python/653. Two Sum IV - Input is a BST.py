@@ -1,60 +1,54 @@
-#  653. Two Sum IV - Input is a BST
-# DescriptionHintsSubmissionsDiscussSolution
+"""
+653. Two Sum IV - Input is a BST
+Easy
 
-# Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is
-# equal to the given target.
+Given the root of a Binary Search Tree and a target number k, return true if there exist two elements in the BST such that their sum is equal to the given target.
 
-# Example 1:
+Example 1:
+Input: root = [5,3,6,2,4,null,7], k = 9
+Output: true
 
-# Input:
-#     5
-#    / \
-#   3   6
-#  / \   \
-# 2   4   7
+Example 2:
+Input: root = [5,3,6,2,4,null,7], k = 28
+Output: false
 
-# Target = 9
-
-# Output: True
-
-# Example 2:
-
-# Input:
-#     5
-#    / \
-#   3   6
-#  / \   \
-# 2   4   7
-
-# Target = 28
-
-# Output: False
+"""
 
 
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        seen = set()
+        queue = [root]
 
-class Solution(object):
-    def findTarget(self, root, k):
-        """
-        :type root: TreeNode
-        :type k: int
-        :rtype: bool
-        """
-        if not root:
-            return False
-        q = [root]
-        s = set()
-        for n in q:
-            if k - n.val in s:
+        while queue:
+            node = queue.pop(0)
+            if not node:
+                continue
+            if k - node.val in seen:
                 return True
-            s.add(n.val)
-            if n.left:
-                q.append(n.left)
-            if n.right:
-                q.append(n.right)
+
+            seen.add(node.val)
+            queue.append(node.right)
+            queue.append(node.left)
+
+        return False
+
+
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        seen = set()
+        queue = [root]
+
+        while queue:
+            node = queue.pop(0)
+            if k - node.val in seen:
+                return True
+
+            seen.add(node.val)
+
+            if node.right:
+                queue.append(node.right)
+            if node.left:
+                queue.append(node.left)
+
         return False

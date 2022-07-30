@@ -14,8 +14,6 @@ After you are done modifying the input array, return the new length of the array
 
 You must write an algorithm that uses only constant extra space.
 
- 
-
 Example 1:
 Input: chars = ["a","a","b","b","c","c","c"]
 Output: Return 6, and the first 6 characters of the input array should be: ["a","2","b","2","c","3"]

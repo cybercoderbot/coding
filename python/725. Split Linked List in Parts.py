@@ -10,8 +10,6 @@ The parts should be in the order of occurrence in the input list, and parts occu
 
 Return an array of the k parts.
 
- 
-
 Example 1:
 Input: head = [1,2,3], k = 5
 Output: [[1],[2],[3],[],[]]

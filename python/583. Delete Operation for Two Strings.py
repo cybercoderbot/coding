@@ -37,4 +37,4 @@ class Solution:
 
         # subtract the common seq length from both the strings
         # the difference is the number of characters that has to deleted
-        return M + N - 2 * commonSeqLength(0, 0)
+        return M + N - 2 * commonSeqLength(i=0, j=0)

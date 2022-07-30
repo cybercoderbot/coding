@@ -10,8 +10,6 @@ To perform a flood fill, consider the starting pixel, plus any pixels connected 
 
 Return the modified image after performing the flood fill.
 
- 
-
 Example 1:
 Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2
 Output: [[2,2,2],[2,2,0],[2,0,1]]
@@ -25,26 +23,27 @@ Explanation: The starting pixel is already colored 0, so no changes are made to 
 """
 
 
-# Algorithm
-# Take the matrix as a graph and traverse it.
-
-# Implementation (time complexity O(MN) | space complexity O(MN))
-
-
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        """
+        Take the matrix as a graph and traverse it.
+        time: O(MN), space: O(MN)
+        """
+
+        if image[sr][sc] == color:
+            return image
+
         M, N = len(image), len(image[0])
         original = image[sr][sc]
+        queue = [(sr, sc)]
 
-        if original != color:
-            stack = [(sr, sc)]
-            while stack:
-                x, y = stack.pop()
-                image[x][y] = color
-                neighbors = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
-                for i, j in neighbors:
-                    if 0 <= i < M and 0 <= j < N and image[i][j] == original:
-                        stack.append((i, j))
+        while queue:
+            x, y = queue.pop(0)
+            image[x][y] = color
+            neighbors = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
+            for i, j in neighbors:
+                if 0 <= i < M and 0 <= j < N and image[i][j] == original:
+                    queue.append((i, j))
         return image
 
 

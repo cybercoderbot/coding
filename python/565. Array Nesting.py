@@ -12,7 +12,6 @@ We stop adding right before a duplicate element occurs in s[k].
 Return the longest length of a set s[k].
 
  
-
 Example 1:
 Input: nums = [5,4,0,3,1,6,2]
 Output: 4
@@ -32,19 +31,21 @@ class Solution:
     def arrayNesting(self, nums: List[int]) -> int:
         """
         Traverse the array following the conneciton.
-        Time complexity O(N)
-        Space complexity O(N)
+        x = nums[x]
+
+        Time: O(N)
+        Space: O(N)
         """
         res = 0
         seen = [False] * len(nums)
 
         for x in nums:
-            val = 0
+            length = 0
             while not seen[x]:
                 seen[x] = True
-                val += 1
+                length += 1
                 x = nums[x]
-            res = max(res, val)  # largest cycle
+            res = max(res, length)  # largest cycle
         return res
 
 

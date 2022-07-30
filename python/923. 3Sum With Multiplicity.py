@@ -2,11 +2,9 @@
 923. 3Sum With Multiplicity
 Medium
 
-
 Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == target.
 
 As the answer can be very large, return it modulo 10^9 + 7.
-
 
 Example 1:
 Input: arr = [1,1,2,2,3,3,4,4,5,5], target = 8

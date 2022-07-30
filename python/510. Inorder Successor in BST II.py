@@ -39,9 +39,6 @@ class Node:
         self.parent = None
 """
 
-# class Solution:
-#     def inorderSuccessor(self, node: 'Node') -> 'Optional[Node]':
-
 
 class Solution:
     def inorderSuccessor(self, node: 'Node') -> 'Optional[Node]':
@@ -55,4 +52,5 @@ class Solution:
         # the successor is somewhere upper in the tree
         while node.parent and node == node.parent.right:
             node = node.parent
+
         return node.parent

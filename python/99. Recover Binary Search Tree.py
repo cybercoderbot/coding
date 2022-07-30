@@ -24,7 +24,8 @@ Locate the two nodes where the symmetric order is violated, and swap their value
 """
 
 
-"""Approach 2: Iterative Inorder Traversal
+"""
+Approach 2: Iterative Inorder Traversal
 Intuition
 
 Here we construct inorder traversal by iterations and identify swapped nodes at the same time, in one pass.
@@ -35,7 +36,7 @@ To identify swapped nodes, track the last node pred in the inorder traversal (i.
 
 There are only two swapped nodes here, and hence one could break after having the second node identified.
 
-Doing so, one could get directly nodes (and not only their values), and hence swap node values in \mathcal{O}(1)O(1) time, drastically reducing the time needed for step 3.
+Doing so, one could get directly nodes (and not only their values), and hence swap node values in O(1) time, drastically reducing the time needed for step 3.
 """
 
 

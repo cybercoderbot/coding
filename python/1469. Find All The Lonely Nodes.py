@@ -44,8 +44,41 @@ Traverse the tree depth-first in preorder and collect lonely nodes.
 
 
 class Solution:
+    def getLonelyNodes(self, root: TreeNode):
+        if not root:
+            return []
+        if root.left and not root.right:
+            return [root.left.val] + self.getLonelyNodes(root.left)
+        if not root.left and root.right:
+            return [root.right.val] + self.getLonelyNodes(root.right)
+        return self.getLonelyNodes(root.left) + self.getLonelyNodes(root.right)
+
+
+class Solution:
+    def getLonelyNodes(self, root: TreeNode) -> List[int]:
+        res = []
+
+        def dfs(node):
+            if node.left and not node.right:
+                res.append(node.left.val)
+
+            if node.right and not node.left:
+                res.append(node.right.val)
+
+            if node.left:
+                dfs(node.left)
+            if node.right:
+                dfs(node.right)
+
+        dfs(root)
+
+        return res
+
+
+class Solution:
     def getLonelyNodes(self, root: TreeNode) -> List[int]:
         """
+        Iterative preorder DFS solution
         Traverse the tree depth-first in preorder and collect lonely nodes.
 
         not node.right -> res.append(node.left.val)

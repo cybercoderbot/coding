@@ -10,31 +10,24 @@ Return the number of possible unique paths that the robot can take to reach the 
 
 The testcases are generated so that the answer will be less than or equal to 2 * 109.
 
- 
-
 Example 1:
-
-
 Input: obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
 Output: 2
 Explanation: There is one obstacle in the middle of the 3x3 grid above.
 There are two ways to reach the bottom-right corner:
 1. Right -> Right -> Down -> Down
 2. Down -> Down -> Right -> Right
+
 Example 2:
-
-
 Input: obstacleGrid = [[0,1],[0,0]]
 Output: 1"""
 
 
 """
-
 Algorithm:
 Define fn(i, j) as number of unique paths arriving at i, j. Then,
 
 fn(i, j) = fn(i-1, j) + fn(i, j-1) except for fn(i, j) = 0 if obstacleGrid[i][j] == 1
-
 """
 
 

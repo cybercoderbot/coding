@@ -33,7 +33,26 @@ class Solution:
 
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         """
-        Solution 1: Iteration
+        Solution 1: Recursion
+        """
+
+        if not list1 or not list2:
+            return list2 or list1
+
+        elif list1.val < list2.val:
+            list1.next = self.mergeTwoLists(list1.next, list2)
+            return list1
+
+        else:
+            list2.next = self.mergeTwoLists(list1, list2.next)
+            return list2
+
+
+class Solution:
+
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        Solution 2: Iteration
         """
 
         dummy = ListNode(-1)
@@ -51,22 +70,3 @@ class Solution:
         node.next = list1 or list2
 
         return dummy.next
-
-
-class Solution:
-
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        """
-        Solution 2: Recursion
-        """
-
-        if not list1 or not list2:
-            return list2 or list1
-
-        elif list1.val < list2.val:
-            list1.next = self.mergeTwoLists(list1.next, list2)
-            return list1
-
-        else:
-            list2.next = self.mergeTwoLists(list1, list2.next)
-            return list2

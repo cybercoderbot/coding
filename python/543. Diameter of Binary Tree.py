@@ -8,8 +8,6 @@ The diameter of a binary tree is the length of the longest path between any two 
 
 The length of a path between two nodes is represented by the number of edges between them.
 
- 
-
 Example 1:
 Input: root = [1,2,3,4,5]
 Output: 3
@@ -22,35 +20,36 @@ Output: 1
 """
 
 
-def traverse(node):
-    """Return length+1 and diameter rooted at node"""
-    if not node:
-        return 0, 0
-
-    depth1, diameter1 = traverse(node.left)
-    depth2, diameter2 = traverse(node.right)
-    depth = max(depth1, depth2) + 1
-    res = max(diameter1, diameter2, depth1+depth2)
-
-    return depth, res
-
-
 class Solution:
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
-        depth, diameter = traverse(root)
-        return diameter
+
+        def traverse(node):
+            """Return length+1 and diameter rooted at node"""
+            if not node:
+                return 0, 0
+
+            depth1, diameter1 = traverse(node.left)
+            depth2, diameter2 = traverse(node.right)
+            depth = max(depth1, depth2) + 1
+            diameter = max(diameter1, diameter2, depth1 + depth2)
+
+            return depth, diameter
+
+        return traverse(root)[1]
 
 
 class Solution(object):
-    def diameterOfBinaryTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+
         def depth(node):
+            """
+            Compute depth of the tree
+            """
             nonlocal res
+
             if not node:
                 return 0
+
             left = depth(node.left)
             right = depth(node.right)
             res = max(res, left+right)
@@ -59,4 +58,5 @@ class Solution(object):
 
         res = 0
         depth(root)
+
         return res

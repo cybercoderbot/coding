@@ -1,39 +1,76 @@
-class Solution(object):
-    def maxKilledEnemies(self, grid):
-        """
-        :type grid: List[List[str]]
-        :rtype: int
-        """
+"""
+361. Bomb Enemy
+Medium
 
-        # Walk through the matrix. At the start of each non-wall-streak (row-wise or column-wise),
-        # count the number of hits in that streak and remember it. O(mn) time, O(n) space.
+Given an m x n matrix grid where each cell is either a wall 'W', an enemy 'E' or empty '0', return the maximum enemies you can kill using one bomb. You can only place the bomb in an empty cell.
 
-        # 这种解法需要一个row_hit变量，用来记录到下一个墙之前的敌人个数。还需要一个数组col_hits，其中
-        # col_hits[j]表示第j列到下一个墙之前的敌人个数。算法思路是遍历整个数组grid，对于位置grid[i][j]，
-        # 对于水平方向，如果当前位置是开头或者前一个是墙壁，我们开始从当前位置往后遍历，遍历到末尾或者
-        # 墙的位置停止，计算敌人个数。对于竖直方向也是同样，如果当前位置是开头或者上一个是墙壁，我们开始
-        # 从当前位置向下遍历，遍历到末尾或者墙的位置停止，计算敌人个数。有了水平方向和竖直方向敌人的个数，
-        # 那么如果当前位置是0，表示可以放炸弹，我们更新结果ans即可
+The bomb kills all the enemies in the same row and column from the planted point until it hits the wall since it is too strong to be destroyed.
 
-        if not grid:
-            return 0
-        ht, wd = len(grid), len(grid[0])
-        ans = 0
-        col_hits = [0] * wd
-        for i, row in enumerate(grid):
-            for j, cell in enumerate(row):
-                if j == 0 or row[j-1] == 'W':
-                    row_hit = 0
-                    k = j
-                    while k < wd and row[k] != 'W':
-                        row_hit += row[k] == 'E'
-                        k += 1
-                if i == 0 or grid[i-1][j] == 'W':
-                    col_hits[j] = 0
-                    k = i
-                    while k < ht and grid[k][j] != 'W':
-                        col_hits[j] += grid[k][j] == 'E'
-                        k += 1
-                if cell == '0':
-                    ans = max(ans, row_hit + col_hits[j])
-        return ans
+Example 1:
+Input: grid = [["0","E","0","0"],["E","0","W","E"],["0","E","0","0"]]
+Output: 3
+
+Example 2:
+Input: grid = [["W","W","W"],["0","0","0"],["E","E","E"]]
+Output: 1
+"""
+
+
+"""
+The brute force solution is very intuitive.. just count 'E's in rows and cols for each 0 in the matrix and return the maximum. This takes O((MN)*(M+N)) as you have to traverse up, down, left, and right for every i,j.
+
+We can optimize on this by doing 4 passes and adding the number of E's seen so far, and reset if we see a 'W'.
+From left to right then right to left for E's seen in each row. And then from up to down and down to up for each E seen so far in column.
+
+Total time -> O(4*MN) --> O(MN)
+
+"""
+
+
+class Solution:
+    def maxKilledEnemies(self, grid: List[List[str]]) -> int:
+        M, N = len(grid), len(grid[0])
+        dp = [[0 for _ in range(N)] for _ in range(M)]
+
+        # left->right
+        for i in range(M):
+            cur = 0
+            for j in range(N):
+                if grid[i][j] == 'W':
+                    cur = 0
+                if grid[i][j] == 'E':
+                    cur += 1
+                else:
+                    dp[i][j] = cur
+        # right->left
+        for i in range(M):
+            cur = 0
+            for j in range(N-1, -1, -1):
+                if grid[i][j] == 'W':
+                    cur = 0
+                if grid[i][j] == 'E':
+                    cur += 1
+                else:
+                    dp[i][j] += cur
+        # up->down
+        for j in range(N):
+            cur = 0
+            for i in range(M):
+                if grid[i][j] == 'W':
+                    cur = 0
+                if grid[i][j] == 'E':
+                    cur += 1
+                else:
+                    dp[i][j] += cur
+        # down->up
+        for j in range(N):
+            cur = 0
+            for i in range(M-1, -1, -1):
+                if grid[i][j] == 'W':
+                    cur = 0
+                if grid[i][j] == 'E':
+                    cur += 1
+                else:
+                    dp[i][j] += cur
+
+        return max(dp[i][j] for i in range(M) for j in range(N))

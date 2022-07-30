@@ -31,13 +31,11 @@ Output: [["baggage","bags","banner"],["baggage","bags","banner"],["baggage","bag
 """
 
 
-"""
-Hash table
-"""
-
-
 class Solution:
     def suggestedProducts(self, products: List[str], word: str) -> List[List[str]]:
+        """
+        Hash table
+        """
         m = defaultdict(list)
         products.sort()
         for prod in products:
@@ -48,17 +46,16 @@ class Solution:
         N = len(word)
         for i in range(N):
             res.append(m[word[:i+1]][:3])
+
         return res
-
-
-"""
-# Approach 2 - 2 pointers
-# Define two pointers lo and hi which mark the beginning and end of products matching prefixes in searchWord.
-"""
 
 
 class Solution:
     def suggestedProducts(self, products: List[str], word: str) -> List[List[str]]:
+        """
+        2 pointers
+        Define two pointers low and high which mark the beginning and end of products matching prefixes in searchWord.
+        """
         products.sort()
         res = []
         N = len(products)

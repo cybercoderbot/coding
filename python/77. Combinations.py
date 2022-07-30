@@ -42,6 +42,6 @@ class Solution:
                 comb.pop()
 
         res = []
-        backtrack(1, [])
+        backtrack(first=1, comb=[])
 
         return res

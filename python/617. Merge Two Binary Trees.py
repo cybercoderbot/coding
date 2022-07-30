@@ -47,11 +47,12 @@ Output: [2,2]
 
 
 class Solution:
-    def mergeTrees(self, t1, t2):
-        if t1 and t2:
-            merged = TreeNode(t1.val + t2.val)
-            merged.left = self.mergeTrees(t1.left, t2.left)
-            merged.right = self.mergeTrees(t1.right, t2.right)
-            return merged
-        else:
+    def mergeTrees(self, t1: Optional[TreeNode], t2: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not t1 or not t2:
             return t1 or t2
+
+        merged = TreeNode(t1.val + t2.val)
+        merged.left = self.mergeTrees(t1.left, t2.left)
+        merged.right = self.mergeTrees(t1.right, t2.right)
+
+        return merged

@@ -6,7 +6,6 @@ Given the heads of two singly linked-lists headA and headB, return the node at w
 
 For example, the following two linked lists begin to intersect at node c1:
 
-
 The test cases are generated such that there are no cycles anywhere in the entire linked structure.
 
 Note that the linked lists must retain their original structure after the function returns.
@@ -21,8 +20,6 @@ listB - The second linked list.
 skipA - The number of nodes to skip ahead in listA (starting from the head) to get to the intersected node.
 skipB - The number of nodes to skip ahead in listB (starting from the head) to get to the intersected node.
 The judge will then create the linked structure based on these inputs and pass the two heads, headA and headB to your program. If you correctly return the intersected node, then your solution will be accepted.
-
- 
 
 Example 1:
 Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
@@ -45,13 +42,11 @@ Explanation: From the head of A, it reads as [2,6,4]. From the head of B, it rea
 Explanation: The two lists do not intersect, so return null.
 """
 
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-
 
 """
 The idea is if you switch head, the possible difference between length would be countered. 

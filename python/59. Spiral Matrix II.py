@@ -2,10 +2,7 @@
 59. Spiral Matrix II
 Medium
 
-
-Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
-
- 
+Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order. 
 
 Example 1:
 Input: n = 3
@@ -20,7 +17,13 @@ Output: [[1]]
 class Solution:
     def generateMatrix(self, N: int) -> List[List[int]]:
         """
-        Generate numbers from 1 to N^2 and fill them in the proper position in the matrix.
+        Solution: Walk the spiral
+
+        Initialize the matrix with 0's, then walk the spiral path and write the numbers 1 to N^2. Make a right turn when the cell ahead is already non-zero.
+
+        When res[(i+di) % N][(j+dj) % N] != 0: 
+            make right turn: di, dj = dj, -di
+
         Time complexity O(N^2)
         Space complexity O(N^2)
 

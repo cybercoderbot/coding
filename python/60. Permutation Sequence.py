@@ -44,7 +44,8 @@ class Solution:
             return
 
         cand, res = [], []
-        backtrack(0)
+        backtrack(i=0)
+
         res.sort()
 
         return res[k-1]
@@ -53,7 +54,7 @@ class Solution:
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
         """
-        Approach 1 - brute force O(N!)
+        Approach 1: brute force O(N!)
         """
         perms = permutations(range(1, n+1))
 
@@ -66,13 +67,14 @@ class Solution:
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
         """
-        Approach 2 - O(N ^ 2)
+        Approach 2:  O(N ^ 2)
         """
         k -= 1
-        ans, nums = [], list(range(1, n+1))
+        res = []
+        nums = list(range(1, n+1))
 
         for i in range(n, 0, -1):
             d, k = divmod(k, factorial(i-1))
-            ans.append(nums.pop(d))
+            res.append(nums.pop(d))
 
-        return "".join(map(str, ans))
+        return "".join(map(str, res))

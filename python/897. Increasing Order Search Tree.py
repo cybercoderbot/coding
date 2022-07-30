@@ -2,10 +2,7 @@
 897. Increasing Order Search Tree
 Easy
 
-
 Given the root of a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.
-
- 
 
 Example 1:
 Input: root = [5,3,6,2,4,null,8,1,null,null,null,7,9]
@@ -15,6 +12,10 @@ Example 2:
 Input: root = [5,1,7]
 Output: [1,null,5,null,7]
 
+"""
+
+
+"""
 Intuition
 Don't need the condition of BST, just in-order output the whole tree.
 
@@ -50,7 +51,6 @@ but it is wrong.
 Complexity
 O(N) time traversal of all nodes
 O(height) space
-
 """
 
 
@@ -62,3 +62,22 @@ class Solution:
         root.left = None
         root.right = self.increasingBST(root.right, tail)
         return res
+
+
+class Solution:
+    def increasingBST(self, root):
+
+        def inorder(node):
+            if not node:
+                return
+
+            inorder(node.left)
+            node.left = None
+            self.p.right = node
+            self.p = node
+            inorder(node.right)
+
+        res = self.p = TreeNode(None)
+        inorder(root)
+
+        return res.right

@@ -15,8 +15,6 @@ For example, after commands "AAR", your car goes to positions 0 --> 1 --> 3 --> 
 
 Given a target position target, return the length of the shortest sequence of instructions to get there.
 
- 
-
 Example 1:
 Input: target = 3
 Output: 2
@@ -47,8 +45,10 @@ class Solution:
                 return move
             if (pos, speed) in visited:
                 continue
+
             visited.add((pos, speed))
             queue.append([move+1, pos+speed, speed*2])
+
             if (pos+speed > target and speed > 0) or (pos+speed < target and speed < 0):
                 speed = -1 if speed > 0 else 1
                 queue.append([move+1, pos, speed])

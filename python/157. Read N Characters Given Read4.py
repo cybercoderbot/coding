@@ -42,7 +42,7 @@ class Solution:
         :rtype: The number of actual characters read (int)
         """
         res, k = 0, 4
-        buf4 = [" "]*4
+        buf4 = [" "] * 4
         while res < n and k == 4:
             k = read4(buf4)
             buf[res: res+4] = buf4

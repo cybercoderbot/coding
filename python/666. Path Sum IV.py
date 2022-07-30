@@ -11,14 +11,11 @@ Given an array of ascending three-digit integers nums representing a binary tree
 
 It is guaranteed that the given array represents a valid connected binary tree.
 
- 
-
 Example 1:
 Input: nums = [113,215,221]
 Output: 12
 Explanation: The tree that the list represents is shown.
 The path sum is (3 + 5) + (3 + 1) = 12.
-
 
 Example 2:
 Input: nums = [113,221]
@@ -38,14 +35,14 @@ class Solution:
         res = 0
         stack = [(1, 1, 0)]
         while stack:
-            depth, pos, val = stack.pop()
-            val += tree[depth, pos]
-            depth1 = depth+1
-            pleft, pright = 2*pos-1, 2*pos
-            if (depth1, pleft) not in tree and (depth1, pright) not in tree:
-                res += val  # leaf
-            if (depth1, pleft) in tree:
-                stack.append((depth1, pleft, val))
-            if (depth1, pright) in tree:
-                stack.append((depth1, pright, val))
+            depth, pos, path = stack.pop()
+            path += tree[depth, pos]
+            depth += 1
+            left, right = 2*pos-1, 2*pos
+            if (depth, left) not in tree and (depth, right) not in tree:
+                res += path
+            if (depth, left) in tree:
+                stack.append((depth, left, path))
+            if (depth, right) in tree:
+                stack.append((depth, right, path))
         return res

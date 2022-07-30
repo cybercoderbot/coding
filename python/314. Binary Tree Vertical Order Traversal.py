@@ -6,22 +6,17 @@ Given the root of a binary tree, return the vertical order traversal of its node
 
 If two nodes are in the same row and column, the order should be from left to right.
 
- 
-
 Example 1:
 Input: root = [3,9,20,null,null,15,7]
 Output: [[9],[3,15],[20],[7]]
-
 
 Example 2:
 Input: root = [3,9,8,4,0,1,7]
 Output: [[4],[9],[3,0,1],[8],[7]]
 Example 3:
 
-
 Input: root = [3,9,8,4,0,1,7,null,null,null,2,5]
 Output: [[4],[9,5],[3,0,1],[8,2],[7]]
-
 """
 
 
@@ -38,18 +33,19 @@ from collections import defaultdict
 
 class Solution:
     def verticalOrder(self, root: TreeNode) -> List[List[int]]:
-        colTable = defaultdict(list)
-        queue = deque([(0, root)])
+        # dic: {col: node.val}
+        dic = collections.defaultdict(list)
+        queue = [(0, root)]
 
         while queue:
-            col, node = queue.popleft()
+            col, node = queue.pop(0)
 
             if node:
-                colTable[col].append(node.val)
+                dic[col].append(node.val)
                 queue.append((col-1, node.left))
                 queue.append((col+1, node.right))
 
-        return [colTable[x] for x in sorted(colTable.keys())]
+        return [dic[x] for x in sorted(dic.keys())]
 
 
 class Solution(object):

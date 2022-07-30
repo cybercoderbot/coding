@@ -11,10 +11,7 @@ Return the corresponding expression that has the maximum value in string format.
 
 Note: your expression should not contain redundant parenthesis.
 
- 
-
 Example 1:
-
 Input: nums = [1000,100,10,2]
 Output: "1000/(100/10/2)"
 Explanation:

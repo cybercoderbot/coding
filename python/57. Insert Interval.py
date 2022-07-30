@@ -8,8 +8,6 @@ Insert newInterval into intervals such that intervals is still sorted in ascendi
 
 Return intervals after the insertion.
 
- 
-
 Example 1:
 Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
 Output: [[1,5],[6,9]]
@@ -21,38 +19,38 @@ Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 """
 
 
-"""
-Loop through the intervals [x, y] and compare with new interval [x0, y0]:
-
-if y < x0, add [x, y] to answer;
-if y0 < x, add [x0, y0] and the remaining of intervals to answer;
-if overlapping, merge the two intervals x0 = min(x0, x) and y0 = max(y0, y).
-Implementation (84ms, 45.46%):
-
-Time complexity O(N)
-Space complexity O(N)
-"""
-
-
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        """
+        Loop through the intervals [xi, yi] and compare with new interval [x0, y0]
+
+        1) if yi < x0, add [xi, yi] to answer
+        2) if y0 < xi, add [x0, y0] and the remaining of intervals to answer
+        2) if overlapping, merge the two intervals 
+            x0 = min(x0, xi) and y0 = max(y0, yi).
+
+        Time: O(N)
+        Space: O(N)
+
+        """
 
         i, N = 0, len(intervals)
-        x2, y2 = newInterval
+        x0, y0 = newInterval
+
         res = []
 
         while i < N:
-            x1, y1 = intervals[i]
-            if y2 < x1:
+            xi, yi = intervals[i]
+            if y0 < xi:
                 break
 
-            if y1 < x2:
-                res.append([x1, y1])
+            if yi < x0:
+                res.append([xi, yi])
             else:
-                x2, y2 = min(x2, x1), max(y2, y1)
+                x0, y0 = min(x0, xi), max(y0, yi)
             i += 1
 
-        res.append([x2, y2])
+        res.append([x0, y0])
         res.extend(intervals[i:])
 
         return res

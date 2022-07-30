@@ -8,10 +8,11 @@ Implement the LRUCache class:
 
 LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
 int get(int key) Return the value of the key if the key exists, otherwise return -1.
-void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+void put(int key, int value) Update the value of the key if the key exists.
+Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
 The functions get and put must each run in O(1) average time complexity.
 
- 
+
 Example 1:
 
 Input
@@ -34,48 +35,43 @@ lRUCache.get(4);    // return 4
 """
 
 
-class LRUCache(object):
+"""
+In Python 3.6+, dicitonary is ordered.
+Essentially, it is to a large extent the LRU cache that we want.
+So the below implementation leverages on this fact and achieves this functionality.
+"""
 
-    # OrderedDict
-    # https://www.kunxi.org/blog/2014/05/lru-cache-in-python/
 
-    # class collections.OrderedDict([items])
-    # Return an instance of a dict subclass, supporting the usual dict methods.
-    # An OrderedDict is a dict that remembers the order that keys were first inserted.
-    # If a new entry overwrites an existing entry, the original insertion position is left unchanged.
-    # Deleting an entry and reinserting it will move it to the end.
+class LRUCache:
 
-    def __init__(self, capacity):
+    def __init__(self, capacity: int):
         """
-        :type capacity: int
+        An OrderedDict is a dict that remembers the order that keys were first inserted.
+        If a new entry overwrites an existing entry, the original insertion position is left unchanged.
+        Deleting an entry and reinserting it will move it to the end.
         """
         self.capacity = capacity
-        self.cache = collections.OrderedDict()
+        self.cache = OrderedDict()
 
-    def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
-        if key in self.cache:
-            value = self.cache.pop(key)
-            self.cache[key] = value
-            return value
-        else:
+    def get(self, key: int) -> int:
+        if key not in self.cache:
             return -1
+        value = self.cache.pop(key)
+        self.cache[key] = value
+        return value
 
-    def put(self, key, value):
+    def put(self, key: int, value: int) -> None:
         """
-        :type key: int
-        :type value: int
-        :rtype: void
+        if key in cache: cache.pop(key)
+        if len(cache) > capacity: popitem()
+        The popitem() method removes the item that was last inserted into the dictionary
         """
         if key in self.cache:
             self.cache.pop(key)
-        elif len(self.cache) == self.capacity:
-            # The popitem() method for ordered dictionaries returns and removes a (key, value) pair.
-            # The pairs are returned in LIFO order if last is true or FIFO order if false.
-            self.cache.popitem(False)
+
+        if len(self.cache) == self.capacity:
+            self.cache.popitem(last=False)
+
         self.cache[key] = value
 
 

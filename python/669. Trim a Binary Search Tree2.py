@@ -28,11 +28,30 @@ class Solution:
 
         if root.val < low:
             root = self.trimBST(root.right, low, high)
+
         elif low <= root.val <= high:
             root.left = self.trimBST(root.left, low, high)
             root.right = self.trimBST(root.right, low, high)
+
         else:
             root = self.trimBST(root.left, low, high)
+
+        return root
+
+
+class Solution:
+    def trimBST(self, root: TreeNode, low: int, high: int) -> TreeNode:
+        if not root:
+            return None
+
+        if root.val < low:
+            return self.trimBST(root.right, low, high)
+
+        elif root.val > high:
+            return self.trimBST(root.left, low, high)
+
+        root.left = self.trimBST(root.left, low, high)
+        root.right = self.trimBST(root.right, low, high)
 
         return root
 

@@ -6,8 +6,6 @@ Given a m x n grid filled with non-negative numbers, find a path from top left t
 
 Note: You can only move either down or right at any point in time.
 
- 
-
 Example 1:
 Input: grid = [[1,3,1],[1,5,1],[4,2,1]]
 Output: 7
@@ -18,16 +16,13 @@ Input: grid = [[1,2,3],[4,5,6]]
 Output: 12
 """
 
-
 """
-Approach 2 - bottom-up dp
+Approach - bottom-up dp 
 
 # Define fn(i, j) as the path sum at position (i, j). Then,
 # fn(0, 0) = grid[0][0],
 # fn(i, j) = min(fn(i-1, j), fn(i, j-1)) + grid[i][j].
 
-Algorithm:
-Similar to approach 1 but with bottom-up implementation.
 """
 
 
@@ -38,10 +33,9 @@ class Solution:
         res = [inf] * N
         res[0] = 0
 
-        for i in range(M):
-            for j in range(N):
-                if j:
-                    res[j] = min(res[j-1], res[j])
-                res[j] += grid[i][j]
+        for i, j in product(range(M), range(N)):
+            if j:
+                res[j] = min(res[j-1], res[j])
+            res[j] += grid[i][j]
 
         return res[-1]

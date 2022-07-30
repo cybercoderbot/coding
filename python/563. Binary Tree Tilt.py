@@ -44,18 +44,18 @@ class Solution:
     def findTilt(self, root: TreeNode) -> int:
         res = 0
 
-        def valueSum(node):
+        def sumNodes(node):
             nonlocal res
 
             if not node:
                 return 0
 
-            lsum = valueSum(node.left)
-            rsum = valueSum(node.right)
-            res += abs(lsum - rsum)
+            left = sumNodes(node.left)
+            right = sumNodes(node.right)
+            res += abs(left - right)
 
-            return lsum + rsum + node.val
+            return left + right + node.val
 
-        valueSum(root)
+        sumNodes(root)
 
         return res

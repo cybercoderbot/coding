@@ -2,13 +2,6 @@
 716. Max Stack
 Hard
 
-1598
-
-471
-
-Add to List
-
-Share
 Design a max stack data structure that supports the stack operations and supports finding the stack's maximum element.
 
 Implement the MaxStack class:

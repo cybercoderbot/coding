@@ -6,8 +6,6 @@ Given the root of a binary tree, determine if it is a complete binary tree.
 
 In a complete binary tree, every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
 
- 
-
 Example 1:
 Input: root = [1,2,3,4,5,6]
 Output: true
@@ -20,20 +18,24 @@ Explanation: The node with value 7 isn't as far left as possible.
 """
 
 
-# The level-order traversal array of a complete binary tree will never have a null node in between non-null nodes. If we encounter a null node, all the following nodes should also be null, otherwise it's not complete.
-
 class Solution:
     def isCompleteTree(self, root: TreeNode) -> bool:
+        """
+        The level-order traversal array of a complete binary tree will never 
+        have a null node in between non-null nodes. 
+        If we encounter a null node, all the following nodes should also be null, 
+        otherwise it's not complete.
+        """
 
-        prevNull = False
+        hasNull = False
         queue = [root]
 
         while queue:
             node = queue.pop(0)
             if not node:
-                prevNull = True
+                hasNull = True
                 continue
-            if prevNull:
+            elif hasNull:
                 return False
             queue.append(node.left)
             queue.append(node.right)
@@ -41,20 +43,20 @@ class Solution:
         return True
 
 
-"""
-Use BFS to do a level order traversal,
-add childrens to the bfs queue,
-until we met the first empty node.
-
-For a complete binary tree,
-there should not be any node after we met an empty one.
-
-Time O(N), Space O(N)
-"""
-
-
 class Solution:
+
     def isCompleteTree(self, root):
+        """
+        Use BFS to do a level order traversal,
+        add childrens to the BFS queue,
+        until we met the first empty node.
+
+        For a complete binary tree,
+        there should not be any node after we met an empty one.
+
+        Time O(N), Space O(N)
+        """
+
         i, queue = 0, [root]
         while queue[i]:
             queue.append(queue[i].left)

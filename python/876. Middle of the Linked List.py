@@ -5,16 +5,13 @@ Easy
 Given the head of a singly linked list, return the middle node of the linked list.
 
 If there are two middle nodes, return the second middle node.
-
  
 Example 1:
-
 Input: head = [1,2,3,4,5]
 Output: [3,4,5]
 Explanation: The middle node of the list is node 3.
+
 Example 2:
-
-
 Input: head = [1,2,3,4,5,6]
 Output: [4,5,6]
 Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
@@ -29,15 +26,6 @@ Explanation: Since the list has two middle nodes with values 3 and 4, we return 
 
 
 class Solution:
-    # Solution 1
-    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        arr = [head]
-        while arr[-1].next:
-            arr.append(arr[-1].next)
-        return arr[len(arr)//2]
-
-    # Solution 2
-
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         slow = fast = head
         while fast and fast.next:
@@ -45,3 +33,11 @@ class Solution:
             fast = fast.next.next
 
         return slow
+
+
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        arr = [head]
+        while arr[-1].next:
+            arr.append(arr[-1].next)
+        return arr[len(arr)//2]

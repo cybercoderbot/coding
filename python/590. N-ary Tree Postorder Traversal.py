@@ -6,8 +6,6 @@ Given the root of an n-ary tree, return the postorder traversal of its nodes' va
 
 Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)
 
- 
-
 Example 1:
 Input: root = [1,null,3,2,4,null,5,6]
 Output: [5,6,3,2,4,1]
@@ -29,6 +27,9 @@ class Node:
 
 class Solution:
     def postorder(self, root: 'Node') -> List[int]:
+        """
+        postorder: children -> root
+        """
 
         if not root:
             return []
@@ -57,6 +58,9 @@ class Solution:
 
 class Solution:
     def postorder(self, root: 'Node') -> List[int]:
+        """
+        preorder visit, then reverse node order
+        """
         res = []
         stack = [root]
         while stack:

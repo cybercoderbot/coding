@@ -6,8 +6,6 @@ Given the roots of two binary trees root and subRoot, return true if there is a 
 
 A subtree of a binary tree tree is a tree that consists of a node in tree and all of this node's descendants. The tree tree could also be considered as a subtree of itself.
 
-
-
 Example 1:
 Input: root = [3,4,5,1,2], subRoot = [4,1,2]
 Output: true
@@ -16,7 +14,6 @@ Example 2:
 Input: root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]
 Output: false
 """
-
 
 """
 # Naive approach, O(|s| * |t|)
@@ -30,19 +27,22 @@ of a child of s.
 
 
 class Solution:
-   def isMatch(self, s, t):
+    def isSameTree(self, s: Optional[TreeNode], t: Optional[TreeNode]) -> bool:
         if not (s and t):
             return s == t
 
-        left = self.isMatch(s.left, t.left)
-        right = self.isMatch(s.right, t.right)
+        left = self.isSameTree(s.left, t.left)
+        right = self.isSameTree(s.right, t.right)
+
         return s.val == t.val and left and right
 
-
     def isSubtree(self, s: Optional[TreeNode], t: Optional[TreeNode]) -> bool:
+        """
+        Naive approach, O(|s| * |t|)
+        """
 
         if not s:
             return False
-        if self.isMatch(s, t):
+        if self.isSameTree(s, t):
             return True
         return self.isSubtree(s.left, t) or self.isSubtree(s.right, t)

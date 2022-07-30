@@ -2,9 +2,7 @@
 46. Permutations
 Medium
 
-Given an array nums of distinct integers, return all the possible permutations. 
-You can return the answer in any order.
-
+Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
 
 Example 1:
 Input: nums = [1,2,3]
@@ -13,18 +11,10 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 Example 2:
 Input: nums = [0,1]
 Output: [[0,1],[1,0]]
-
 Example 3:
+
 Input: nums = [1]
 Output: [[1]]
-
-"""
-
-
-"""
-Scan through nums and at each position low trigger a recursive call 
-with a later element (say i) swapped with it.
-
 """
 
 """
@@ -37,115 +27,102 @@ If the first integer to consider has index n that means that the current permuta
 Iterate over the integers from index first to index n - 1.
 Place i-th integer first in the permutation, i.e. swap(nums[first], nums[i]).
 Proceed to create all permutations which starts from i-th integer : backtrack(first + 1).
-Now backtrack, i.e. swap(nums[first], nums[i]) back.
-"""
+Now backtrack, i.e. swap(nums[first], nums[i]) back."""
 
 
 class Solution:
-    def permute(self, nums):
+    def permute(self, nums: List[int]) -> List[List[int]]:
         """
-        :type nums: List[int]
-        :rtype: List[List[int]]
+        Scan through nums and at each position i trigger a recursive call
+        with a later element (j) and swap with it.
+
+        Time: O(N!)
+        Space: O(N!)
         """
-        def backtrack(first):
-            # if all integers are used up
-            if first == n:
-                res.append(nums[:])
 
-            for i in range(first, n):
-                # place i-th integer first
-                # in the current permutation
-                nums[first], nums[i] = nums[i], nums[first]
+        def backtrack(i):
+            """Populate res via backtracking."""
+            if i == len(nums):
+                res.append(nums.copy())
 
-                # use next integers to complete the permutations
-                backtrack(first+1)
+            for j in range(i, len(nums)):
+                nums[i], nums[j] = nums[j], nums[i]
+                backtrack(i+1)
+                nums[i], nums[j] = nums[j], nums[i]
 
-                # backtrack
-                nums[first], nums[i] = nums[i], nums[first]
-
-        n = len(nums)
         res = []
-        backtrack(0)
+        backtrack(i=0)
+
+        return res
+
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        """
+        47. Permutations II, no dupliations allowed
+        To exclude duplication, only swap nums[i] with nums[j] when no such value
+        has appeared in this position.
+
+        Time: O(N!)
+        Space: O(N!)
+        """
+
+        def backtrack(i):
+            """Populate res via backtracking."""
+            if i == len(nums):
+                return res.append(nums.copy())
+
+            seen = set()
+            for j in range(i, len(nums)):
+                if nums[j] not in seen:
+                    nums[i], nums[j] = nums[j], nums[i]
+                    backtrack(i+1)
+                    nums[i], nums[j] = nums[j], nums[i]
+                    seen.add(nums[j])
+
+        res = []
+        backtrack(i=0)
 
         return res
 
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-
-        def fn(lo=0):
-            """Return permutation of nums starting from index lo"""
-            if lo == len(nums)-1:
-                yield nums  # base condition
-            else:
-                yield from fn(lo+1)
-                for i in range(lo+1, len(nums)):
-                    nums[lo], nums[i] = nums[i], nums[lo]  # swapping
-                    yield from fn(lo+1)
-                    nums[lo], nums[i] = nums[i], nums[lo]  # swapping back
-
-        yield from fn()
-
-
-Analysis:
-Time complexity O(N!)
-Space complexity O(N!)
-
-Compared to the solution when duplication is not allowed.
-
-
-class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-
-        def fn(i):
-            """Populate answer with permutations in backtracking"""
-            if i == len(nums):
-                ans.append(nums.copy())
-            for j in range(i, len(nums)):
-                nums[i], nums[j] = nums[j], nums[i]
-                fn(i+1)
-                nums[i], nums[j] = nums[j], nums[i]
-
-        ans = []
-        fn(0)
-        return ans
-
-
-Below is Heap's algorithm(1963) which saves one swap in each iteration.
-
-
-class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-
-        def fn(i):
-            """Heap's algorithm (1963)"""
-            if i == len(nums):
-                ans.append(nums.copy())
-            for k in reversed(range(i, len(nums))):
-                fn(i+1)
-                if (len(nums)-i) & 1:
-                    nums[i], nums[-1] = nums[-1], nums[i]
-                else:
-                    nums[i], nums[k] = nums[k], nums[i]
-
-        ans = []
-        fn(0)
-        return ans
-
-
-Approach 3 - - iterative solution
-
-
-class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
+        """
+        Iterative solution
+        """
         res = [[]]
-        for n in nums:
+        for x in nums:
             tmp = []
-            for p in res:
-                p.append(n)
-                for i in range(len(p)):
-                    p[i], p[-1] = p[-1], p[i]
-                    tmp.append(p.copy())
-                    p[i], p[-1] = p[-1], p[i]
+            for pm in res:
+                pm.append(x)
+                for i in range(len(pm)):
+                    pm[i], pm[-1] = pm[-1], pm[i]
+                    tmp.append(pm.copy())
+                    pm[i], pm[-1] = pm[-1], pm[i]
             res = tmp
+        return res
+
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        """
+        Iterative solution
+        """
+        res = [[]]
+        for x in nums:
+            tmp = []
+            seen = set()
+            for pm in res:
+                pm.append(x)
+
+                for i in range(len(pm)):
+
+                    pm[i], pm[-1] = pm[-1], pm[i]
+                    tmp.append(pm.copy())
+                    pm[i], pm[-1] = pm[-1], pm[i]
+                    seen.add(pm[i])
+            if tmp not in seen:
+                res = tmp
+                seen.append(tmp)
         return res

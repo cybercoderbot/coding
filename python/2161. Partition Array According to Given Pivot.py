@@ -23,6 +23,15 @@ Output: [-3,2,4,3]
 
 class Solution:
     def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+        small = [x for x in nums if x < pivot]
+        equal = [x for x in nums if x == pivot]
+        large = [x for x in nums if x > pivot]
+
+        return small + equal + large
+
+
+class Solution:
+    def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
         small, equal, large = [], [], []
 
         for x in nums:

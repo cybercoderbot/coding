@@ -6,9 +6,7 @@ Given a string paragraph and a string array of the banned words banned, return t
 
 The words in paragraph are case-insensitive and the answer should be returned in lowercase.
 
-
 Example 1:
-
 Input: paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.", banned = ["hit"]
 Output: "ball"
 Explanation: 
@@ -17,8 +15,8 @@ Explanation:
 Note that words in the paragraph are not case sensitive,
 that punctuation is ignored (even if adjacent to words, such as "ball,"), 
 and that "hit" isn't the answer even though it occurs more because it is banned.
-Example 2:
 
+Example 2:
 Input: paragraph = "a.", banned = []
 Output: "a"
 """
@@ -37,7 +35,7 @@ class Solution(object):
 
         words = paragraph.lower().split()
 
-        counts = Counter()
+        counts = collections.Counter()
         banned = set(banned)
 
         for w in words:

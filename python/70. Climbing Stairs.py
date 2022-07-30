@@ -32,8 +32,27 @@ Ruby wins, and "the C languages" all look the same.
 """
 
 
-def climbStairs(self, n):
-    a = b = 1
-    for _ in range(n):
-        a, b = b, a + b
-    return a
+class Solution:
+
+    def climbStairs(self, N: int) -> int:
+        """
+        Bottom up DP, O(N) time, O(N) space
+        """
+
+        if N == 1:
+            return 1
+
+        res = [0] * N
+        res[0:2] = [1, 2]
+
+        for i in range(2, N):
+            res[i] = res[i-1] + res[i-2]
+        return res[-1]
+
+
+class Solution:
+    def climbStairs(self, N: int) -> int:
+        a = b = 1
+        for _ in range(N):
+            a, b = b, a + b
+        return a
