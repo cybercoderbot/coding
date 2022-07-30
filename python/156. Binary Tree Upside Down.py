@@ -12,7 +12,6 @@ The original right child becomes the new left child.
 
 The mentioned steps are done level by level. It is guaranteed that every right node has a sibling (a left node with the same parent) and has no children.
 
-
 Example 1:
 Input: root = [1,2,3,4,5]
 Output: [4,5,2,null,null,3,1]

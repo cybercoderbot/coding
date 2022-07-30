@@ -21,7 +21,6 @@ Input: s = "abc"
 Output: 1
 """
 
-
 """
 This is the sliding window problem, when it satisfies the requirements (containing all three characters), we move i (i++). That means after the while loop, i-1 would be the leftmost index to satisfy the requirements, i doesn't satisfy (break the while loop).
 [i-1, j] would be the minimum window size to satisfy the requirements.

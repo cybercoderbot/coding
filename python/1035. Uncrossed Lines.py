@@ -31,13 +31,10 @@ Output: 2
 from functools import lru_cache
 
 
-# Same as 1143. Longest Common Subsequence
-
 class Solution:
     def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
         """
-        Top-down DP
-
+        Same as 1143. Longest Common Subsequence. Top-down DP
         Time: O(M*N), Space: O(*N)
         """
 
@@ -58,7 +55,7 @@ class Solution:
 class Solution:
     def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
         """
-        Bottom-up
+        Bottom-up DP
         """
         m, n = len(nums1), len(nums2)  # dimensions
         dp = [[0]*(n+1) for _ in range(m+1)]
@@ -74,7 +71,7 @@ class Solution:
 class Solution:
     def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
         """
-        Bottom-up with space optimization
+        Bottom-up DP with space optimization
         """
         dp = [0]*(1 + len(nums2))
         for i in reversed(range(len(nums1))):

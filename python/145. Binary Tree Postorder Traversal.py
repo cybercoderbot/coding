@@ -15,7 +15,6 @@ Output: []
 Example 3:
 Input: root = [1]
 Output: [1]
-
 """
 
 # Definition for a binary tree node.

@@ -26,15 +26,6 @@ Output: [1,5,2,4,3]
 #         self.next = None
 
 
-"""
-It takes 3 steps to achive O(N) time and O(1) space for this problem.
-
-locate the mid-point;
-reverse the 2nd half;
-merge 1st and 2nd half.
-"""
-
-
 class Solution:
     def reorderList(self, head: ListNode) -> None:
         """

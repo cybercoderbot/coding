@@ -12,9 +12,7 @@ void put(int key, int value) Update the value of the key if the key exists.
 Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
 The functions get and put must each run in O(1) average time complexity.
 
-
 Example 1:
-
 Input
 ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
 [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
@@ -35,13 +33,6 @@ lRUCache.get(4);    // return 4
 """
 
 
-"""
-In Python 3.6+, dicitonary is ordered.
-Essentially, it is to a large extent the LRU cache that we want.
-So the below implementation leverages on this fact and achieves this functionality.
-"""
-
-
 class LRUCache:
 
     def __init__(self, capacity: int):
@@ -49,6 +40,7 @@ class LRUCache:
         An OrderedDict is a dict that remembers the order that keys were first inserted.
         If a new entry overwrites an existing entry, the original insertion position is left unchanged.
         Deleting an entry and reinserting it will move it to the end.
+        In Python 3.6+, dicitonary is ordered.
         """
         self.capacity = capacity
         self.cache = OrderedDict()

@@ -18,7 +18,6 @@ Explanation: Return true because "applepenapple" can be segmented as "apple pen 
 Note that you are allowed to reuse a dictionary word.
 """
 
-
 """
 The idea is the following:
 

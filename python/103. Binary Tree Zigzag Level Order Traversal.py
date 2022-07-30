@@ -23,7 +23,6 @@ class Solution:
         """
         BFS for level order traverse. 
         Alternate order of vals while storing it.
-
         Time: O(N), Space: O(N)
         """
 

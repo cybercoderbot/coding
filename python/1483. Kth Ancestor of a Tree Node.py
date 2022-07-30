@@ -11,7 +11,6 @@ Implement the TreeAncestor class:
 TreeAncestor(int n, int[] parent) Initializes the object with the number of nodes in the tree and the parent array.
 int getKthAncestor(int node, int k) return the kth ancestor of the given node node. If there is no such ancestor, return -1.
  
-
 Example 1:
 Input
 ["TreeAncestor", "getKthAncestor", "getKthAncestor", "getKthAncestor"]

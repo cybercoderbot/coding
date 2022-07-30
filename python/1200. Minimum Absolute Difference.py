@@ -10,7 +10,6 @@ a, b are from arr
 a < b
 b - a equals to the minimum absolute difference of any two elements in arr
  
-
 Example 1:
 Input: arr = [4,2,1,3]
 Output: [[1,2],[2,3],[3,4]]

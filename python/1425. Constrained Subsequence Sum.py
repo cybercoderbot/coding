@@ -23,7 +23,6 @@ Output: 23
 Explanation: The subsequence is [10, -2, -5, 20].
 """
 
-
 """
 Intuition
 We need to know the maximum in the window of size k.
