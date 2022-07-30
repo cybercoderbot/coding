@@ -21,9 +21,7 @@ Input: m = 1, n = 4, head = [0,1,2]
 Output: [[0,1,2,-1]]
 Explanation: The diagram above shows how the values are printed from left to right in the matrix.
 The last space in the matrix is set to -1.
-
 """
-
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -38,7 +36,6 @@ class Solution:
         1) Initial: di, dj = 0, 1
         2) If out of bound: di, dj = dj, -di
         3) Update: i, j = i+di, j+dj
-
         """
 
         i, j = 0, 0

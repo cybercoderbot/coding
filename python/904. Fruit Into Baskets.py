@@ -11,7 +11,6 @@ Starting from any tree of your choice, you must pick exactly one fruit from ever
 Once you reach a tree with fruit that cannot fit in your baskets, you must stop.
 Given the integer array fruits, return the maximum number of fruits you can pick.
 
- 
 Example 1:
 Input: fruits = [1,2,1]
 Output: 3

@@ -37,8 +37,7 @@ class Solution:
         """
         Inorder traverse the two binary search trees and collect their values in two
         arrays (sorted in ascending order). Search for target with 2-pointer approach.
-        Time complexity O(M+N)
-        Space complexity O(M+N)
+        Time: O(M+N), Space: O(M+N)
         """
 
         # inorder traverse: nums sorted in ascending order

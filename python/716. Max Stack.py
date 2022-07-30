@@ -13,8 +13,6 @@ int top() Gets the element on the top of the stack without removing it.
 int peekMax() Retrieves the maximum element in the stack without removing it.
 int popMax() Retrieves the maximum element in the stack and removes it. If there is more than one maximum element, only remove the top-most one.
 You must come up with a solution that supports O(1) for each top call and O(logn) for each other call? 
-
-
 """
 
 

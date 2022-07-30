@@ -12,7 +12,7 @@ class Node {
     public int val;
     public List<Node> neighbors;
 }
- 
+
 Test case format:
 
 For simplicity, each node's value is the same as the node's index (1-indexed). For example, the first node with val == 1, the second node with val == 2, and so on. The graph is represented in the test case using an adjacency list.
@@ -32,16 +32,14 @@ class Node:
 """
 
 
-"""
-Recursively (deep) copy the nodes being traversed. 
-A caveat is that the node needs to be put in seen before adding neighbors. 
-Otherwise, endless recursive calls will be induced.
-
-"""
-
-
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
+        """
+        Recursively deep copy the nodes being traversed.
+        A caveat is that the node needs to be put in seen before adding neighbors.
+        Otherwise, endless recursive calls will be induced.
+        """
+
         if not node:
             return None
 

@@ -1,19 +1,38 @@
-class Solution(object):
-    def findWords(self, words):
-        """
-        :type words: List[str]
-        :rtype: List[str]
-        """
+"""
+500. Keyboard Row
+Easy
 
-        # 判断输入单词的字母集合是否为键盘某一行字母集合的子集
+Given an array of strings words, return the words that can be typed using letters of the alphabet on only one row of American keyboard like the image below.
 
-        row1 = set('qwertyuiop')
-        row2 = set('asdfghjkl')
-        row3 = set('zxcvbnm')
+In the American keyboard:
+the first row consists of the characters "qwertyuiop",
+the second row consists of the characters "asdfghjkl", and
+the third row consists of the characters "zxcvbnm".
 
-        result = []
+Example 1:
+Input: words = ["Hello","Alaska","Dad","Peace"]
+Output: ["Alaska","Dad"]
+
+Example 2:
+Input: words = ["omk"]
+Output: []
+
+Example 3:
+Input: words = ["adsdf","sfd"]
+Output: ["adsdf","sfd"]
+"""
+
+
+class Solution:
+    def findWords(self, words: List[str]) -> List[str]:
+
+        s1 = set('qwertyuiop')
+        s2 = set('asdfghjkl')
+        s3 = set('zxcvbnm')
+
+        res = []
         for word in words:
             w = set(word.lower())
-            if w.issubset(row1) or w.issubset(row2) or w.issubset(row3):
-                result.append(word)
-        return result
+            if w.issubset(s1) or w.issubset(s2) or w.issubset(s3):
+                res.append(word)
+        return res

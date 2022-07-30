@@ -10,7 +10,6 @@ The score of a balanced parentheses string is based on the following rule:
 AB has score A + B, where A and B are balanced parentheses strings.
 (A) has score 2 * A, where A is a balanced parentheses string.
 
-
 Example 1:
 Input: s = "()"
 Output: 1

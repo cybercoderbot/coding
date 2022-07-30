@@ -24,7 +24,6 @@ Input: tree = [8,null,6,null,5,null,4,null,3,null,2,null,1], target = 4
 Output: 4
 """
 
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
@@ -49,6 +48,7 @@ class Solution:
             if src:
                 queue.append((src.left, dst.left))
                 queue.append((src.right, dst.right))
+        return None
 
 
 class Solution:

@@ -21,15 +21,13 @@ Output: []
 """
 
 
-"""
-Define fn(i) to be the sentences formed by s[i:]. Then, the recursion satisfies
-
-fn(i) = [[word] + x for x in fn(i + len(word)] for word in wordDict if s[i:].startswith(word)
-"""
-
-
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        """
+        Define fn(i) to be the sentences formed by s[i:]. 
+        Then, the recursion satisfies
+        fn(i) = [[w] + x for x in fn(i + len(w) for w in dict if s[i:].startswith(w)]
+        """
         # for better performance
         wordDict = set(wordDict)
 

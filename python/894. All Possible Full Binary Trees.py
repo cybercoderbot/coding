@@ -8,8 +8,6 @@ Each element of the answer is the root node of one possible tree. You may return
 
 A full binary tree is a binary tree where each node has exactly 0 or 2 children.
 
- 
-
 Example 1:
 Input: n = 7
 Output: [[0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,null,null,null,null,0,0],[0,0,0,0,0,null,null,0,0]]
@@ -18,7 +16,6 @@ Example 2:
 Input: n = 3
 Output: [[0,0,0]]
 """
-
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -29,7 +26,7 @@ Output: [[0,0,0]]
 
 
 """
-[Python3] memoized recursion
+Memoized recursion
 
 Creat full binary trees recursively.
 

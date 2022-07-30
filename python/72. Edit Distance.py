@@ -10,17 +10,15 @@ Insert a character
 Delete a character
 Replace a character
 
-
 Example 1:
-
 Input: word1 = "horse", word2 = "ros"
 Output: 3
 Explanation:
 horse -> rorse (replace 'h' with 'r')
 rorse -> rose (remove 'r')
 rose -> ros (remove 'e')
-Example 2:
 
+Example 2:
 Input: word1 = "intention", word2 = "execution"
 Output: 5
 Explanation:

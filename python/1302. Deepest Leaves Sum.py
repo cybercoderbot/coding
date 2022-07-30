@@ -13,7 +13,6 @@ Input: root = [6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]
 Output: 19
 """
 
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -28,8 +27,7 @@ class Solution:
         Level-order traverse the tree and keep track of sum for each level.
         Sum of last level: sum of leaves
 
-        Time complexity O(N)
-        Space complexity O(1)
+        Time: O(N), Space: O(1)
         """
         if not root:
             return 0

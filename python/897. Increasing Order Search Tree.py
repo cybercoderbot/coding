@@ -14,7 +14,6 @@ Output: [1,null,5,null,7]
 
 """
 
-
 """
 Intuition
 Don't need the condition of BST, just in-order output the whole tree.

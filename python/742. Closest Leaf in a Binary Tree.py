@@ -22,7 +22,6 @@ Output: 3
 Explanation: The leaf node with value 3 (and not the leaf node with value 6) is nearest to the node with value 2.
  
 Constraints:
-
 The number of nodes in the tree is in the range [1, 1000].
 1 <= Node.val <= 1000
 All the values of the tree are unique.
