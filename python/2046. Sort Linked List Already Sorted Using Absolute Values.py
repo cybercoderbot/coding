@@ -4,7 +4,6 @@ Medium
 
 Given the head of a singly linked list that is sorted in non-decreasing order using the absolute values of its nodes, return the list sorted in non-decreasing order using the actual values of its nodes.
  
-
 Example 1:
 Input: head = [0,2,-5,5,10,-10]
 Output: [-10,-5,0,2,5,10]

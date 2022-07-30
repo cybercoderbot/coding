@@ -6,8 +6,6 @@ Given a string s and a dictionary of strings wordDict, return true if s can be s
 
 Note that the same word in the dictionary may be reused multiple times in the segmentation.
 
- 
-
 Example 1:
 Input: s = "leetcode", wordDict = ["leet","code"]
 Output: true
@@ -56,17 +54,7 @@ class Solution:
 
 
 class Solution(object):
-    def wordBreak(self, s, wordDict):
-        """
-        :type s: str
-        :type wordDict: List[str]
-        :rtype: bool
-        """
-        # 解题思路：
-        # BFS（广度优先搜索）
-        # 将当前单词拆分为前后两半，若前缀可以在字典dict中找到，则将后缀加入队列。
-
-        # if s in wordDict: return True
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
 
         queue = [s]
         while queue:

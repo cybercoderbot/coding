@@ -1,36 +1,52 @@
-class Solution(object):
+"""
+522. Longest Uncommon Subsequence II
+Medium
 
-    # 解题思路：
-    # 首先将输入字符串列表strs按照长度递减排序，记得到的新列表为 s_sorted
-    # 利用计数器count统计每个字符串出现的次数。
-    # 遍历 s_sorted，记当前字符串为c，其下标为i：
-    #     若c在strs中出现不止一次，跳过该字符串
-    #     否则，利用贪心算法对c和s_sorted[0 .. i-1]的字符串进行匹配，若均匹配失败，则返回len(c)
-    # 遍历结束，返回-1
+Given an array of strings strs, return the length of the longest uncommon subsequence between them. If the longest uncommon subsequence does not exist, return -1.
 
-    def uncommon(self, x, y):
-        i = j = 0
-        while i < len(x) and j < len(y):
-            if x[i] == y[j]:
-                j += 1
-            i += 1
-        return j != len(y)
+An uncommon subsequence between an array of strings is a string that is a subsequence of one string but not the others.
 
-    def findLUSlength(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: int
-        """
+A subsequence of a string s is a string that can be obtained after deleting any number of characters from s.
 
-        count = collections.Counter(strs)
-        s_sorted = sorted(set(strs), key=len, reverse=True)
+For example, "abc" is a subsequence of "aebdc" because you can delete the underlined characters in "aebdc" to get "abc". Other subsequences of "aebdc" include "aebdc", "aeb", and "" (empty string). 
 
-        for i, c in enumerate(s_sorted):
-            if count[c] > 1:
-                continue
-            for p in s_sorted:
-                comp = [self.uncommon(p, c) for p in s_sorted[:i]]
-                if all(comp):
-                    return len(c)
+Example 1:
+Input: strs = ["aba","cdc","eae"]
+Output: 3
 
+Example 2:
+Input: strs = ["aaa","aaa","aa"]
+Output: -1
+"""
+
+
+class Solution:
+    def findLUSlength(self, strs: List[str]) -> int:
+        def isSub(s, t):
+            """Return True if s is t subsequence of s."""
+            t = iter(t)
+            return all(c in t for c in s)
+
+        sort = sorted(strs, key=len, reverse=True)
+        for s in sort:
+            if sum(isSub(s, t) for t in strs) == 1:
+                return len(s)
         return -1
+
+
+class Solution:
+    def findLUSlength(self, strs: List[str]) -> int:
+
+        def isSub(p, s):
+            """Return True if p is a subsequence of s."""
+            s = iter(s)
+            return all(c in s for c in p)
+
+        res = -1
+        for i, s in enumerate(strs):
+            for j in range(len(strs)):
+                if i != j and len(s) <= len(strs[j]) and isSub(s, strs[j]):
+                    break
+            else:
+                res = max(res, len(s))
+        return res

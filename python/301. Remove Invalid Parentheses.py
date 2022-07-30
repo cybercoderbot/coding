@@ -6,40 +6,34 @@ Given a string s that contains parentheses and letters, remove the minimum numbe
 
 Return all the possible results. You may return the answer in any order.
 
- 
-
 Example 1:
-
 Input: s = "()())()"
 Output: ["(())()","()()()"]
-Example 2:
 
+Example 2:
 Input: s = "(a)())()"
 Output: ["(a())()","(a)()()"]
-Example 3:
 
+Example 3:
 Input: s = ")("
 Output: [""]
 """
 
 
-# class Solution:
-#     def removeInvalidParentheses(self, s: str) -> List[str]:
-
-
 from collections import deque
 
 
-def isValid(string):
-    count = 0
-    for c in string:
-        if c == '(':
-            count += 1
-        elif c == ')':
-            count -= 1
-            if count < 0:
-                return False
-    return count == 0
+class Solution:
+    def removeInvalidParentheses(self, s: str) -> List[str]:
+        count = 0
+        for c in string:
+            if c == '(':
+                count += 1
+            elif c == ')':
+                count -= 1
+                if count < 0:
+                    return False
+        return count == 0
 
 
 class Solution:

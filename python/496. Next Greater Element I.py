@@ -1,27 +1,54 @@
-class Solution(object):
-    def nextGreaterElement(self, findNums, nums):
+"""
+496. Next Greater Element I
+Easy
+
+The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.
+
+You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.
+
+For each 0 <= i < nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.
+
+Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.
+
+Example 1:
+Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
+Output: [-1,3,-1]
+Explanation: The next greater element for each value of nums1 is as follows:
+- 4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
+- 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.
+- 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
+
+Example 2:
+Input: nums1 = [2,4], nums2 = [1,2,3,4]
+Output: [3,-1]
+Explanation: The next greater element for each value of nums1 is as follows:
+- 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.
+- 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
+"""
+
+
+class Solution:
+
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         """
-        :type findNums: List[int]
-        :type nums: List[int]
-        :rtype: List[int]
+        Time complexity: O(N), N = num of elements in nums2
+        Space complexity: O(N)
         """
+        res = []
+        stack = []
+        m = {}
 
-        # 用哈希表建立每个数字和其右边第一个较大数之间的映射，没有的话就是-1。
-        # 我们遍历原数组中的所有数字，如果此时栈不为空，且栈顶元素小于当前数字，
-        # 说明当前数字就是栈顶元素的右边第一个较大数，那么建立二者的映射，并且
-        # 去除当前栈顶元素，最后将当前遍历到的数字压入栈。当所有数字都建立了映射，
-        # 那么最后我们可以直接通过哈希表快速的找到子集合中数字的右边较大值
+        for x in nums2:
+            while stack and x > stack[-1]:
+                m[stack[-1]] = x
+                stack.pop()
+            stack.append(x)
 
-        d = {}
-        s = []
-        ans = []
+        # unmatched vals
+        for x in stack:
+            m[x] = -1
 
-        for n in nums:
-            while s and s[-1] < n:
-                d[s.pop()] = n
-            s.append(n)
+        for n in nums1:
+            res.append(m[n])
 
-        for n in findNums:
-            ans.append(d.get(n, -1))
-
-        return ans
+        return res

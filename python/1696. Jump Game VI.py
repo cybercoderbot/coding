@@ -10,7 +10,6 @@ You want to reach the last index of the array (index n - 1). Your score is the s
 
 Return the maximum score you can get.
 
- 
 Example 1:
 Input: nums = [1,-1,-2,4,-7,3], k = 2
 Output: 7

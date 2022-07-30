@@ -14,7 +14,6 @@ Given a 2D integer array moves where moves[i] = [rowi, coli] indicates that the 
 
 You can assume that moves is valid (i.e., it follows the rules of Tic-Tac-Toe), the grid is initially empty, and A will play first.
 
-
 Example 1:
 Input: moves = [[0,0],[2,0],[1,1],[2,1],[2,2]]
 Output: "A"

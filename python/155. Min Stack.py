@@ -35,7 +35,6 @@ minStack.getMin(); // return -2
 
 
 class MinStack(object):
-
     """
     Use two stacks.
     Use stack to store all vals, and use minstack to store the min val.
@@ -44,7 +43,6 @@ class MinStack(object):
     For push:
     stack.append(x)
     minStack.append( min( minStack.top(), x ) )
-
     """
 
     def __init__(self):

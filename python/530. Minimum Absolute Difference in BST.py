@@ -11,7 +11,6 @@ Output: 1
 Example 2:
 Input: root = [1,0,48,null,null,12,49]
 Output: 1
-
 """
 
 

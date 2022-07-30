@@ -18,27 +18,21 @@ Output: 1
 Example 3:
 Input: nums = [5,4,-1,7,8]
 Output: 23
-
-"""
-
-
-"""
-Kadane's algorithm is explained in 
-https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
-
-To summarize, it defines an array s whose ith element represents the largest contiguous sum ending at nums[i]. Then,
-
-s[i+1] = max(s[i], 0) + nums[i]
-
 """
 
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         """
+        Kadane's algorithm (search Maximum_subarray_problem)
+
+        For an array s whose ith element represents the largest contiguous sum 
+        ending at nums[i]. Then,
+
+        s[i+1] = max(s[i], 0) + nums[i]
+
         Bottom-up DP
-        Time: O(N)
-        Space: O(1)
+        Time: O(N), Space: O(1)
         """
 
         for i in range(1, len(nums)):

@@ -13,9 +13,7 @@ This continues until none of the queue students want to take the top sandwich an
 You are given two integer arrays students and sandwiches where sandwiches[i] is the type of the ith sandwich in the stack (i = 0 is the top of the stack) and students[j] is the preference of the jth student in the initial queue (j = 0 is the front of the queue). Return the number of students that are unable to eat.
 
 
-
 Example 1:
-
 Input: students = [1,1,0,0], sandwiches = [0,1,0,1]
 Output: 0
 Explanation:
@@ -28,12 +26,10 @@ Explanation:
 - Front student takes the top sandwich and leaves the line making students = [1] and sandwiches = [1].
 - Front student takes the top sandwich and leaves the line making students = [] and sandwiches = [].
 Hence all students are able to eat.
-Example 2:
 
+Example 2:
 Input: students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1]
 Output: 3
-
-
 """
 
 

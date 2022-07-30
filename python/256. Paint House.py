@@ -9,7 +9,6 @@ The cost of painting each house with a certain color is represented by an n x 3 
 For example, costs[0][0] is the cost of painting house 0 with the color red; costs[1][2] is the cost of painting house 1 with color green, and so on...
 Return the minimum cost to paint all houses.
 
- 
 Example 1:
 Input: costs = [[17,2,17],[16,16,5],[14,3,19]]
 Output: 10

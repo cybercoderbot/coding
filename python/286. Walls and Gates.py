@@ -1,15 +1,51 @@
-class Solution(object):
-    def wallsAndGates(self, rooms):
+"""
+286. Walls and Gates
+Medium
+
+You are given an m x n grid rooms initialized with these three possible values.
+
+-1 A wall or an obstacle. 0 A gate.
+INF Infinity means an empty room. We use the value 231 - 1 = 2147483647 to represent INF as you may assume that the distance to a gate is less than 2147483647.
+Fill each empty room with the distance to its nearest gate. If it is impossible to reach a gate, it should be filled with INF.
+
+Example 1:
+Input: rooms = [[2147483647,-1,0,2147483647],[2147483647,2147483647,2147483647,-1],[2147483647,-1,2147483647,-1],[0,-1,2147483647,2147483647]]
+Output: [[3,-1,0,1],[2,2,1,-1],[1,-1,2,-1],[0,-1,3,4]]
+
+Example 2:
+Input: rooms = [[-1]]
+Output: [[-1]]
+"""
+
+
+class Solution:
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
         """
-        :type rooms: List[List[int]]
-        :rtype: void Do not return anything, modify rooms in-place instead.
+        Starting from gates, BFS traverse the grid and fill in distance to nearest gates.
+        Time: O(M * N), Space: O(M * N)
         """
 
-        # 这道题类似一种迷宫问题，规定了-1表示墙，0表示门，让求每个点到门的最近的曼哈顿距离，
-        # 这其实类似于求距离场Distance Map的问题，那么我们先考虑用DFS来解，思路是，
-        # 我们搜索0的位置，每找到一个0，以其周围四个相邻点为起点，开始DFS遍历，并带入深度值1，
-        # 如果遇到的值大于当前深度值，我们将位置值赋为当前深度值，并对当前点的四个相邻点开始
-        # DFS遍历，注意此时深度值需要加1，这样遍历完成后，所有的位置就被正确地更新了
+        M, N = len(rooms), len(rooms[0])
+        MAX = 2**31 - 1
+        queue = [(i, j)
+                 for i, j in product(range(M), range(N)) if rooms[i][j] == 0]
+
+        dist = 0
+        while queue:
+            dist += 1
+            queue2 = []
+            for i, j in queue:
+                for ii, jj in (i-1, j), (i, j-1), (i, j+1), (i+1, j):
+                    if 0 <= ii < M and 0 <= jj < N and rooms[ii][jj] == MAX:
+                        rooms[ii][jj] = dist
+                        queue2.append((ii, jj))
+            queue = queue2
+
+        return
+
+
+class Solution:
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
 
         if not rooms:
             return

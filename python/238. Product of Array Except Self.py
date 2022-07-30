@@ -8,8 +8,6 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 
 You must write an algorithm that runs in O(n) time and without using the division operation.
 
- 
-
 Example 1:
 Input: nums = [1,2,3,4]
 Output: [24,12,8,6]

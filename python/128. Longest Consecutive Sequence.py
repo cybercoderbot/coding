@@ -17,18 +17,16 @@ Output: 9
 """
 
 
-"""
-The first approach is relatively straighforward. 
-Define a hash set. For each element x, check if x-1 is in the set.
-
-If not (i.e. x is the start of the sequence), progressively check if x+1, x+2, ... is in the set and update the counter
-If so, do nothing.
-
-"""
-
-
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
+        """
+        Define a hash set. For each element x, check if x-1 is in the set.
+
+        If not (eg. x is the start of the sequence), 
+        progressively check if x+1, x+2, ... is in the set and update the counter.
+        If so, do nothing.
+        """
+
         nums = set(nums)
         res = 0
         for x in nums:

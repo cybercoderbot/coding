@@ -4,7 +4,6 @@ Medium
 
 Given an array of unique integers preorder, return true if it is the correct preorder traversal sequence of a binary search tree.
 
-
 Example 1:
 Input: preorder = [5,2,1,3,6]
 Output: true

@@ -1,37 +1,65 @@
-class Solution(object):
-    def nthUglyNumber(self, n):
+"""
+264. Ugly Number II
+Medium
+
+An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
+
+Given an integer n, return the nth ugly number. 
+
+Example 1:
+Input: n = 10
+Output: 12
+Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
+
+Example 2:
+Input: n = 1
+Output: 1
+Explanation: 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.
+"""
+
+
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
         """
-        :type n: int
-        :rtype: int
+        Bottom-up DP
         """
-
-        # 丑陋数序列可以拆分为下面3个子列表：
-
-        # (1) 1×2, 2×2, 3×2, 4×2, 5×2, …
-        # (2) 1×3, 2×3, 3×3, 4×3, 5×3, …
-        # (3) 1×5, 2×5, 3×5, 4×5, 5×5, …
-        # 我们可以发现每一个子列表都是丑陋数本身(1, 2, 3, 4, 5, …) 乘以 2, 3, 5
-
-        # 接下来我们使用与Merge Sort相似的合并方法，从3个子列表中获取丑陋数。
-        # 每一步我们从中选出最小的一个，然后向后移动一步。
 
         dp = [1]
-        i2 = i3 = i5 = 0
+        i = j = k = 0
 
-        while len(dp) < n:
-            x2 = dp[i2] * 2
-            x3 = dp[i3] * 3
-            x5 = dp[i5] * 5
-
-            xn = min(x2, x3, x5)
-
-            if xn == x2:
-                i2 += 1
-            if xn == x3:
-                i3 += 1
-            if xn == x5:
-                i5 += 1
-
-            dp.append(xn)
-
+        for _ in range(n-1):
+            x = min(2 * dp[i], 3 * dp[j], 5 * dp[k])
+            dp.append(x)
+            if 2 * dp[i] == x:
+                i += 1
+            if 3 * dp[j] == x:
+                j += 1
+            if 5 * dp[k] == x:
+                k += 1
         return dp[-1]
+
+
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+        """
+        An interesting fact about ugly number sequence is that it is possible to 
+        figure out the next ugly number given an ugly number.
+
+        Define fn(x) to return next ugly number given an ugly number x through
+
+        fn(x) = min(f*fn(x//f) for f in (2, 3, 5)).
+
+        top-down DP
+        """
+
+        @lru_cache(None)
+        def fn(k):
+            """Return the smallest ugly number larger than k (not necessarily ugly)."""
+            if k == 0:
+                return 1
+            return min(x * fn(k//x) for x in (2, 3, 5))
+
+        res = 1
+        for _ in range(n-1):
+            res = fn(res)
+        return res

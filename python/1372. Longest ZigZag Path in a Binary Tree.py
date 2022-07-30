@@ -14,8 +14,6 @@ Zigzag length is defined as the number of nodes visited - 1. (A single node has 
 
 Return the longest ZigZag path contained in that tree.
 
- 
-
 Example 1:
 Input: root = [1,null,1,1,1,null,null,1,1,null,1,null,null,null,1,null,1]
 Output: 3

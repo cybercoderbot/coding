@@ -30,7 +30,8 @@ fn(i) = [[word] + x for x in fn(i + len(word)] for word in wordDict if s[i:].sta
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        wordDict = set(wordDict)  # edit: better performance
+        # for better performance
+        wordDict = set(wordDict)
 
         @lru_cache(None)
         def search(i):
@@ -46,11 +47,6 @@ class Solution:
 
         words = search(i=0)
         return [" ".join(x) for x in words]
-
-
-"""
-The bottom-up implementation is very easy to go TLE. The reason is that it doesn't a lot of unnecessary calculations while top-down only does what's required.
-"""
 
 
 class Solution:

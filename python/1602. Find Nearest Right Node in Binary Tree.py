@@ -13,9 +13,6 @@ Example 2:
 Input: root = [3,null,4,2], u = 2
 Output: null
 Explanation: There are no nodes to the right of 2.
-
-
-Traverse the tree and return the node to the right of u.
 """
 
 

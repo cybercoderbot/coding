@@ -18,8 +18,7 @@ class Solution:
     def shortestDistance(self, words: List[str], word1: str, word2: str) -> int:
         """
         Scan through words and mark the locations of word1 and word2.
-        Time complexity O(N)
-        Space complexity O(1)
+        Time: O(N), Space: O(1)
         """
         res = i1 = i2 = inf
         for i, word in enumerate(words):
@@ -31,20 +30,16 @@ class Solution:
         return res
 
 
-"""
-For a given word, collect its indices in an array. 
-For given two words, find their closest indices.
-
-"""
-
-
 class WordDistance:
+        """
+        For a given word, collect its indices in an array.
+        For given two words, find their closest indices.
+
+        Time: O(N), Space: O(N)
+        """
 
     def __init__(self, words: List[str]):
-        """
-        Time complexity O(N)
-        Space complexity O(N)
-        """
+ 
         self.loc = defaultdict(int)
         for i, word in enumerate(words):
             self.loc[word].append(i)

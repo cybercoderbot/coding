@@ -15,7 +15,6 @@ Output: [1,3]
 Example 3:
 Input: root = []
 Output: []
-
 """
 
 
@@ -27,15 +26,11 @@ Output: []
 #         self.right = right
 
 
-"""
-Solution:         
-Traverse the tree and put the rightmost node of each level to a container.
-"""
-
-
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         """
+        Traverse the tree and put the rightmost node of each level to res.
+
         BFS search
         """
 

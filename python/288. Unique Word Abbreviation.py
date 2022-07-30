@@ -1,45 +1,40 @@
-class ValidWordAbbr(object):
+"""
+288. Unique Word Abbreviation
+Medium
 
-    # 这道题让我们求独特的单词缩写，但是题目中给的例子不是很清晰，我们来看下面三种情况：
-    # 1. dictionary = {"dear"},         isUnique("door") -> false
-    # 2. dictionary = {"door", "door"}, isUnique("door") -> true
-    # 3. dictionary = {"dear", "door"}, isUnique("door") -> false
+The abbreviation of a word is a concatenation of its first letter, the number of characters between the first and last letter, and its last letter. If a word has only two characters, then it is an abbreviation of itself.
 
-    # 从上面三个例子我们可以看出，当缩写一致的时候，字典中的单词均和给定单词相同时，那么返回true。
-    # 我们需要用哈希表来建立缩写形式和其对应的单词的映射，把所有缩写形式的相同单词放到一个dict中，
-    # 然后我们在判断是否unique的时候只需要看给定单词的缩写形式的是否和dict中的缩写相同，相同的话
-    # 就是上面的第二种情况，返回true。需要注意的是由于set中不能有重复值，
-    # 所有上面第二种情况只会有一个door存在set里，但是并不影响判断结果
+For example:
+dog --> d1g because there is one letter between the first letter 'd' and the last letter 'g'.
+internationalization --> i18n because there are 18 letters between the first letter 'i' and the last letter 'n'.
+it --> it because any word with only two characters is an abbreviation of itself.
+Implement the ValidWordAbbr class:
 
-    def __init__(self, dictionary):
-        """
-        :type dictionary: List[str]
-        """
-        self.d = {}
-        for w in dictionary:
-            if len(w) <= 2:
-                self.d[w] = [w]
-            else:
-                s = w[0] + str(len(w)-2) + w[-1]
-                if s not in self.d:
-                    self.d[s] = [w]
-                else:
-                    self.d[s].append(w)
-
-    def isUnique(self, word):
-        """
-        :type word: str
-        :rtype: bool
-        """
-
-        if len(word) <= 2:
-            val = word
-        else:
-            val = word[0] + str(len(word)-2) + word[-1]
-
-        return val not in self.d or (len(self.d[val]) == 1 and self.d[val][0] == word)
+ValidWordAbbr(String[] dictionary) Initializes the object with a dictionary of words.
+boolean isUnique(string word) Returns true if either of the following conditions are met (otherwise returns false):
+There is no word in dictionary whose abbreviation is equal to word's abbreviation.
+For any word in dictionary whose abbreviation is equal to word's abbreviation, that word and word are the same.
+ 
+Example 1:
+Input
+["ValidWordAbbr", "isUnique", "isUnique", "isUnique", "isUnique", "isUnique"]
+[[["deer", "door", "cake", "card"]], ["dear"], ["cart"], ["cane"], ["make"], ["cake"]]
+Output
+[null, false, true, false, true, true]
+"""
 
 
-# Your ValidWordAbbr object will be instantiated and called as such:
-# obj = ValidWordAbbr(dictionary)
-# param_1 = obj.isUnique(word)
+class ValidWordAbbr:
+    """
+    Create a hash table to map key to words. Here a trick is that one doesn't have to follow the definition given by the problem. Instead, one could safely use ones own hashing algo. Here I use word[0] + str(len(word)) + word[-1] as the key.
+    """
+
+    def __init__(self, dictionary: List[str]):
+        self.d = defaultdict(set)
+        for word in set(dictionary):
+            key = word[0] + str(len(word)) + word[-1]
+            self.d[key].add(word)
+
+    def isUnique(self, word: str) -> bool:
+        key = word[0] + str(len(word)) + word[-1]
+        return self.d[key] <= {word}

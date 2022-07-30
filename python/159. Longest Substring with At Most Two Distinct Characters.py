@@ -22,15 +22,13 @@ Once a new character arrives, we check if it is the same as the end of queue
 * if not, pop from the front
 if the poped character is different from the newly arrived one, update starting anchor(ii)
 
-
 """
 
 
 class Solution:
     def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
         """
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N), Space: O(N)
         """
         res = j = 0
         x0 = x1 = ""
@@ -48,8 +46,7 @@ class Solution:
 class Solution:
     def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
         """
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N), Space: O(N)
         """
         res, j = 0, -1  # starting anchor
         queue = deque()

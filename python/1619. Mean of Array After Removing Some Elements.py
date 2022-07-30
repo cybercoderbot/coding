@@ -6,7 +6,6 @@ Given an integer array arr, return the mean of the remaining integers after remo
 
 Answers within 10-5 of the actual answer will be considered accepted.
  
-
 Example 1:
 Input: arr = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3]
 Output: 2.00000

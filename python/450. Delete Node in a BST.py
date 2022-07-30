@@ -9,7 +9,6 @@ Basically, the deletion can be divided into two stages:
 Search for a node to remove.
 If the node is found, delete the node.
  
-
 Example 1:
 Input: root = [5,3,6,2,4,null,7], key = 3
 Output: [5,4,6,2,null,null,7]

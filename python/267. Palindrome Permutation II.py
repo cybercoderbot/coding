@@ -6,13 +6,11 @@ Given a string s, return all the palindromic permutations (without duplicates) o
 
 You may return the answer in any order. If s has no palindromic permutation, return an empty list.
 
-
 Example 1:
-
 Input: s = "aabb"
 Output: ["abba","baab"]
-Example 2:
 
+Example 2:
 Input: s = "abc"
 Output: []
 """

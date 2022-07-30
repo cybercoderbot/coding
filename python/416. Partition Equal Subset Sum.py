@@ -1,27 +1,42 @@
-class Solution(object):
-    def canPartition(self, nums):
+"""
+416. Partition Equal Subset Sum
+Medium
+
+Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
+ 
+Example 1:
+Input: nums = [1,5,11,5]
+Output: true
+Explanation: The array can be partitioned as [1, 5, 5] and [11].
+
+Example 2:
+Input: nums = [1,2,3,5]
+Output: false
+Explanation: The array cannot be partitioned into equal sum subsets.
+"""
+
+
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
         """
-        :type nums: List[int]
-        :rtype: bool
+        This is a classic knapsack problem which falls in the area of dynamic programming.
+
+        In this top-down implementation, we define fn(i, x) to return True if there is a subarray summing up to x. Then, the recursive relation is
+
+        fn(i, x) = fn(i+1, x) or fn(i+1, x - nums[i]).
         """
 
-        # 解题思路：
-        # 动态规划（Dynamic Programming）
-        # 利用数组dp[i]记录和为i的子数组是否存在，初始令dp[0] = 1
-
-        # for n in nums:
-        #     for i in range(sum(nums) - n + 1):
-        #         if dp[i]: dp[i + n] = 1
-
-        if sum(nums) & 1:
+        total = sum(nums)
+        if total & 1:
             return False
 
-        target = sum(nums) / 2
+        @lru_cache(None)
+        def dfs(i, x):
+            """Return True if possible to find subarray of sum(nums[i:]) = v."""
+            if x <= 0:
+                return x == 0
+            if i == len(nums):
+                return False
+            return dfs(i+1, x) or dfs(i+1, x - nums[i])
 
-        nset = set([0])
-        for n in nums:
-            # if you need the original set unchanged when the new set is modified,
-            # you can use copy() method. This is called shallow copy.
-            for m in nset.copy():
-                nset.add(m + n)
-        return target in nset
+        return dfs(0, total//2)

@@ -4,7 +4,6 @@ Easy
 
 Given the root of a binary search tree and a target value, return the value in the BST that is closest to the target.
 
-
 Example 1:
 Input: root = [4,2,5,1,3], target = 3.714286
 Output: 4
@@ -12,7 +11,6 @@ Output: 4
 Example 2:
 Input: root = [1], target = 4.428571
 Output: 1
-
 """
 
 
@@ -31,8 +29,7 @@ class Solution:
         2. if root.val > target, move to left subtree. All nodes in right subtree have larger difference than current node
         3. if root.val < target, move to right subtree.
 
-        Time complexity O(N)
-        Space complexity O(1)
+        Time: O(N), Space: O(1)
 
         """
 

@@ -1,25 +1,22 @@
 """
 1995. Count Special Quadruplets
-
 Easy
 
 Given a 0-indexed integer array nums, return the number of distinct quadruplets (a, b, c, d) such that:
 
 nums[a] + nums[b] + nums[c] == nums[d], and a < b < c < d
  
-
 Example 1:
-
 Input: nums = [1,2,3,6]
 Output: 1
 Explanation: The only quadruplet that satisfies the requirement is (0, 1, 2, 3) because 1 + 2 + 3 == 6.
-Example 2:
 
+Example 2:
 Input: nums = [3,3,6,4,5]
 Output: 0
 Explanation: There are no such quadruplets in [3,3,6,4,5].
-Example 3:
 
+Example 3:
 Input: nums = [1,1,1,3,5]
 Output: 4
 Explanation: The 4 quadruplets that satisfy the requirement are:
@@ -156,33 +153,3 @@ class Solution:
                 count[nums[x] - nums[b]] += 1
 
         return res
-
-
-class Solution {
-    public:
-    int countQuadruplets(vector < int > & nums) {
-        int res = 0
-        int len = nums.size()
-
-        unordered_map < int, int > count
-        count[nums[len-1] - nums[len-2]] = 1
-
-        for (int b=len - 3
-             b >= 1
-             b--) {
-            for (int a=b - 1
-                 a >= 0
-                 a--) {
-                res += count[nums[a] + nums[b]]
-            }
-
-            for (int x=len - 1
-                 x > b
-                 x--) {
-                count[nums[x] - nums[b]]++
-            }
-        }
-
-        return res
-    }
-}

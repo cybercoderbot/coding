@@ -13,7 +13,6 @@ Input: head = [1,2]
 Output: false
 """
 
-
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, x):

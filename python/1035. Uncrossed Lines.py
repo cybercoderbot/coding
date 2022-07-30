@@ -12,8 +12,6 @@ Note that a connecting line cannot intersect even at the endpoints (i.e., each n
 
 Return the maximum number of connecting lines we can draw in this way.
 
- 
-
 Example 1:
 Input: nums1 = [1,4,2], nums2 = [1,2,4]
 Output: 2
@@ -38,10 +36,9 @@ from functools import lru_cache
 class Solution:
     def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
         """
-        Top-down
+        Top-down DP
 
-        Time complexity O(MN)
-        Space complexity O(MN)
+        Time: O(M*N), Space: O(*N)
         """
 
         @lru_cache(None)

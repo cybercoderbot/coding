@@ -1,26 +1,52 @@
-class Solution(object):
-    def singleNumber(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
+"""
+260. Single Number III
+Medium
 
-        # 这道题是之前那两道Single Number 单独的数字和 Single Number II 单独的数字之二的再次延伸，
-        # 那道题其实是很巧妙的利用了Single Number 单独的数字的解法，准确的找出只出现了一次的数字，
-        # 但前提是其他数字必须出现两次才行。而这题有两个数字都只出现了一次，那么我们如果能想办法把
-        # 原数组分为两个小数组，不相同的两个数字分别在两个小数组中，这样分别调用Single Number 单独的数字
-        # 的解法就可以得到答案。那么如何实现呢，首先我们先把原数组全部异或起来，那么我们会得到一个数字，
-        # 这个数字是两个不相同的数字异或的结果，我们取出其中任意一位为‘1’的位，为了方便起见，我们用 a &= -a
-        # 来取出最右端为‘1’的位，然后和原数组中的数字挨个相与，那么我们要求的两个不同的数字就被分到了两个小组中，
-        # 分别将两个小组中的数字都异或起来，就可以得到最终结果了
+Given an integer array nums, in which exactly two elements appear only once and all the other elements appear exactly twice. Find the two elements that appear only once. You can return the answer in any order.
 
-        # result of a^b
-        axb = reduce(lambda x, y: x ^ y, nums)
-        lowbit = axb & -axb
-        a = b = 0
-        for n in nums:
-            if n & lowbit:
-                a = a ^ n
-            else:
-                b = b ^ n
-        return [a, b]
+You must write an algorithm that runs in linear runtime complexity and uses only constant extra space.
+
+Example 1:
+Input: nums = [1,2,1,3,2,5]
+Output: [3,5]
+Explanation:  [5, 3] is also a valid answer.
+
+Example 2:
+Input: nums = [-1,0]
+Output: [-1,0]
+Example 3:
+
+Input: nums = [0,1]
+Output: [1,0]
+"""
+
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        freq = collections.Counter(nums)
+        return [k for k, v in freq.items() if v == 1]
+
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        freq = defaultdict(int)
+
+        for x in nums:
+            freq[x] += 1
+
+        return [x for x in freq if freq[x] == 1]
+
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        freq = defaultdict(int)
+
+        for x in nums:
+            freq[x] += 1
+
+        res = []
+        for x in freq:
+            if freq[x] == 1:
+                res.append(x)
+
+        return res

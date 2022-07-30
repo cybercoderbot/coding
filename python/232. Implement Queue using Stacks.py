@@ -15,9 +15,7 @@ Notes:
 You must use only standard operations of a stack, which means only push to top, peek/pop from top, size, and is empty operations are valid.
 Depending on your language, the stack may not be supported natively. You may simulate a stack using a list or deque (double-ended queue) as long as you use only a stack's standard operations.
 
-
 Example 1:
-
 Input
 ["MyQueue", "push", "push", "peek", "pop", "empty"]
 [[], [1], [2], [], [], []]
@@ -34,13 +32,9 @@ myQueue.empty(); // return false
 """
 
 
-"""
-The idea is to simulate a queue using two stacks.
-"""
-
-
 class MyQueue:
 	"""
+    Simulate a queue using two stacks.
 	push O(N), pop amortized O(1)
 	"""
     def __init__(self):

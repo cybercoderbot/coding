@@ -7,8 +7,6 @@ Given the root of a binary search tree and a node p in it, return the in-order s
 
 The successor of a node p is the node with the smallest key greater than p.val.
 
- 
-
 Example 1:
 Input: root = [2,1,3], p = 1
 Output: 2

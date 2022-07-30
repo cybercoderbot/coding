@@ -9,12 +9,11 @@ You are given an integer array gain of length n where gain[i] is the net gain in
 
  
 Example 1:
-
 Input: gain = [-5,1,5,0,-7]
 Output: 1
 Explanation: The altitudes are [0,-5,-4,1,1,-6]. The highest is 1.
-Example 2:
 
+Example 2:
 Input: gain = [-4,-3,-2,-1,4,3,2]
 Output: 0
 Explanation: The altitudes are [0,-4,-7,-9,-10,-6,-3,-1]. The highest is 0.
@@ -25,8 +24,7 @@ class Solution:
     def largestAltitude(self, gain: List[int]) -> int:
         """
         Compute cumsum and keep track of max.
-        Time complexity O(N)
-        Space complexity O(1)
+        Time: O(N), Space: O(1)
         """
         res = cumsum = 0
         for x in gain:
