@@ -31,10 +31,12 @@ class Solution:
             if i == len(word):
                 res.append(cur + str(x) if x > 0 else cur)
             else:
-                # Skip current position, and increment count (x)
+                # Skip current position, and increment count
                 backtrack(i + 1, cur, x + 1)
-                # Include current position, and zero-out count (x)
-                backtrack(i + 1, cur + (str(x) if x > 0 else '') + word[i], 0)
+                # Include current position, and zero-out count
+                if x > 0:
+                    cur += str(x)
+                backtrack(i + 1, cur + word[i], 0)
 
         res = []
         backtrack(i=0, cur='', x=0)
