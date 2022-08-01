@@ -31,33 +31,33 @@ class Solution:
         Given nums, retrieve the number in the middle which is the value for the root.
         Left and right sub-array become left and right sub-tree respectively.
         """
-        def build(low, high):
-            """Return BST using nums[low:high]"""
-            if low == high:
+        def convert(i, j):
+            """Return BST using nums[i:high]"""
+            if i == j:
                 return None
 
-            mid = (low + high) // 2
-            left = build(low, mid)
-            right = build(mid+1, high)
+            mid = (i + j) // 2
+            left = convert(i, mid)
+            right = convert(mid+1, j)
 
             return TreeNode(val=nums[mid], left=left, right=right)
 
-        return build(0, len(nums))
+        return convert(0, len(nums))
 
 
 class Solution:
     def arrayToBST(self, nums: List[int]) -> TreeNode:
         nums.sort()
 
-        def build(low, high):
-            """Return BST using nums[low:high]"""
-            if low == high:
+        def convert(i, j):
+            """Return BST using nums[i:j]"""
+            if i == j:
                 return None
 
-            mid = (low + high) // 2
-            left = build(low, mid)
-            right = build(mid+1, high)
+            mid = (i + j) // 2
+            left = convert(i, mid)
+            right = convert(mid+1, j)
 
             return TreeNode(val=nums[mid], left=left, right=right)
 
-        return build(0, len(nums))
+        return convert(i=0, j=len(nums))
