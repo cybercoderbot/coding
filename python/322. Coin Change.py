@@ -27,15 +27,11 @@ class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         """
         Bottom-up DP
-
         Assume dp[i] is the fewest number of coins making up amount i, 
         then for every coin in coins, dp[i] = min(dp[i - coin] + 1).
-
         Time: is O(N * M), M = number of coins
         Space complexity is O(N), N = amount
-
         """
-
         dp = [0] + [inf] * amount
 
         for x in range(1, amount+1):
@@ -52,7 +48,6 @@ class Solution(object):
         """
         Bottom-up DP
         """
-
         dp = [0] + [inf for i in range(amount)]
 
         for i in range(1, amount+1):

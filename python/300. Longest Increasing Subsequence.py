@@ -19,12 +19,59 @@ Output: 4
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
+        # O(N*M) solution. M is the sub[]'s length
+        seq = []
+        for x in nums:
+            i, N = 0, len(seq)
+            # update the element to the correct position of the seq.
+            while i <= N:
+                if i == N:
+                    seq.append(x)
+                    break
+                elif x <= seq[i]:
+                    seq[i] = x
+                    break
+                else:
+                    i += 1
+
+        return len(seq)
+
+
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        """
+        O(NlogN) solution with binary search
+        """
+        def search(s, target):
+            left, right = 0, len(s)-1
+            while left <= right:
+                mid = (left + right)//2
+                if s[mid] < target:
+                    left = mid + 1
+                elif target < s[mid]:
+                    right = mid - 1
+                else:
+                    return mid
+            return left
+
+        seq = []
+        for x in nums:
+            i = search(seq, x)
+            if i == len(seq):
+                seq.append(x)
+            else:
+                seq[i] = x
+        return len(seq)
+
+
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
         """
         Time: O(NlogN) 
         """
         vals = []
         for x in nums:
-            k = bisect_left(vals, x)
+            k = bisect.bisect_left(vals, x)
             if k == len(vals):
                 vals.append(x)
             else:

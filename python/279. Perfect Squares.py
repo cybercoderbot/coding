@@ -20,6 +20,10 @@ Explanation: 13 = 4 + 9.
 
 class Solution:
     def numSquares(self, n: int) -> int:
+        """
+        Define fn(x) as the least number of perfect squares summing to x. Then,
+        fn(x) = min(1 + fn(x-i*i) for i in range(1, int(sqrt(x))+1))
+        """
         dp = [0] + [n]*n
         for i in range(1, n+1):
             for x in range(1, int(sqrt(i))+1):
