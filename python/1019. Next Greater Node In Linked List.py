@@ -8,21 +8,14 @@ For each node in the list, find the value of the next greater node. That is, for
 
 Return an integer array answer where answer[i] is the value of the next greater node of the ith node (1-indexed). If the ith node does not have a next greater node, set answer[i] = 0.
 
-
-
 Example 1:
-
-
 Input: head = [2,1,5]
 Output: [5,5,0]
+
 Example 2:
-
-
 Input: head = [2,7,4,3,5]
 Output: [7,0,5,5,0]
-
- """
-
+"""
 
 # Similar to 503. Next Greater Element II, I am giving two solutions here.
 
@@ -31,8 +24,7 @@ class Solution:
     def nextLargerNodes(self, head: ListNode) -> List[int]:
         """
         Solution 1 - forward approach
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N), Space: O(N)
         """
         res, stack = [], []
         while head:
@@ -48,23 +40,21 @@ class Solution:
     def nextLargerNodes(self, head: ListNode) -> List[int]:
         """
         Solution 2 - backward approach
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N), Space: O(N)
         """
-
         prev, node = None, head
         while node:
             node.next, node, prev = prev, node.next, node
 
         node = prev
-        ans, stack = [], []
+        res, stack = [], []
         while node:
             while stack and stack[-1] <= node.val:
                 stack.pop()
-            ans.append(stack[-1] if stack else 0)
+            res.append(stack[-1] if stack else 0)
             stack.append(node.val)
             node = node.next
-        return ans[::-1]
+        return res[::-1]
 
 
 """
@@ -79,30 +69,29 @@ For each 0 <= i < nums1.length, find the index j such that nums1[i] == nums2[j] 
 
 Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.
 
-
 Example 1:
-
 Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
 Output: [-1,3,-1]
 Explanation: The next greater element for each value of nums1 is as follows:
 - 4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
 - 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.
 - 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
-Example 2:
 
+Example 2:
 Input: nums1 = [2,4], nums2 = [1,2,3,4]
 Output: [3,-1]
 Explanation: The next greater element for each value of nums1 is as follows:
 - 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.
-- 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1."""
+- 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
+"""
 
 
 class Solution:
 
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         """
-        Time complexity: O(N), N = num of elements in nums2
-        Space complexity: O(N)
+        Time: O(N), N = num of elements in nums2
+        Space: O(N)
         """
         res = []
         stack = []
@@ -155,7 +144,7 @@ class Solution:
             # add the element nums2[i] to the stack because we need to find a number greater than this
             stack.append(nums2[i])
 
-        # if there are elements in the stack for which we didn't find a greater number, map them to -1
+        # for those in the stack for which we didn't find a greater number, map them to -1
         for x in stack:
             m[x] = -1
 
@@ -173,17 +162,14 @@ Given a circular integer array nums (i.e., the next element of nums[nums.length 
 
 The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return -1 for this number.
 
- 
-
 Example 1:
-
 Input: nums = [1,2,1]
 Output: [2,-1,2]
 Explanation: The first 1's next greater number is 2; 
 The number 2 can't find next greater number. 
 The second 1's next greater number needs to search circularly, which is also 2.
-Example 2:
 
+Example 2:
 Input: nums = [1,2,3,4,3]
 Output: [2,3,4,-1,4]
 """
@@ -260,8 +246,6 @@ Given a positive integer n, find the smallest integer which has exactly the same
 
 Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.
 
- 
-
 Example 1:
 Input: n = 12
 Output: 21
@@ -303,7 +287,6 @@ class Solution:
 31. Next Permutation
 Medium
 
-
 A permutation of an array of integers is an arrangement of its members into a sequence or linear order.
 
 For example, for arr = [1,2,3], the following are considered permutations of arr: [1,2,3], [1,3,2], [3,1,2], [2,3,1].
@@ -316,10 +299,7 @@ Given an array of integers nums, find the next permutation of nums.
 
 The replacement must be in place and use only constant extra memory.
 
- 
-
 Example 1:
-
 Input: nums = [1,2,3]
 Output: [1,3,2]
 
@@ -330,12 +310,11 @@ Output: [1,2,3]
 Example 3:
 Input: nums = [1,1,5]
 Output: [1,5,1]
-
 """
 
 
 def nextPermutation(self, nums):
-    """ O(N)T O(1)S_in_place"""
+    """ Time O(N), Space O(1) in place"""
 
     idx1 = next((i for i in range(len(nums) - 2, -1, -1)
                  if nums[i] < nums[i + 1]), None)
@@ -352,23 +331,14 @@ def nextPermutation(self, nums):
     return
 
 
-"""
-Algorithm:
-
-look for the last occurrence of an adjacent increasing pair nums[k-1] and nums[k];
-look for the smallest numbers (say at j) in nums[k:] that is larger than nums[k-1];
-swap nums[k-1] and nums[j];
-reverse numbers in nums[k:].
-Implementation (36ms, 94.52%):
-
-"""
-
-
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
         """
-        Time complexity O(N)
-        Space complexity O(1)
+        Look for the last occurrence of an adjacent increasing pair nums[k-1] and nums[k];
+        look for the smallest numbers (say at j) in nums[k:] that is larger than nums[k-1];
+        swap nums[k-1] and nums[j];
+        reverse numbers in nums[k:].
+        Time: O(N), Space: O(1)
         """
         k = len(nums)-1
         while k and nums[k-1] >= nums[k]:

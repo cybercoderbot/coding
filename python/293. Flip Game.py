@@ -22,7 +22,7 @@ class Solution:
     def generatePossibleNextMoves(self, s: str) -> List[str]:
         """
         Loop through s and look for ++
-        If ++ is found, add the string with ++ replace by -- to answer.
+        If ++ is found, add the string with ++ replaced by -- to answer.
         """
 
         res = []

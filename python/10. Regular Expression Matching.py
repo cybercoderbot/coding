@@ -9,22 +9,19 @@ Given an input string s and a pattern p, implement regular expression matching w
 The matching should cover the entire input string (not partial).
 
 Example 1:
-
 Input: s = "aa", p = "a"
 Output: false
 Explanation: "a" does not match the entire string "aa".
-Example 2:
 
+Example 2:
 Input: s = "aa", p = "a*"
 Output: true
 Explanation: '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
-Example 3:
 
+Example 3:
 Input: s = "ab", p = ".*"
 Output: true
-Explanation: ".*" means "zero or more (*) of any character (.)".       
-
-
+Explanation: ".*" means "zero or more (*) of any character (.)".
 
 Solution
 This problem can be solved using dynamic programming. Define dfs(i, j) to represent if s[i:] and p[j:] matches.
@@ -44,10 +41,9 @@ def dfs(s, p, i, j):
         return i == M
 
     match = i < M and p[j] in (s[i], ".")
-    # match = i < M and (s[i] == p[j] or p[j] == ".")
 
     if j+1 < N and p[j+1] == "*":
-        return dfs(s, p, i, j+2) or (match and dfs(s, p, i+1, j))
+        return dfs(s, p, i, j+2) or match and dfs(s, p, i+1, j)
     else:
         return match and dfs(s, p, i+1, j+1)
 

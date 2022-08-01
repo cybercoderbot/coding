@@ -21,8 +21,6 @@ Input: triangle = [[-10]]
 Output: -10
 """
 
-top-down(time complexity O(N ^ 2) | space complexity O(N ^ 2))
-
 
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:

@@ -6,7 +6,6 @@ Given the root of a binary tree, find the maximum value v for which there exist 
 
 A node a is an ancestor of b if either: any child of a is equal to b or any child of a is an ancestor of b.
 
-
 Example 1:
 Input: root = [8,3,10,1,6,null,14,null,null,4,7,13]
 Output: 7
