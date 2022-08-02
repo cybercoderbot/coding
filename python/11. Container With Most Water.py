@@ -21,26 +21,13 @@ Output: 1
 """
 
 
-"""
-Approach 1: Brute Force
-Algorithm
-
-In this case, we will simply consider the area for every possible pair of the lines and find out the maximum area out of those.
-
-Note: Brute force approaches are often included because they are intuitive starting points when solving a problem. However, they are often expected to receive Time Limit Exceeded since they would not be accepted in an interview setting.
-
-
-Time complexity:  O(n^2)
-Space complexity: O(1)
-"""
-
-
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         """
         Brute Force
-        Time complexity:  O(n^2)
-        Space complexity: O(1)
+        simply consider the area for every possible pair of the lines and 
+        find out the maximum area out of those. 
+        Time: O(N^2), Space: O(1)
         """
         res = 0
         N = len(height) - 1
@@ -81,7 +68,6 @@ class Solution(object):
         Two pointers
         Time: O(N), Space: O(1)
         """
-
         N = len(height)
         left, right = 0, N-1
 

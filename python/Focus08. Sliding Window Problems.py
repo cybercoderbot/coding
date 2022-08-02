@@ -1,5 +1,13 @@
 """
 Sliding Window Problems
+
+How do we recognize a sliding window problem? Well, there are three things to look for:
+
+1. A question asking you to analyze a contiguous set of data (subarray, substring, etc)
+2. A predefined condition that can be analyzed for each set of data
+3. The max, min, longest, shortest, number of, etc things that meet the condition.
+
+You can use the same sliding window algorithms with a couple different variations for almost every sliding window problem. This particular problem requires the use of a dynamically resizing sliding window (one that gets longer until it meets the condition and shrinks until it does not). I left comments for every piece of the code. It's a bit longer than the "concise" answers but I prefer a longer, more readable piece of code over a short and unreadable one. You could have also used an array to store the character frequencies but I like the hashmap implementation better in terms of readability.
 """
 
 

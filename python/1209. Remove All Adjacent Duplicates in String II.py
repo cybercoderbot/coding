@@ -38,7 +38,6 @@ class Solution:
         Once you have identified that stack solves this problem, the logic is quite straightforward. We just need to track consecutive occurences of a character. 
         If count matches k, we pop the element from stack.
         """
-
         # stack: (c, count)
         stack = []
 

@@ -26,7 +26,6 @@ class Solution:
         """
         Level-order traverse the tree and keep track of sum for each level.
         Sum of last level: sum of leaves
-
         Time: O(N), Space: O(1)
         """
         if not root:

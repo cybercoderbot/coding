@@ -10,7 +10,6 @@ The left subtree of a node contains only nodes with keys less than the node's ke
 The right subtree of a node contains only nodes with keys greater than the node's key.
 Both the left and right subtrees must also be binary search trees.
  
-
 Example 1:
 Input: root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
 Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
@@ -18,20 +17,6 @@ Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
 Example 2:
 Input: root = [0,null,1]
 Output: [1,null,1]
-
-"""
-
-"""
-Solution:
-
-We need to do the work from biggest to smallest, right to left.
-pre will record the previous value the we get, which the total sum of bigger values.
-For each node, we update root.val with root.val + pre.
-
-
-Complexity
-Time O(n)
-Space O(height)
 """
 
 
@@ -39,6 +24,12 @@ class Solution:
     pre = 0
 
     def bstToGst(self, root: TreeNode) -> TreeNode:
+        """
+        We need to do the work from biggest to smallest, right to left.
+        pre records the previous value the we get, the total sum of bigger values.
+        For each node, we update root.val with root.val + pre.
+        Time O(N), Space O(height)
+        """
         if root.right:
             self.bstToGst(root.right)
 
@@ -54,13 +45,12 @@ class Solution:
 class Solution:
     def bstToGst(self, root: TreeNode) -> TreeNode:
 
-        def reversedInorder(node: TreeNode, cumsum: int) -> int:
+        def reversedInorder(node: TreeNode, pre: int) -> int:
             if not node:
-                return cumsum
-
-            node.val += reversedInorder(node.right, cumsum)
+                return pre
+            node.val += reversedInorder(node.right, pre)
             res = reversedInorder(node.left, node.val)
             return res
 
-        reversedInorder(root, 0)
+        reversedInorder(node=root, pre=0)
         return root

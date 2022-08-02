@@ -18,21 +18,21 @@ def getAllElements(self, root1, root2):
     """
     Before you scream "But sorting isn't linear!", know that it's →Timsort, which identifies the two already sorted runs as such and simply merges them. And since it's done in C, it's likely faster than if I tried merging myself in Python.
     """
-    nums = []
+    res = []
 
+    @lru_cache(None)
     def inorder(root):
         if not root:
             return
-
         inorder(root.left)
-        nums.append(root.val)
+        res.append(root.val)
         inorder(root.right)
         return
 
     inorder(root1)
     inorder(root2)
 
-    return sorted(nums)
+    return sorted(res)
 
 
 class Solution:

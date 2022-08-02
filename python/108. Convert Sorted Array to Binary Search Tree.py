@@ -47,6 +47,7 @@ class Solution:
 
 class Solution:
     def arrayToBST(self, nums: List[int]) -> TreeNode:
+        """Sort array -> BST"""
         nums.sort()
 
         def convert(i, j):

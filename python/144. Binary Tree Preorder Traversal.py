@@ -20,6 +20,7 @@ Output: [1]
 
 
 class Solution(object):
+    @lru_cache(None)
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
         root -> left -> right
@@ -34,7 +35,7 @@ class Solution(object):
 
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-
+        @lru_cache(None)
         def preorder(node):
             if not node:
                 return []

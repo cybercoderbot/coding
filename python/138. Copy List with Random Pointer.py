@@ -48,42 +48,46 @@ class Solution:
         if not head:
             return None
         if head in memo:
-            return memo.get(head)
-        else:
-            copied = memo[head] = Node(head.val)
-            copied.next = self.copyRandomList(head.next, memo)
-            copied.random = self.copyRandomList(head.random, memo)
-            return memo.get(head)
+            return memo[head]
+        memo[head] = copied = Node(head.val)
+        copied.next = self.copyRandomList(head.next, memo)
+        copied.random = self.copyRandomList(head.random, memo)
+        return memo[head]
 
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         # O(N) time & O(N) space
 
-        def copy(node):
+        def deepcopy(node):
             """Return a deep copy of node."""
-            if node and node not in memo:
+            if not node:
+                return None
+            if node not in memo:
                 copied = memo[node] = Node(node.val)
-                copied.next = copy(node.next)
-                copied.random = copy(node.random)
-            return memo.get(node)
+                copied.next = deepcopy(node.next)
+                copied.random = deepcopy(node.random)
+            return memo[node]
 
         memo = {}
-        return copy(node=head)
+        return deepcopy(node=head)
 
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         """2-pass iterative implementation"""
+        if not head:
+            return None
+
         memo = {}
-        node, copied = head, Node(0)
+        node, copied = head, Node(head.val)
         while node:
-            copied.next = memo[node] = Node(node.val)
+            memo[node] = copied = Node(node.val)
             node = node.next
-            copied = copied.next
 
         node = head
         while node:
+            memo[node].next = memo.get(node.next)
             memo[node].random = memo.get(node.random)
             node = node.next
-        return memo.get(head)
+        return memo[head]

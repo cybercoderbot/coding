@@ -2,10 +2,8 @@
 117. Populating Next Right Pointers in Each Node II
 Medium
 
-Given a binary tree
-
-Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
-
+Given a binary tree, populate each next pointer to point to its next right node. 
+If there is no next right node, the next pointer should be set to NULL.
 Initially, all next pointers are set to NULL.
  
 Example 1:
@@ -31,54 +29,21 @@ class Node:
 
 
 class Solution:
-    def connect(self, root: 'Node') -> 'Node':
-        parent = root
-        while parent:
-            child = dummy = Node()
-            while parent:
-                if parent.left:
-                    child.next = child = parent.left
-                if parent.right:
-                    child.next = child = parent.right
-                parent = parent.next
-            parent = dummy.next
-        return root
-
-
-"""
-This can be solved via a typical BFS as below. 
-After solving many LC problems, I tend to prefer general methods rather than the ad-hoc ones.
-"""
-
-
-"""
-# Definition for a Node.
-class Node:
-    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
-        self.val = val
-        self.left = left
-        self.right = right
-        self.next = next
-"""
-
-
-class Solution:
-    def connect(self, root: 'Node') -> 'Node':
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         """
+        116 (perfect BT) and 117 (BT). Both applicable
         BFS for level order traverse
-        Connect nodes one by one in each level
+        Connect nodes one by one in each level (right->left)
         """
-
         if not root:
             return None
 
         queue = [root]
         while queue:
-            level, prev = [], None
+            level, tail = [], None
             for node in queue:
-                node.next = prev
-                prev = node
-
+                node.next = tail
+                tail = node
                 if node.right:
                     level.append(node.right)
                 if node.left:
@@ -88,14 +53,8 @@ class Solution:
         return root
 
 
-"""
-Comparing to below solution for 116. Populating Next Right Pointers in Each Node, it is clear that info of perfect binary tree can somewhat simplify the implementation.
-
-"""
-
-
 class Solution:
-    def connect(self, root: 'Node') -> 'Node':
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         """
         116. Populating Next Right Pointers in Each Node
         The tree if perfect (left and right)

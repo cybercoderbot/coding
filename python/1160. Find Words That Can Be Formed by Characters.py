@@ -2,10 +2,8 @@
 1160. Find Words That Can Be Formed by Characters
 Easy
 
-You are given an array of strings words and a string chars.
-
-A string is good if it can be formed by characters from chars (each character can only be used once).
-
+You are given an array of strings words and a string chars. 
+A string is good if it can be formed by characters from chars (each can only be used once). 
 Return the sum of lengths of all good strings in words.
 
 Example 1:
@@ -22,8 +20,8 @@ Explanation: The strings that can be formed are "hello" and "world" so the answe
 
 class Solution:
     def countCharacters(self, words: List[str], chars: str) -> int:
-        res = 0
         freq = Counter(chars)
+        res = 0
         for word in words:
             if Counter(word) <= freq:
                 res += len(word)
@@ -32,13 +30,12 @@ class Solution:
 
 class Solution:
     def countCharacters(self, words: List[str], chars: str) -> int:
-        """ O(N)TS """
+        """ Time: O(N), Space: O(N) """
         freq = collections.Counter(chars)
         return sum(len(w) for w in words if collections.Counter(w) <= freq)
 
 
 class Solution:
-
     def countCharacters(self, words: List[str], chars: str) -> int:
         fc = {}
         for c in chars:

@@ -3,9 +3,7 @@
 Easy
 
 We are given a list nums of integers representing a list compressed with run-length encoding.
-
 Consider each adjacent pair of elements [freq, val] = [nums[2*i], nums[2*i+1]] (with i >= 0).  For each such pair, there are freq elements with value val concatenated in a sublist. Concatenate all the sublists from left to right to generate the decompressed list.
-
 Return the decompressed list.
 
 Example 1:
@@ -26,9 +24,7 @@ class Solution:
         """
         Loop through nums by 2 steps. 
         nums[i] is freq while nums[i+1] is the value.
-
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N), Space: O(N)
         """
         res = []
         for i in range(0, len(nums), 2):
@@ -42,6 +38,6 @@ class Solution:
 
         res = []
         for x in range(0, len(nums), 2):
-            for _ in range(nums[x]):
+            for k in range(nums[x]):
                 res.append(nums[x+1])
         return res

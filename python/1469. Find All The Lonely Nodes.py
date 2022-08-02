@@ -34,15 +34,9 @@ All other nodes are lonely.
 #         self.right = right
 
 
-"""
-Traverse the tree depth-first in preorder and collect lonely nodes.
-- Time complexity O(N)
-- Space complexity O(N)
-"""
-
-
 class Solution:
-    def getLonelyNodes(self, root: TreeNode):
+    @lru_cache(None)
+    def getLonelyNodes(self, root: TreeNode) -> List[int]:
         if not root:
             return []
         if root.left and not root.right:
@@ -78,17 +72,12 @@ class Solution:
         """
         Iterative preorder DFS solution
         Traverse the tree depth-first in preorder and collect lonely nodes.
-
-        not node.right -> res.append(node.left.val)
-        not node.left  -> res.append(node.right.val)
-
-        - Time complexity O(N)
-        - Space complexity O(N)
+        1) not node.right -> res.append(node.left.val)
+        2) not node.left  -> res.append(node.right.val)
+        Time: O(N), Space: O(N)
         """
-
-        res = []
         queue = [root]
-
+        res = []
         while queue:
             node = queue.pop(0)
 

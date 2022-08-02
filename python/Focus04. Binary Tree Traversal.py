@@ -1,9 +1,9 @@
-class Solution(object):
+class Solution:
+    @lru_cache(None)
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
         Preorder: root -> left -> right
         """
-
         if not root:
             return []
 
@@ -13,11 +13,11 @@ class Solution(object):
 
 
 class Solution:
+    @lru_cache(None)
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
         Inorder: left -> root -> right
         """
-
         if not root:
             return []
 
@@ -27,11 +27,11 @@ class Solution:
 
 
 class Solution:
+    @lru_cache(None)
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
         Postorder: left -> right -> root
         """
-
         if not root:
             return []
 
@@ -41,11 +41,12 @@ class Solution:
 
 
 class Solution:
+
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
         Preorder: root -> left -> right
         """
-
+        @lru_cache(None)
         def preorder(node):
             if not node:
                 return []
@@ -64,7 +65,7 @@ class Solution:
         """
         Inorder: left -> root -> right
         """
-
+        @lru_cache(None)
         def inorder(node):
             if not node:
                 return
@@ -82,7 +83,7 @@ class Solution:
         """
         Postorder: left -> right -> root
         """
-
+        @lru_cache(None)
         def postorder(node):
             if not node:
                 return []
@@ -96,6 +97,7 @@ class Solution:
 
 
 class Solution:
+    @lru_cache(None)
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         """
         105. Construct Binary Tree from Preorder and Inorder Traversal
@@ -124,6 +126,7 @@ class Solution:
 
 
 class Solution:
+    @lru_cache(None)
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
         """
         106. Construct Binary Tree from Inorder and Postorder Traversal
@@ -150,6 +153,7 @@ class Solution:
 
 
 class Solution:
+    @lru_cache(None)
     def buildTree(self, preorder: List[int], postorder: List[int]) -> TreeNode:
         """
         889. Construct Binary Tree from Preorder and Postorder Traversal
@@ -180,7 +184,6 @@ class Solution:
         """
         Trace-retrace via stack
         """
-
         # mapping from val to pos
         loc = {x: i for i, x in enumerate(inorder)}
         root = None
@@ -204,10 +207,10 @@ class Solution:
         """
         Trace-retrace via recursion
         """
-
         loc = {x: i for i, x in enumerate(inorder)}
         index = 1
 
+        @lru_cache(None)
         def build(left, right):
             nonlocal index
 

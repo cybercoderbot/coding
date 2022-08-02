@@ -25,12 +25,11 @@ class Solution:
         Alternate order of vals while storing it.
         Time: O(N), Space: O(N)
         """
-
         if not root:
             return []
 
         res, queue = [], [root]
-        flip = False
+        forward = True
 
         while queue:
             vals, level = [], []
@@ -40,9 +39,8 @@ class Solution:
                     level.append(node.left)
                 if node.right:
                     level.append(node.right)
-
-            res.append(vals[::-1] if flip else vals)
+            res.append(vals if forward else vals[::-1])
             queue = level
-            flip = not flip
+            forward = not forward
 
         return res

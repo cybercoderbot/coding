@@ -24,6 +24,15 @@ Output: 2
 
 
 class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
+        return max(left, right) + 1
+
+
+class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
@@ -31,22 +40,15 @@ class Solution:
             return self.maxDepth(root.right) + 1
         if not root.right:
             return self.maxDepth(root.left) + 1
-
-        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
-
-
-class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-
-        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
+        return max(left, right) + 1
 
 
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
         """
-        Iterative DFS
+        Iterative BFS
         This is just to traverse the tree and find deepest node.
         """
         if not root:
@@ -55,14 +57,12 @@ class Solution:
         queue = [(root, 1)]
         res = 0
         while queue:
-            node, depth = queue.pop()
+            node, depth = queue.pop(0)
             res = max(res, depth)
-
             if node.left:
                 queue.append((node.left, depth+1))
             if node.right:
                 queue.append((node.right, depth+1))
-
         return res
 
 
@@ -74,7 +74,7 @@ class Solution:
         if not root:
             return 0
 
-        depth, queue = 0, [root]
+        res, queue = 0, [root]
         while queue:
             level = []
             for node in queue:
@@ -83,5 +83,5 @@ class Solution:
                 if node.right:
                     level.append(node.right)
             queue = level
-            depth += 1
-        return depth
+            res += 1
+        return res

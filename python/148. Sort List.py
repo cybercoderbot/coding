@@ -31,17 +31,13 @@ class Solution:
         Sort the array and reconstruct a new linked list with sorted values.
         The solution is the same as 
         2046. Sort Linked List Already Sorted Using Absolute Values
-
-        Time: O(NlogN)
-        Space:  O(N)  
+        Time: O(NlogN), Space:  O(N)  
         """
-
         nums = []
         node = head
         while node:
             nums.append(node.val)
             node = node.next
-
         nums.sort()
 
         dummy = node = ListNode()

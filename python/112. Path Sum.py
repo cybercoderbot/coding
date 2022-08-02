@@ -29,38 +29,71 @@ Explanation: Since the tree is empty, there are no root-to-leaf paths.
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], target: int) -> bool:
         """
-        Iteration
-        Use stack to store [node, presum] pair while traversing the tree
+        112. Path Sum. Return True if the tree has a root-to-leaf path
+        Use a queue to store (node, pre) pair while traversing the tree
         """
-        stack = [(root, 0)]
-        while stack:
-            node, presum = stack.pop()
-            if node:
-                presum += node.val
-                if not node.left and not node.right and presum == target:
-                    return True
-
-                if node.right:
-                    stack.append((node.right, presum))
-                if node.left:
-                    stack.append((node.left, presum))
+        if not root:
+            return False
+        queue = [(root, 0)]
+        while queue:
+            node, pre = queue.pop(0)
+            pre += node.val
+            if not node.left and not node.right and pre == target:
+                return True
+            if node.left:
+                queue.append((node.left, pre))
+            if node.right:
+                queue.append((node.right, pre))
 
         return False
 
 
 class Solution:
+    def pathSum(self, root: Optional[TreeNode], target: int) -> List[List[int]]:
+        """
+        113. Path Sum II. Return all root-to-leaf paths summing to target.
+        Record each node's parent {node: parent} while traversing the tree
+        Use a queue to store (node, pre) pair
+        When reach to leaf, get leaf->root path
+        Reverse path, get root->leaf path
+        """
+        if not root:
+            return []
+
+        res = []
+        parent = {root: None}
+        queue = [(root, 0)]
+        while queue:
+            node, pre = queue.pop(0)
+            pre += node.val
+
+            if node.left:
+                parent[node.left] = node
+                queue.append((node.left, pre))
+            if node.right:
+                parent[node.right] = node
+                queue.append((node.right, pre))
+
+            if not node.left and not node.right and pre == target:
+                path = []
+                while node:
+                    path.append(node.val)
+                    node = parent[node]
+                res.append(path[::-1])
+
+        return res
+
+
+class Solution:
+    @lru_cache(None)
     def hasPathSum(self, root: TreeNode, target: int) -> bool:
-
-        def dfs(node, x):
-            if not node:
-                return False
-
-            elif not node.left and not node.right:
-                return node.val == x
-
-            else:
-                left = dfs(node.left, x-node.val)
-                right = dfs(node.right, x-node.val)
-                return left or right
-
-        return dfs(root, target)
+        """
+        Recursion
+        """
+        if not root:
+            return False
+        if not root.left and not root.right:
+            return root.val == target
+        left = self.hasPathSum(root.left, target-root.val)
+        right = self.hasPathSum(root.right, target-root.val)
+        return left or right

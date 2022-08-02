@@ -2,8 +2,7 @@
 131. Palindrome Partitioning
 Medium
 
-Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
-
+Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s. 
 A palindrome string is a string that reads the same backward as forward.
 
 Example 1:
@@ -19,6 +18,7 @@ Output: [["a"]]
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
 
+        @lru_cache(None)
         def dfs(s, path, res):
             if not s:
                 res.append(path[:])
@@ -41,6 +41,7 @@ class Solution:
         def isPalindrome(x):
             return x == x[::-1]
 
+        @lru_cache(None)
         def dfs(path=[], i=1):
             if i == len(s) + 1:
                 res.append(list(path))

@@ -33,7 +33,6 @@ class Solution(object):
         """
         Sort nums -> 2sum
         """
-
         nums.sort()
         N, res = len(nums), []
 

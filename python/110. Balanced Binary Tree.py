@@ -2,11 +2,9 @@
 110. Balanced Binary Tree
 Easy
 
-Given a binary tree, determine if it is height-balanced.
-
-For this problem, a height-balanced binary tree is defined as:
-
-a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+Given a binary tree, determine if it is height-balanced. A height-balanced binary tree 
+is a binary tree in which the left and right subtrees of every node differ in height by 
+no more than 1.
 
 Example 1:
 Input: root = [3,9,20,null,null,15,7]
@@ -30,47 +28,44 @@ Output: true
 
 
 class Solution:
+    @lru_cache(None)
     def height(self, root: TreeNode) -> int:
         if not root:
             return 0
-
-        left, right = self.height(root.left), self.height(root.right)
+        left = self.height(root.left)
+        right = self.height(root.right)
         return max(left, right) + 1
 
     def isBalanced(self, root: TreeNode) -> bool:
         if not root:
             return True
-
         left = self.isBalanced(root.left)
         right = self.isBalanced(root.right)
-        balanced = abs(self.height(root.left) -
-                       self.height(root.right)) <= 1
-
-        return balanced and left and right
+        x, y = self.height(root.left), self.height(root.right)
+        return left and right and abs(x - y) <= 1
 
 
 class Solution:
     def isBalanced(self, root: TreeNode) -> bool:
         """
-        Post-order traverse the tree. At each node, collect the info if its left and right sub-trees are 
+        Post-order traverse the tree. 
+        At each node, collect the info if its left and right subtrees are 
         balanced and their height. Return 
         1. if the current sub-tree is balanced;
         2. the height of the current sub-tree.
-
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N), Space: O(N)
         """
-
+        @lru_cache(None)
         def check(node):
             """Return True if subtree is balanced and its height."""
             if not node:
                 return True, 0
 
-            balanced1, height1 = check(node.left)
-            balanced2, height2 = check(node.right)
+            left, x = check(node.left)
+            right, y = check(node.right)
 
-            height = max(height1, height2) + 1
-            balanced = balanced1 and balanced2 and abs(height1 - height2) <= 1
+            height = max(x, y) + 1
+            balanced = left and right and abs(x - y) <= 1
 
             return balanced, height
 

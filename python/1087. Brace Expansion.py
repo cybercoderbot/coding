@@ -2,7 +2,6 @@
 1087. Brace Expansion
 Medium
 
-Share
 You are given a string s representing a list of words. Each letter in the word has one or more options.
 
 If there is one option, the letter is represented as is.
@@ -18,7 +17,6 @@ Output: ["acdf","acef","bcdf","bcef"]
 Example 2:
 Input: s = "abcd"
 Output: ["abcd"]
- 
 
 Constraints:
 1 <= s.length <= 50
@@ -38,8 +36,8 @@ class Solution:
                 j = i+1
                 while s[j] != "}":
                     j += 1
-                sub = s[i+1:j].split(",")
-                res = [r + x for r in res for x in sub]
+                options = s[i+1:j].split(",")
+                res = [r + x for r in res for x in options]
                 i = j + 1
             else:
                 res = [r + s[i] for r in res]
@@ -53,21 +51,19 @@ class Solution:
         N = len(s)
         res = []
 
-        def recurse(tmp, i):
+        def dfs(cand, i):
             if i == N:
-                res.append(tmp)
+                res.append(cand)
+                return
+            if s[i] == "{":
+                j = i+1
+                while s[j] != "}":
+                    j += 1
+                options = s[i+1: j].split(",")
+                for c in options:
+                    dfs(cand + c, j + 1)
             else:
-                if s[i] == "{":
-                    j = i+1
-                    while s[j] != "}":
-                        j += 1
+                dfs(cand + s[i], i + 1)
 
-                    sub = s[i+1: j].split(",")
-                    for c in sub:
-                        recurse(tmp + c, j + 1)
-
-                else:
-                    recurse(tmp + s[i], i + 1)
-
-        recurse("", 0)
+        dfs("", 0)
         return sorted(res)

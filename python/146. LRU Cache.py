@@ -3,7 +3,6 @@
 Medium
 
 Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
-
 Implement the LRUCache class:
 
 LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
@@ -34,13 +33,11 @@ lRUCache.get(4);    // return 4
 
 
 class LRUCache:
-
     def __init__(self, capacity: int):
         """
         An OrderedDict is a dict that remembers the order that keys were first inserted.
-        If a new entry overwrites an existing entry, the original insertion position is left unchanged.
-        Deleting an entry and reinserting it will move it to the end.
-        In Python 3.6+, dicitonary is ordered.
+        If a new value overwrites an existing one, the original position is unchanged.
+        So we need to delete an entry and reinsert it will move it to the end.
         """
         self.capacity = capacity
         self.cache = OrderedDict()
@@ -54,16 +51,16 @@ class LRUCache:
 
     def put(self, key: int, value: int) -> None:
         """
+        If a new value overwrites an existing one, the original position is unchanged.
+        So we need to delete an entry and reinsert it will move it to the end.
         if key in cache: cache.pop(key)
         if len(cache) > capacity: popitem()
         The popitem() method removes the item that was last inserted into the dictionary
         """
         if key in self.cache:
             self.cache.pop(key)
-
         if len(self.cache) == self.capacity:
             self.cache.popitem(last=False)
-
         self.cache[key] = value
 
 

@@ -35,10 +35,8 @@ class Solution:
         Record positions of imbalanced parens i
         set chars[i] -> ""
         """
-
         stack = []
-        chars = list(s)
-
+        valid = list(s)
         for i, c in enumerate(s):
             if c == '(':
                 stack.append(i)
@@ -47,10 +45,8 @@ class Solution:
                     stack.pop()
                 else:
                     # invalid "("
-                    chars[i] = ""
-
+                    valid[i] = ""
         # invalid ")"
         for i in stack:
-            chars[i] = ""
-
-        return ''.join(chars)
+            valid[i] = ""
+        return ''.join(valid)

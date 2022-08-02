@@ -25,14 +25,11 @@ class Solution:
         """
         Keep a stack as a characters stack.
         Iterate characters of s one by one.
-
-        If the next character is same as the last character in stack,
+        1) If the next character is same as the last character in stack,
         pop the last character from stack.
         In this way, we remove a pair of adjacent duplicates characters.
-
-        If the next character is different, we append it to the end of stack.
+        2) If the next character is different, we append it to the end of stack.
         """
-
         stack = []
         for c in s:
             if stack and stack[-1] == c:
@@ -51,7 +48,6 @@ class Solution:
         """
         stack = []
         dup = None
-
         for c in s:
             if dup:
                 if dup == c:
@@ -107,7 +103,7 @@ class Solution:
         stack = []
 
         for c in s:
-            if stack and stack[-1][0] == c:  # check if stack is not empty
+            if stack and stack[-1][0] == c:
                 stack[-1][1] += 1
                 if stack[-1][1] == k:
                     stack.pop()

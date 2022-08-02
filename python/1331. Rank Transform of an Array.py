@@ -3,13 +3,11 @@
 Easy
 
 Given an array of integers arr, replace each element with its rank.
-
 The rank represents how large the element is. The rank has the following rules:
-
 Rank is an integer starting from 1.
 The larger the element, the larger the rank. If two elements are equal, their rank must be the same.
 Rank should be as small as possible.
- 
+
 Example 1:
 Input: arr = [40,10,20,30]
 Output: [4,1,2,3]
@@ -26,21 +24,26 @@ Output: [5,3,4,2,8,6,7,1,3]
 """
 
 
+from sortedcontainers import SortedList, SortedSet, SortedDict
+
+
 class Solution:
     def arrayRankTransform(self, arr: List[int]) -> List[int]:
         """
-        m = {x:i+1} in sorted set of arr
+        rank = {x:i+1} in sorted set of arr
+        arr: [40,10,20,30], rank: {10: 1, 20: 2, 30: 3, 40: 4}
+        arr: [10,10,10,10], rank: {10: 1}
         """
-
         sort = sorted(set(arr))
-        m = defaultdict(int)
+        # sort = SortedSet(arr)
 
-        for i, x in enumerate(sort):
+        rank = defaultdict(int)
+        for i, x in enumerate(sort, 1):
             if x not in m:
-                m[x] = i+1
+                rank[x] = i
 
-        for j, x in enumerate(arr):
-            arr[j] = m[x]
+        for i, x in enumerate(arr):
+            arr[i] = rank[x]
 
         return arr
 

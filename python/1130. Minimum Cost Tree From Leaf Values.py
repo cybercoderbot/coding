@@ -31,10 +31,8 @@ class Solution:
         """
         Solution1: Greedy algorithm
         Recursively locate the min val and combine it with its smaller neighbor.
-        Time: O(N ^ 2)
-        Space: O(1)
+        Time: O(N ^ 2), Space: O(1)
         """
-
         res = 0
         while len(nums) > 1:
             i = nums.index(min(nums))
@@ -49,9 +47,7 @@ class Solution:
         Solution 2: Stack soluton
         We decompose a hard problem into a easier one: 503. Next Greater Element II
         Just find the next greater element in the array, on the left and one right.
-
-        Time: O(N) for one pass
-        Space: O(N) for stack in the worst cases
+        Time: O(N), Space: O(N)
         """
 
         res = 0
@@ -95,7 +91,6 @@ class Solution:
 		"""
 		DP (slower than the above greedy alg)
 		"""
-
         @lru_cache(None)
         def dp(i, j):
             """Return """

@@ -3,7 +3,6 @@
 Medium
 
 You are given the root of a binary tree.
-
 A ZigZag path for a binary tree is defined as follow:
 
 Choose any node in the binary tree and a direction (right or left).
@@ -29,13 +28,6 @@ Input: root = [1]
 Output: 0
 """
 
-
-"""
-Algorithm:
-Traverse the tree and compute the length of zigzag path ending at a node. 
-Return the largest of such value.
-"""
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -49,20 +41,23 @@ class Solution:
         """
         Traverse the tree and compute the length of zigzag path ending at a node. 
         Return the largest of such value.
-        Store (node, length, isLeft) in stack when traversing the tree
+        Store (node, length, isLeft) in queue when traversing the tree
         """
+        if not root:
+            return 0
+
+        queue = [(root, 0, '')]
         res = 0
-        stack = [(root, 0, None)]
-        while stack:
-            node, path, left = stack.pop()
+        while queue:
+            node, path, label = queue.pop(0)
             if not node:
                 continue
             res = max(res, path)
-            if left:
-                stack.append((node.left,  1, True))
-                stack.append((node.right, path+1, False))
+            if label == 'left':
+                queue.append((node.left, 1, 'left'))
+                queue.append((node.right, path+1, 'right'))
             else:
-                stack.append((node.left,  path+1, True))
-                stack.append((node.right, 1, False))
+                queue.append((node.left, path+1, 'left'))
+                queue.append((node.right, 1, 'right'))
 
         return res

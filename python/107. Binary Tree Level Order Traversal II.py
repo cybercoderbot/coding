@@ -2,8 +2,8 @@
 107. Binary Tree Level Order Traversal II
 Medium
 
-Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values.
-(i.e., from left to right, level by level from leaf to root).
+Given the root of a binary tree, return the bottom-up level order traversal of 
+its nodes' values (from left to right, level by level from leaf to root).
 
 Example 1:
 Input: root = [3,9,20,null,null,15,7]

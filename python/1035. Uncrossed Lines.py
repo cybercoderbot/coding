@@ -75,10 +75,10 @@ class Solution:
         """
         dp = [0]*(1 + len(nums2))
         for i in reversed(range(len(nums1))):
-            tmp = dp.copy()
+            copy = dp.copy()
             for j in reversed(range(len(nums2))):
                 if nums1[i] == nums2[j]:
-                    dp[j] = 1 + tmp[j+1]
+                    dp[j] = 1 + copy[j+1]
                 else:
-                    dp[j] = max(tmp[j], dp[j+1])
+                    dp[j] = max(copy[j], dp[j+1])
         return dp[0]

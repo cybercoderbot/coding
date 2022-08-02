@@ -32,25 +32,32 @@ def inorder(node: TreeNode)-> List[int]:
     return res
 
 
+@lru_cache(None)
+def inorder(node: Optional[TreeNode]) -> List[int]:
+    """
+    Return array of inorder traversal of binary tree.
+    Inorder: left -> root -> right
+    """
+    if not node:
+        return []
+    return inorder(node.left) + [node.val] + inorder(node.right)
+
+
 class Solution:
     def twoSumBSTs(self, root1: TreeNode, root2: TreeNode, target: int) -> bool:
         """
+        Inorder traverse: nums sorted in ascending order
         Inorder traverse the two binary search trees and collect their values in two
         arrays (sorted in ascending order). Search for target with 2-pointer approach.
         Time: O(M+N), Space: O(M+N)
         """
-
-        # inorder traverse: nums sorted in ascending order
         nums1 = inorder(root1)
         nums2 = inorder(root2)
 
         M, N = len(nums1), len(nums2)
-
         # left point in nums1 and right pointer in nums2
         low, high = 0, N-1
-
         while low < M and high >= 0:
-
             if nums1[low] + nums2[high] == target:
                 return True
             elif nums1[low] + nums2[high] < target:

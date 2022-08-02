@@ -2,13 +2,7 @@
 1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree
 Easy
 
-Given two binary trees original and cloned and given a reference to a node target in the original tree.
-
-The cloned tree is a copy of the original tree.
-
-Return a reference to the same node in the cloned tree.
-
-Note that you are not allowed to change any of the two trees or the target node and the answer must be a reference to a node in the cloned tree.
+Given two binary trees original and cloned and given a reference to a node target in the original tree. The cloned tree is a copy of the original tree. Return a reference to the same node in the cloned tree. Note that you are not allowed to change any of the two trees or the target node and the answer must be a reference to a node in the cloned tree.
 
 Example 1:
 Input: tree = [7,4,3,null,null,6,19], target = 3
@@ -35,11 +29,16 @@ Output: 4
 class Solution:
     def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
         """
-        Preorder treverse the tree
+        Preorder treverse the tree (root -> left -> right)
         Keep a pair of (src, dst) in the queue
-        Constantly check if src == target.
-        If yes, return dst
+        Constantly check if src == target. If yes, return dst
         """
+        if not original or not cloned:
+            return None
+
+        if original == target:
+            return cloned
+
         queue = [(original, cloned)]
         while queue:
             src, dst = queue.pop(0)

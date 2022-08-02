@@ -18,14 +18,8 @@ Output: 0
 class Solution:
     def countNegatives(self, grid: List[List[int]]) -> int:
         M, N = len(grid), len(grid[0])
-        xyrange = product(range(M), range(N))
-        return sum([1 for i, j in xyrange if grid[i][j] < 0])
-
-
-class Solution:
-    def countNegatives(self, grid: List[List[int]]) -> int:
-        M, N = len(grid), len(grid[0])
-        return sum([1 for i, j in product(range(M), range(N)) if grid[i][j] < 0])
+        xy = product(range(M), range(N))
+        return sum([1 for i, j in xy if grid[i][j] < 0])
 
 
 class Solution:

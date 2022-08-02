@@ -2,9 +2,7 @@
 1358. Number of Substrings Containing All Three Characters
 Medium
 
-Given a string s consisting only of characters a, b and c.
-
-Return the number of substrings containing at least one occurrence of all these characters a, b and c.
+Given a string s consisting only of characters a, b and c.Return the number of substrings containing at least one occurrence of all these characters a, b and c.
 
 Example 1:
 Input: s = "abcabc"
@@ -29,21 +27,66 @@ Therefore, we can add i new cases (from 0 to i -1) to res.
 """
 
 
-def numberOfSubstrings(self, s):
+
+
+import collections
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
     """
     Sliding window
     """
-    res = i = 0
-    count = {c: 0 for c in 'abc'}
-
-    for j in xrange(len(s)):
-        count[s[j]] += 1
-        while all(count.values()):
-            count[s[i]] -= 1
-            i += 1
-        res += i
+    freq = {x: 0 for x in 'abc'}
+    res = left = 0
+    for right in range(len(s)):
+        freq[s[right]] += 1
+        while all(freq.values()):
+            freq[s[left]] -= 1
+            left += 1
+        res += left
 
     return res
+
+
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        """
+        Time: O(N), Space O(1) since we always going to have 3 elements stored (a,b,c)  
+        and this won't change even if our string was a million characters long.
+        """
+        j, res = 0, 0
+        freq = collections.Counter()
+        for i, c in enumerate(s):
+            freq[c] += 1
+            while len(freq) == 3:
+                res += len(s) - i
+                freq[s[j]] -= 1
+                if not freq[s[j]]:
+                    freq.pop(s[j])
+                j += 1
+        return res
+
+
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        """
+        Maintain a window which contains at least each character of a, b, c.
+        Once we found a window, rest part of that window will be a valid count.
+        So we can add len(s) - left on it.
+        Time: O(N), Space O(1) since we always going to have 3 elements stored (a,b,c)  
+        and this won't change even if our string was a million characters long.
+        """
+        freq = defaultdict(int)
+        left, N = 0, len(s)
+        res = 0
+        for right, c in enumerate(s):
+            freq[c] += 1
+            while len(freq) >= 3:
+                res += N - right
+                freq[s[left]] -= 1
+                if not freq[s[left]]:
+                    freq.pop(s[left])
+                left += 1
+        return res
 
 
 class Solution:

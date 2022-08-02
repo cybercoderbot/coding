@@ -52,10 +52,27 @@ If deque[0] > 0. we add it to A[i]
 
 In the end, we return the maximum res.
 
-
 Complexity
 Because all element are pushed and popped at most once.
 Time O(N)
 
 Because at most O(K) elements in the deque.
-Space O(K)"""
+Space O(K)
+"""
+
+
+class Solution:
+    def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
+        if not nums:
+            return -1
+
+        deq = []
+        for i in range(len(nums)):
+            nums[i] += deq[0] if deq else 0
+            while len(deq) and nums[i] > deq[-1]:
+                deq.pop()
+            if nums[i] > 0:
+                deq.append(nums[i])
+            if i >= k and deq and deq[0] == nums[i - k]:
+                deq.pop(0)
+        return max(nums)

@@ -26,11 +26,11 @@ Output: [1]
 
 
 class Solution:
+    @lru_cache(None)
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
         left -> right -> root
         """
-
         if not root:
             return []
 
@@ -41,7 +41,7 @@ class Solution:
 
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-
+        @lru_cache(None)
         def postorder(node):
             if not node:
                 return []

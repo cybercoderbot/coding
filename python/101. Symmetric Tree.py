@@ -23,42 +23,52 @@ Output: false
 
 class Solution:
     def isSymmetric(self, root):
-        """Iterative Solution"""
-
+        """Iterative BFS"""
         if root is None:
             return True
-
-        stack = [(root.left, root.right)]
-        while stack:
-            left, right = stack.pop()
-            if left is None and right is None:
+        queue = [(root.left, root.right)]
+        while queue:
+            left, right = queue.pop(0)
+            if not left and not right:
                 continue
-            if left is None or right is None:
+            if not left or not right:
                 return False
-            if left.val == right.val:
-                stack.append((left.left, right.right))
-                stack.append((left.right, right.left))
-            else:
+            if left.val != right.val:
                 return False
-
+            queue.append((left.left, right.right))
+            queue.append((left.right, right.left))
         return True
 
 
 class Solution:
-    def isReflective(self, root: Optional[TreeNode]) -> bool:
+    def isSymmetric(self, root):
+        """Iterative DFS"""
+        if root is None:
+            return True
+        stack = [(root.left, root.right)]
+        while stack:
+            left, right = stack.pop()
+            if not left and not right:
+                continue
+            if not left or not right:
+                return False
+            if left.val != right.val:
+                return False
+            stack.append((left.left, right.right))
+            stack.append((left.right, right.left))
+        return True
 
+
+class Solution:
+    def isReflective(self, t1, t2) -> bool:
+        """Recursive DFS"""
         if not t1 and not t2:
             return True
         if not t1 or not t2:
             return False
-
         left = self.isReflective(t1.left, t2.right)
         right = self.isReflective(t1.right, t2.left)
-
         return t1.val == t2.val and left and right
 
-
-class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        """Recursive Solution"""
         return self.isReflective(root, root)
