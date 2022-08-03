@@ -25,11 +25,11 @@ Output: [0,1]
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        d = defaultdict(int)
+        seen = defaultdict(int)
         for i, x in enumerate(nums):
-            if target-x in d:
-                return [i, d[target-x]]
+            if target-x in seen:
+                return [i, seen[target-x]]
             else:
-                d[x] = i
+                seen[x] = i
 
         return []

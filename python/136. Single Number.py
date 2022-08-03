@@ -123,8 +123,8 @@ class Solution:
     def singleNumber(self, nums: List[int]) -> List[int]:
         freq = defaultdict(lambda: 0)
 
-        for n in nums:
-            freq[n] += 1
+        for x in nums:
+            freq[x] += 1
 
         res = []
         for key in freq:

@@ -19,36 +19,17 @@ Output: 0
 """
 
 
-"""
-Count Number of Nice Subarrays
-Replace the Substring for Balanced String
-Max Consecutive Ones III
-Binary Subarrays With Sum
-Subarrays with K Different Integers
-Fruit Into Baskets
-Shortest Subarray with Sum at Least K
-"""
-
-
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        """
-        Sliding window with 2 pointers
-        The result is initialized as res = N + 1.
-        One pass, remove the value from sum s by doing target -= nums[right].
-        If target <= 0, it means nums[i] + ... + nums[j] >= sum that we want.
-        Then we update the res = min(res, right - left + 1)
-        Finally we return the result res.
-        Time O(N), Space O(1)
-        """
-
-        left, N = 0, len(nums)
-        res = N + 1
-
-        for right in range(N):
-            target -= nums[right]
-            while target <= 0:
-                res = min(res, right-left + 1)
-                target += nums[left]
+        """ 209. Minimum Size Subarray Sum Greater Than k"""
+        left = total = 0
+        res = len(nums) + 1
+        for right in range(len(nums)):
+            total += nums[right]
+            while total >= target:
+                res = min(res, right-left+1)
+                total -= nums[left]
                 left += 1
-        return res % (N + 1)
+        if res == len(nums) + 1:
+            return 0
+        return res

@@ -3,7 +3,6 @@
 Medium
 
 You are given an integer array nums and an integer target.
-
 You want to build an expression out of nums by adding one of the symbols '+' and '-' before each integer in nums and then concatenate all the integers.
 
 For example, if nums = [2, 1], you can add a '+' before 2 and a '-' before 1 and concatenate them to build the expression "+2-1".
@@ -35,6 +34,33 @@ class Solution:
                 d[sm-x] += n
             memo = d
         return memo[target]
+
+
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        """
+        DP
+        Two variables: index + sum
+        Cannot determine the range of sum, therefore, use a map (sum : ways) to keep
+        Update map for each index interation
+        """
+        lookup = collections.Counter()
+        lookup[nums[0]] = 1
+        lookup[-nums[0]] = 1
+
+        for i in range(1, len(nums)):
+            # parepare a new map for the next iteration
+            nextLookup = collections.Counter()
+            # for each iteration, update each possible sum and it's count
+            for s in lookup:
+                # current to be possitive
+                nextLookup[s + nums[i]] += lookup[s]
+                # current to be negative
+                nextLookup[s - nums[i]] += lookup[s]
+            # assign the new map to be the current map
+            lookup = nextLookup
+
+        return lookup[target]
 
 
 class Solution:

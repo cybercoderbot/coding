@@ -26,6 +26,28 @@ Below implementation is an even shorter summary of above thought.
 
 
 class Solution:
+    @lru_cache(None)
+    def flatten(self, root: TreeNode) -> None:
+
+        if not root:
+            return None
+
+        if not root.left and not root.right:
+            return root
+
+        left = self.flatten(root.left)
+        right = self.flatten(root.right)
+
+        if left:
+            left.right = root.right
+            root.right = root.left
+            root.left = None
+
+        # return the rightmost node
+        return right if right else left
+
+
+class Solution:
     def flatten(self, root: TreeNode) -> None:
         """
         Do not return anything, modify root in-place instead.

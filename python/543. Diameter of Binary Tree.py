@@ -13,7 +13,6 @@ Input: root = [1,2,3,4,5]
 Output: 3
 Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
 
-
 Example 2:
 Input: root = [1,2]
 Output: 1
@@ -41,22 +40,18 @@ class Solution:
 class Solution(object):
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
 
-        def depth(node):
-            """
-            Compute depth of the tree
-            """
+        def height(node):
+            """Compute height of the tree"""
             nonlocal res
 
             if not node:
                 return 0
-
-            left = depth(node.left)
-            right = depth(node.right)
+            left = height(node.left)
+            right = height(node.right)
             res = max(res, left+right)
-
             return max(left, right) + 1
 
         res = 0
-        depth(root)
+        height(root)
 
         return res

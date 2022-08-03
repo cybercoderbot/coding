@@ -34,7 +34,6 @@ class Solution:
 
 
 class Solution:
-
     def majorityElement(self, nums: List[int]) -> int:
         freq = defaultdict(int)
         res = freq[res] = -1
@@ -47,4 +46,5 @@ class Solution:
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
+        """Counter: {x: freq(x) for x in nums}"""
         return Counter(nums).most_common()[0][0]

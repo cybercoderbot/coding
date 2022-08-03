@@ -11,37 +11,120 @@ You can use the same sliding window algorithms with a couple different variation
 """
 
 
-"""
-239. Sliding Window Maximum
-Hard
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        """
+        3. Longest Substring Without Repeating Characters
+        """
+        res = left = 0
+        freq = Counter()
+        # freq = defaultdict(int)
+        for right, c in enumerate(s):
+            freq[c] += 1
+            while freq[c] > 1:
+                freq[s[left]] -= 1
+                left += 1
+            res = max(res, right-left + 1)
+        return res
 
-You are given an array of integers nums, there is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.
 
-Return the max sliding window.
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], k: int) -> int:
+        """
+        930. Binary Subarrays With Sum
+        Return the number of non-empty subarrays with a sum k
+        """
+        freq = collections.Counter({0: 1})
+        csum = res = 0
+        for x in nums:
+            csum += x
+            res += freq[csum-k]
+            freq[csum] += 1
+        return res
 
-Example 1:
 
-Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
-Output: [3,3,5,5,6,7]
-Explanation:
-Window position                Max
----------------               -----
-[1  3  -1] -3  5  3  6  7       3
- 1 [3  -1  -3] 5  3  6  7       3
- 1  3 [-1  -3  5] 3  6  7       5
- 1  3  -1 [-3  5  3] 6  7       5
- 1  3  -1  -3 [5  3  6] 7       6
- 1  3  -1  -3  5 [3  6  7]      7
-Example 2:
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], k: int) -> int:
+        """
+        930. Binary Subarrays With Sum
+        Return the number of non-empty subarrays with a sum k
+        """
+        def atMost(k):
+            if k < 0:
+                return 0
+            res = left = total = 0
+            for right, x in enumerate(nums):
+                total += x
+                while total > k:
+                    total -= nums[left]
+                    left += 1
+                res += right - left + 1
+            return res
 
-Input: nums = [1], k = 1
-Output: [1]
-"""
+        return atMost(k) - atMost(k-1)
+
+
+class Solution:
+    def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
+        """
+        992. Subarrays with k Different Integers
+        """
+        def atMost(k):
+            freq = collections.Counter()
+            res = left = diff = 0
+            for right, x in enumerate(nums):
+                diff += (freq[x] == 0)
+                freq[x] += 1
+                while diff > k:
+                    freq[nums[left]] -= 1
+                    diff -= (freq[nums[left]] == 0)
+                    left += 1
+                res += right - left + 1
+            return res
+
+        return atMost(k) - atMost(k-1)
+
+
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        """
+        1358. Number of ALL Substrings Containing 3 Characters
+        """
+        freq = {x: 0 for x in 'abc'}
+        res = left = 0
+        for right, c in enumerate(s):
+            freq[c] += 1
+            while all(freq.values()):
+                freq[s[left]] -= 1
+                left += 1
+            res += left
+        return res
+
+
+class Solution:
+    def balancedString(self, s: str) -> int:
+        """
+        1234. Replace the Substring for Balanced String
+        s = "QWER" -> 0
+        s = "QQWE" -> 1
+        Time: O(N), Space: O(N)
+        """
+        freq = collections.Counter(s)
+        res = N = len(s)
+        left = 0
+        for right, c in enumerate(s):
+            freq[c] -= 1
+            while left < N and all(freq[c] <= N/4 for c in 'QWER'):
+                res = min(res, right - left + 1)
+                freq[s[left]] += 1
+                left += 1
+        return res
 
 
 class Solution:
     def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':
         """
+        239. Sliding Window Maximum
         Time: O(Nk), where N is number of elements in the array.
         Space: O(N−k+1) for an output array.
         TLE
@@ -56,12 +139,10 @@ class Solution:
 class Solution:
     def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':
         """
+        239. Sliding Window Maximum
         Use a deque to keep indexes of the running maximum num
-
-        Time: O(N)
-        Space: O(N)
+        Time: O(N), Space: O(N)
         """
-
         deq = []
         res = []
         for i, x in enumerate(nums):
@@ -77,99 +158,183 @@ class Solution:
             while deq and i - deq[0] >= k:
                 deq.pop(0)
 
-            # if i + 1 < k, then we are initializing the bigger array
+            # sliding window size: k
             if i + 1 >= k:
                 res.append(nums[deq[0]])
         return res
 
 
-"""
-862. Shortest Subarray with Sum at Least K
-Hard
-
-Given an integer array nums and an integer k, return the length of the shortest non-empty subarray of nums with a sum of at least k. If there is no such subarray, return -1.
-
-A subarray is a contiguous part of an array.
-
-
-Example 1:
-Input: nums = [1], k = 1
-Output: 1
-
-Example 2:
-Input: nums = [1,2], k = 4
-Output: -1
-
-Example 3:
-Input: nums = [2,-1,2], k = 3
-Output: 3
-"""
-
-
 class Solution:
     def shortestSubarray(self, nums: List[int], k: int) -> int:
+        """
+        862. Shortest Subarray with Sum at Least K
+        """
         res = inf
         deq = [(-1, 0)]
-        presum = 0
+        total = 0
         for i, x in enumerate(nums):
-            presum += x
-            while deq and presum - deq[0][1] >= k:
+            total += x
+            while deq and total - deq[0][1] >= k:
                 start, _ = deq.pop(0)
                 res = min(res, i - start)
-            while deq and deq[-1][1] >= presum:
+            while deq and deq[-1][1] >= total:
                 deq.pop(-1)
-            deq.append((i, presum))
+            deq.append((i, total))
 
         return res if res < inf else -1
 
 
-"""
-904. Fruit Into Baskets
-Medium
-
-You are visiting a farm that has a single row of fruit trees arranged from left to right. The trees are represented by an integer array fruits where fruits[i] is the type of fruit the ith tree produces.
-
-You want to collect as much fruit as possible. However, the owner has some strict rules that you must follow:
-
-You only have two baskets, and each basket can only hold a single type of fruit. There is no limit on the amount of fruit each basket can hold.
-Starting from any tree of your choice, you must pick exactly one fruit from every tree (including the start tree) while moving to the right. The picked fruits must fit in one of your baskets.
-Once you reach a tree with fruit that cannot fit in your baskets, you must stop.
-Given the integer array fruits, return the maximum number of fruits you can pick.
-
- 
-Example 1:
-Input: fruits = [1,2,1]
-Output: 3
-Explanation: We can pick from all 3 trees.
-
-Example 2:
-Input: fruits = [0,1,2,2]
-Output: 3
-Explanation: We can pick from trees [1,2,2].
-If we had started at the first tree, we would only pick from trees [0,1].
-
-Example 3:
-Input: fruits = [1,2,3,2,2]
-Output: 4
-Explanation: We can pick from trees [2,3,2,2].
-If we had started at the first tree, we would only pick from trees [1,2].
-"""
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        """ 209. Minimum Size Subarray Sum Greater Than k"""
+        left = total = 0
+        res = len(nums) + 1
+        for right in range(len(nums)):
+            total += nums[right]
+            while total >= target:
+                res = min(res, right-left+1)
+                total -= nums[left]
+                left += 1
+        if res == len(nums) + 1:
+            return 0
+        return res
 
 
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
+        """
+        904. Fruit Into Baskets
+        1.Problem:
+        Start from any index, collect at most 2 types of fruits.
+        What is the max amount?
+        2.Translation:
+        Find out the longest length of subarrays with at most 2 different numbers
+        3.Solution:
+        Solve with sliding window, and maintain a hashmap counter,
+        which count the number of element between the two pointers.
+        Time O(N), Space O(1)
+        """
         freq = defaultdict(int)
-        start = 0
-
-        for i, v in enumerate(fruits):
-            freq[v] += 1
-
+        left = 0
+        for right, x in enumerate(fruits):
+            freq[x] += 1
             if len(freq) > 2:
-                pre = fruits[start]
+                pre = fruits[left]
                 freq[pre] -= 1
                 if freq[pre] == 0:
                     freq.pop(pre)
+                left += 1
+        return right - left + 1
 
-                start += 1
 
-        return i - start + 1
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        """
+        485. Max Consecutive Ones I
+        Return the max number of consecutive 1's
+        """
+        res = count = 0
+        for x in nums:
+            if x:
+                count += 1
+            else:
+                count = 0
+            res = max(res, count)
+        return res
+
+
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        """
+        487. Max Consecutive Ones II
+        Return the max number of consecutive 1's if you can flip at most one 0
+        """
+        zeros, left = 0, 0
+        res = 0
+        for right, x in enumerate(nums):
+            zeros += (x == 0)
+            while zeros > 1:
+                zeros -= (nums[left] == 0)
+                left += 1
+            res = max(res, right - left + 1)
+        return res
+
+
+class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        """
+        1004. Max Consecutive Ones III
+        Return max number of consecutive 1's if you can flip at most k 0's
+        """
+        zeros, left = 0, 0
+        res = 0
+        for right, x in enumerate(nums):
+            zeros += (x == 0)
+            if zeros > k:
+                zeros -= (nums[left] == 0)
+                left += 1
+                res = max(res, right - left + 1)
+        return res
+
+
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        """
+        1248. Count Number of Nice Subarrays
+        Nice subarray: it has exactly k odd numbers in it
+        """
+        def atMost(k):
+            res = left = 0
+            odd = 0
+            for right in range(len(nums)):
+                odd += nums[right] % 2
+                while odd > k:
+                    odd -= nums[left] % 2
+                    left += 1
+                res += right - left + 1
+            return res
+
+        return atMost(k)-atMost(k-1)
+
+
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        """
+        1248. Count Number of Nice Subarrays
+        Nice subarray: it has exactly k odd numbers in it
+        """
+        seen = defaultdict(int)
+        seen[0] = 1
+        odd = res = 0
+        for x in nums:
+            odd += x % 2
+            seen[odd] += 1
+            if odd-k in seen:
+                res += seen[odd-k]
+        return res
+
+
+class Solution:
+    def kthSmallestSubarraySum(self, nums: List[int], k: int) -> int:
+        """
+        1918. Kth Smallest Subarray Sum
+        """
+        def nsubs(target):
+            """Return num of subarrays whose sums <= target """
+            res = total = left = 0
+            for right in range(len(nums)):
+                total += nums[right]
+                while total > target:  # sliding window
+                    total -= nums[left]
+                    left += 1
+                res += right - left + 1
+            return res
+
+        low, high = 0, sum(nums)
+        while low < high:
+            mid = (low + high) // 2
+            if nsubs(mid) < k:
+                low = mid + 1
+            else:
+                high = mid
+        return low

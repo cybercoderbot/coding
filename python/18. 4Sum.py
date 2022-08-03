@@ -39,26 +39,25 @@ class Solution(object):
         """
         4Sum: sort
         """
-
         res, N = [], len(nums)
         nums.sort()
 
         for i in range(N):
             for j in range(i+1, N):
-                k, m = j+1, N-1
+                left, right = j+1, N-1
 
-                while k < m:
-                    sums = nums[i] + nums[j] + nums[k] + nums[m]
+                while left < right:
+                    sums = nums[i] + nums[j] + nums[left] + nums[right]
 
                     if sums == target:
-                        tmp = [nums[i], nums[j], nums[k], nums[m]]
-                        if tmp not in res:
-                            res.append(tmp)
-                        k += 1
-                        m -= 1
-                    elif sums > target:
-                        m -= 1
+                        quad = [nums[i], nums[j], nums[left], nums[right]]
+                        if quad not in res:
+                            res.append(quad)
+                        left += 1
+                        right -= 1
+                    elif sums < target:
+                        left += 1
                     else:
-                        k += 1
+                        right -= 1
 
         return res

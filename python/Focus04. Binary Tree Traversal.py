@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 class Solution:
     @lru_cache(None)
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
@@ -41,7 +44,6 @@ class Solution:
 
 
 class Solution:
-
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         """
         Preorder: root -> left -> right
@@ -58,6 +60,78 @@ class Solution:
         res = []
         preorder(root)
         return res
+
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        """
+        589. N-ary Tree Preorder Traversal
+        root -> children
+        """
+        @lru_cache(None)
+        def traverse(node):
+            if not node:
+                return
+            res.append(node.val)
+            for child in node.children:
+                traverse(child)
+
+        res = []
+        traverse(root)
+        return res
+
+
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        """
+        590. N-ary Tree Postorder Traversal
+        children -> root
+        """
+        def traverse(node):
+            if not node:
+                return
+            for child in node.children:
+                traverse(child)
+            res.append(node.val)
+
+        res = []
+        traverse(root)
+        return res
+
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        """
+        589. N-ary Tree Preorder Traversal
+        root -> children
+        """
+        if not root:
+            return []
+
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.extend(node.children[::-1])
+        return res
+
+
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        """
+        590. N-ary Tree Postorder Traversal
+        children -> root
+        """
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.extend(node.children)
+        return res[::-1]
 
 
 class Solution:
@@ -94,6 +168,119 @@ class Solution:
         res = []
         postorder(root)
         return res
+
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        """
+        102. Binary Tree Top-Down Level Order Traversal
+        """
+        if not root:
+            return
+
+        res, queue = [], [root]
+        while queue:
+            level, vals = [], []
+            for node in queue:
+                vals.append(node.val)
+                if node.left:
+                    level.append(node.left)
+                if node.right:
+                    level.append(node.right)
+            res.append(vals)
+            queue = level
+
+        return res
+
+
+class Solution:
+    def levelOrder(self, root: Optional['Node']) -> List[List[int]]:
+        """
+        429. N-ary Tree Level Order Traversal
+        """
+        if root is None:
+            return []
+
+        res = []
+        queue = [root]
+        while queue:
+            vals, level = [], []
+            for node in queue:
+                vals.append(node.val)
+                level.extend(node.children)
+            res.append(vals)
+            queue = level
+        return res
+
+
+class Solution:
+    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+        """
+        107. Binary Tree Bottom-Up Level Order Traversal II
+        """
+        if not root:
+            return []
+
+        res, queue = [], [root]
+        while queue:
+            vals, level = [], []
+            for node in queue:
+                vals.append(node.val)
+                if node.left:
+                    level.append(node.left)
+                if node.right:
+                    level.append(node.right)
+            res.append(vals)
+            queue = level
+
+        return res[::-1]
+
+
+class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        """
+        103. Binary Tree Zigzag Level Order Traversal
+        """
+        if not root:
+            return []
+
+        res, queue = [], [root]
+        forward = True
+        while queue:
+            vals, level = [], []
+            for node in queue:
+                vals.append(node.val)
+                if node.left:
+                    level.append(node.left)
+                if node.right:
+                    level.append(node.right)
+            res.append(vals if forward else vals[::-1])
+            queue = level
+            forward = not forward
+
+        return res
+
+
+class Solution:
+    def verticalOrder(self, root: TreeNode) -> List[List[int]]:
+        """
+        314. Binary Tree Vertical Order Traversal
+        queue: (col, node). seen: {col: [node.val]}
+        left: (col-1, node.left), right: (col+1, node.right)
+        """
+        if not root:
+            return []
+
+        seen = collections.defaultdict(list)
+        queue = [(0, root)]
+        while queue:
+            col, node = queue.pop(0)
+            if node:
+                seen[col].append(node.val)
+                queue.append((col-1, node.left))
+                queue.append((col+1, node.right))
+
+        return [seen[x] for x in sorted(seen.keys())]
 
 
 class Solution:
