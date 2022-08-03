@@ -22,7 +22,6 @@ class Solution:
         45. Jump Game II. 
         Start from first position, return the min number of jumps to reach the last position.
         """
-
         N = len(nums)
         if N <= 1:
             return 0
@@ -42,7 +41,6 @@ class Solution:
         1306. Jump Game III
         When you are at index i, you can jump to i + nums[i] or i - nums[i], check if you can reach to any index with value 0. You can not jump outside of the array at any time.
         """
-
         N = len(nums)
         queue = [start]
 
@@ -67,14 +65,11 @@ class Solution:
         """
         1345. Jump Game IV
         In one step you can jump from index i to index:
-
         1) i + 1 where: i + 1 < nums.length.
         2) i - 1 where: i - 1 >= 0.
         3) j where: nums[i] == nums[j] and i != j.
-
         Construct graph and BFS traverse the graph to find the end of array.
         """
-
         pos = defaultdict(list)
         for i, x in enumerate(nums):
             pos[x].append(i)
@@ -100,11 +95,9 @@ class Solution:
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
         """
         1871. Jump Game VII
-
         You can move from index i to index j if:
         1) i + minJump <= j <= min(i + maxJump, s.length - 1), and 
         2) s[j] == '0'.
-
         BFS
         """
 

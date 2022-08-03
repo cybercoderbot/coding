@@ -5,15 +5,13 @@ class Solution:
         Return all the possible permutations of distinct nums.
         Duplication allowed. 
         [0,1] -> [[0,1],[1,0]]
-
         Time: O(N!), Space: O(N!)
         """
-
+        @lru_cache(None)
         def backtrack(i):
             """Populate res in backtrack"""
             if i == len(nums):
                 res.append(nums.copy())
-
             for j in range(i, len(nums)):
                 nums[i], nums[j] = nums[j], nums[i]
                 backtrack(i+1)
@@ -28,17 +26,13 @@ class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         """
         47. Permutations II
-
         Duplication NOT allowed.
         [1,1,2] -> [[1,1,2], [1,2,1], [2,1,1]]
-
         """
-
         def backtrack(i):
             """Populate res via backtracking."""
             if i == len(nums):
                 return res.append(nums.copy())
-
             seen = set()
             for j in range(i, len(nums)):
                 if nums[j] not in seen:
@@ -58,7 +52,6 @@ class Solution:
         266. Palindrome Permutation
         Return true if a permutation of the s could form a palindrome.
         """
-
         freq = collections.Counter(s)
         return sum([x & 1 for x in freq.values()]) <= 1
 
@@ -69,11 +62,9 @@ class Solution:
         267. Palindrome Permutation II
         Return all the palindromic permutations (without duplicates) of s.
         """
-
         freq = Counter(s)
-
-        nodd = sum(x & 1 for x in freq.values())
-        if nodd > 1:
+        odd = sum(x & 1 for x in freq.values())
+        if odd > 1:
             return []
 
         res = []
@@ -97,5 +88,4 @@ class Solution:
                     vals[i], vals[j] = vals[j], vals[i]
 
         backtrack(0)
-
         return res

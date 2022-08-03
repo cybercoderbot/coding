@@ -926,7 +926,7 @@ class Solution:
 
         # two passes
         # 1st pass - find a node on longest path
-        # 2nd pass - find length of longest path (tree diameter)
+        # 2nd pass - find longest path (tree diameter)
         node = bfs(0)[0]
         return bfs(node)[1]
 
@@ -1088,20 +1088,18 @@ class Solution:
         while p1 != p2:
             p1 = p1.parent if p1 else q
             p2 = p2.parent if p2 else p
-
         return p1
 
     def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
         """1650. Lowest Common Ancestor of a Binary Tree III"""
-        visited = set()
+        seen = set()
         while q:
-            visited.add(q.val)
+            seen.add(q.val)
             q = q.parent
-
         while p:
-            if p.val in visited:
+            if p.val in seen:
                 return p
-            visited.add(p.val)
+            seen.add(p.val)
             p = p.parent
         return None
 
