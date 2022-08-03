@@ -391,17 +391,17 @@ class Solution():
         523. Continuous Subarray Sum
         Return true if nums has a continuous subarray of size >= 2  
         summming up to a multiple of k, or false otherwise.
-        Iterate through list and update dic: {prefix: i}
+        Iterate through list and update dic: {csum: i}
         """
         seen = {0: -1}
-        prefix = 0
+        csum = 0
         for i, x in enumerate(nums):
-            prefix += x
+            csum += x
             if k != 0:
-                prefix %= k
-            if prefix not in seen:
-                seen[prefix] = i
-            elif i - seen[prefix] >= 2:
+                csum %= k
+            if csum not in seen:
+                seen[csum] = i
+            elif i - seen[csum] >= 2:
                 return True
         return False
 
@@ -412,12 +412,12 @@ class Solution:
         325. Maximum Size Subarray Sum Equals k
         """
         seen = {0: -1}
-        res = prefix = 0
+        res = csum = 0
         for i, x in enumerate(nums):
-            prefix += x
-            if prefix-k in seen:
-                res = max(res, i - seen[prefix-k])
-            seen.setdefault(prefix, i)
+            csum += x
+            if csum-k in seen:
+                res = max(res, i - seen[csum-k])
+            seen.setdefault(csum, i)
         return res
 
 
@@ -471,15 +471,15 @@ class NumArray:
     def __init__(self, nums: List[int]):
         self.diff = {}
         self.nums = nums
-        self.prefix = [0]
+        self.csum = [0]
         for x in nums:
-            self.prefix.append(self.prefix[-1] + x)
+            self.csum.append(self.csum[-1] + x)
 
     def update(self, i: int, val: int) -> None:
         self.diff[i] = val - self.nums[i]
 
     def sumRange(self, i: int, j: int) -> int:
-        res = self.prefix[j+1] - self.prefix[i]
+        res = self.csum[j+1] - self.csum[i]
         for key, val in self.diff.items():
             if i <= key <= j:
                 res += val
@@ -493,16 +493,16 @@ class NumMatrix:
 
     def __init__(self, matrix: List[List[int]]):
         M, N = len(matrix), len(matrix[0])
-        self.prefix = [[0]*(N+1) for _ in range(M+1)]
+        self.csum = [[0]*(N+1) for _ in range(M+1)]
         for i, j in product(range(M), range(N)):
-            self.prefix[i+1][j+1] = matrix[i][j] + self.prefix[i][j+1] \
-                + self.prefix[i+1][j] - self.prefix[i][j]
+            self.csum[i+1][j+1] = matrix[i][j] + self.csum[i][j+1] \
+                + self.csum[i+1][j] - self.csum[i][j]
 
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
-        x22 = self.prefix[row2+1][col2+1]
-        x11 = self.prefix[row1][col1]
-        x12 = self.prefix[row1][col2+1]
-        x21 = self.prefix[row2+1][col1]
+        x22 = self.csum[row2+1][col2+1]
+        x11 = self.csum[row1][col1]
+        x12 = self.csum[row1][col2+1]
+        x21 = self.csum[row2+1][col1]
         return x22 - x12 - x21 + x11
 
 

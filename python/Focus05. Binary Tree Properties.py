@@ -485,8 +485,8 @@ class Solution:
             if node.right:
                 queue.append((node.right))
 
-        mode = max(freq.values())
-        return [key for key, val in freq.items() if val == mode]
+        fmax = max(freq.values())
+        return [key for key, val in freq.items() if val == fmax]
 
 
 class Solution:
