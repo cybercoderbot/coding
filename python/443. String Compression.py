@@ -30,8 +30,8 @@ Output: Return 4, and the first 4 characters of the input array should be: ["a",
 Explanation: The groups are "a" and "bbbbbbbbbbbb". This compresses to "ab12".
 """
 
-
 # fine two pointers i and ii. Loop i through chars and rewrite compressed string.
+
 
 class Solution:
     def compress(self, chars: List[str]) -> int:

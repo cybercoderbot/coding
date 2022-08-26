@@ -51,8 +51,8 @@ class Solution:
                 parent[node.right] = node
                 stack.append(node.right)
 
-        queue = deque([src])
         seen = {src}
+        queue = collections.deque([src])
         while queue:
             node = queue.popleft()
             if not node.left and not node.right:

@@ -24,7 +24,6 @@ class Solution:
         Starting from gates, BFS traverse the grid and fill in distance to nearest gates.
         Time: O(M * N), Space: O(M * N)
         """
-
         M, N = len(rooms), len(rooms[0])
         MAX = 2**31 - 1
         queue = [(i, j)
@@ -46,7 +45,6 @@ class Solution:
 
 class Solution:
     def wallsAndGates(self, rooms: List[List[int]]) -> None:
-
         if not rooms:
             return
 

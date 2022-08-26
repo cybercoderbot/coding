@@ -49,7 +49,8 @@ class Solution:
 
         Time: O(N), Space: O(N)
         """
-        minq, maxq = [], []  # (index, value)
+        minq = collections.deque([])
+        maxq = collections.deque([])  # (index, value)
 
         left = right = res = 0
         while right < len(nums):
@@ -63,9 +64,9 @@ class Solution:
             if maxq[0][1] - minq[0][1] > k:
                 left += 1
                 if left > minq[0][0]:
-                    minq.pop(0)
+                    minq.popleft()
                 if left > maxq[0][0]:
-                    maxq.pop(0)
+                    maxq.popleft()
             else:
                 res = max(res, right - left + 1)
                 right += 1
@@ -78,7 +79,8 @@ class Solution:
         Keep track of the max and min in two deques.
         """
         i = 0
-        minq, maxq = [], []
+        minq = collections.deque([])
+        maxq = collections.deque([])
 
         for x in nums:
             while minq and minq[-1] > x:
@@ -91,9 +93,9 @@ class Solution:
 
             if maxq[0] - minq[0] > k:
                 if nums[i] == minq[0]:
-                    minq.pop(0)
+                    minq.popleft()
                 if nums[i] == maxq[0]:
-                    maxq.pop(0)
+                    maxq.popleft()
                 i += 1
 
         return len(nums) - i

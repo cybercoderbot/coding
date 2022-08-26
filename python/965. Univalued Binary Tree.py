@@ -30,15 +30,15 @@ class Solution:
         if not root:
             return True
 
-        res, queue = [], [root]
+        res = []
+        queue = collections.deque([root])
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             res.append(node.val)
             if node.left:
                 queue.append(node.left)
             if node.right:
                 queue.append(node.right)
-
         return len(set(res)) == 1
 
 

@@ -23,7 +23,6 @@ Output: 0
 
 
 class Solution:
-
     def trailingZeroes(self, n: int) -> int:
         """
         Num of 0's -> num of 2's and num of 5's -> num of 5's
@@ -37,10 +36,8 @@ class Solution:
 
 
 class Solution:
-
     @lru_cache(None)
     def trailingZeroes(self, n: int) -> int:
-
         if n == 0:
             return 0
 

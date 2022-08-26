@@ -27,7 +27,6 @@ class Solution:
         Time: O(N * M).
         Checking haystack[i:i+N] == needle is O(N), done O(M) times.
         """
-
         M, N = len(haystack), len(needle)
         for i in range(M-N+1):
             if haystack[i:i+N] == needle:

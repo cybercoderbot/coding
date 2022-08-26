@@ -18,18 +18,19 @@ Output: [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
 
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
+        """ Rotate = transpose + reflect """
         self.transpose(matrix)
         self.reflect(matrix)
 
     def transpose(self, matrix):
-        n = len(matrix)
-        for i in range(n):
-            for j in range(i + 1, n):
+        N = len(matrix)
+        for i in range(N):
+            for j in range(i+1, N):
                 matrix[j][i], matrix[i][j] = matrix[i][j], matrix[j][i]
+        return
 
     def reflect(self, matrix):
-        n = len(matrix)
-        for i in range(n):
-            for j in range(n // 2):
-                matrix[i][j], matrix[i][-j -
-                                        1] = matrix[i][-j - 1], matrix[i][j]
+        N = len(matrix)
+        for i, j in product(range(N), range(N//2)):
+            matrix[i][j], matrix[i][-j-1] = matrix[i][-j-1], matrix[i][j]
+        return

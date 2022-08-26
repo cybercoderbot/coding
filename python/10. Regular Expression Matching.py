@@ -25,17 +25,17 @@ Explanation: ".*" means "zero or more (*) of any character (.)".
 """
 
 
+@lru_cache(None)
 def dfs(s, p, i, j):
     """Return True if s[i:] matches p[j:]"""
     M, N = len(s), len(p)
-
     if j == N:
         return i == M
 
     match = i < M and p[j] in (s[i], ".")
 
     if j+1 < N and p[j+1] == "*":
-        return dfs(s, p, i, j+2) or match and dfs(s, p, i+1, j)
+        return dfs(s, p, i, j+2) or (match and dfs(s, p, i+1, j))
     else:
         return match and dfs(s, p, i+1, j+1)
 

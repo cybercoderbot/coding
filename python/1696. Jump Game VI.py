@@ -28,16 +28,15 @@ Output: 0
 
 class Solution:
     def maxResult(self, nums: List[int], k: int) -> int:
-
-        queue = []
         N = len(nums)
+        deq = collections.deque([])
         for i in range(N-1, -1, -1):
-            while queue and queue[0][1] - i > k:
-                queue.pop(0)
+            while deq and deq[0][1] - i > k:
+                deq.popleft()
             res = nums[i]
-            if queue:
-                res += queue[0][0]
-            while queue and queue[-1][0] <= res:
-                queue.pop()
-            queue.append((res, i))
+            if deq:
+                res += deq[0][0]
+            while deq and deq[-1][0] <= res:
+                deq.pop()
+            deq.append((res, i))
         return res

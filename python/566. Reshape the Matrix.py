@@ -25,7 +25,6 @@ class Solution:
         """
         res[i//C][i % C] = mat[i//N][i % N]
         """
-
         M, N = len(mat), len(mat[0])
         if M * N != R * C:
             return mat

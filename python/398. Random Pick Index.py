@@ -5,7 +5,6 @@ Medium
 Given an integer array nums with possible duplicates, randomly output the index of a given target number. You can assume that the given target number must exist in the array.
 
 Implement the Solution class:
-
 Solution(int[] nums) Initializes the object with the array nums.
 int pick(int target) Picks a random index i from nums where nums[i] == target. If there are multiple valid i's, then each index should have an equal probability of returning.
  
@@ -27,29 +26,17 @@ solution.pick(3); // It should return either index 2, 3, or 4 randomly. Each ind
 class Solution(object):
 
     def __init__(self, nums: List[int]):
-        """
-        :type nums: List[int]
-        :type numsSize: int
-        """
         self.nums = nums
 
     def pick(self, target: int) -> int:
         """
-        :type target: int
-        :rtype: int
-        """
-
-        """
         Reservoir sampling solution.
-
         If we want to optimize run time then we can use a dictionary to pre-process the nums array.
         Simply create a map of key (number) and value (list of its indices).
         Then run reservoir sampling over this input.
         But the problem statement says that using too much memory is not allowed.
-        In that case, we can iterate the entire array and keep a variable to track the frequency of the target
-        for input into reservoir sampling.
+        In that case, we can iterate the entire array and keep a variable to track the frequency of the target for input into reservoir sampling.
         Notice random.random() returns uniform random number between [0 to 1]
-        
         """
         res = None
         count = 0

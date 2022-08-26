@@ -20,7 +20,6 @@ Explanation: No swap.
 
 """
 Approach:
-
 Find the max of given array of digits.
 If max matches with the first digit (index 0) then there is no benefit of swapping, so recursively solve for remaining array i.e. index 1 onwards
 Else if - digit at index 0 is not equal to max of that array then swap it with the last occurance of max in the given array.

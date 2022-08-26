@@ -22,6 +22,7 @@ Output: 1
 class Solution:
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
 
+        @lru_cache(None)
         def traverse(node):
             """Return length+1 and diameter rooted at node"""
             if not node:
@@ -31,7 +32,6 @@ class Solution:
             depth2, diameter2 = traverse(node.right)
             depth = max(depth1, depth2) + 1
             diameter = max(diameter1, diameter2, depth1 + depth2)
-
             return depth, diameter
 
         return traverse(root)[1]
@@ -40,6 +40,7 @@ class Solution:
 class Solution(object):
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
 
+        @lru_cache(None)
         def height(node):
             """Compute height of the tree"""
             nonlocal res

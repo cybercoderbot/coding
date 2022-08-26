@@ -53,7 +53,6 @@ class Solution():
         """
         Time: O(N), Space: O(N)
         """
-
         stack = []
         for op in ops:
             if op == 'C':
@@ -73,7 +72,6 @@ class Solution:
         """
         Time: O(N), Space: O(N)
         """
-
         stack = []
         res = 0
         for op in ops:

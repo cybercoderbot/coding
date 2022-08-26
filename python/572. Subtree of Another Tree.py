@@ -22,7 +22,6 @@ We can do that in a straightforward way by an isMatch function:
 check if s and t match at the values of their roots, plus their subtrees match.
 Then, in our main function, we want to check if s and t match, or if t is a subtree
 of a child of s.
-
 """
 
 
@@ -33,14 +32,12 @@ class Solution:
 
         left = self.isSameTree(s.left, t.left)
         right = self.isSameTree(s.right, t.right)
-
         return s.val == t.val and left and right
 
     def isSubtree(self, s: Optional[TreeNode], t: Optional[TreeNode]) -> bool:
         """
         Naive approach, O(|s| * |t|)
         """
-
         if not s:
             return False
         if self.isSameTree(s, t):

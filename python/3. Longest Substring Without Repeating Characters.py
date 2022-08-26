@@ -25,13 +25,12 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 class Solution(object):
     def lengthOfLongestSubstring(self, s: str) -> int:
 
-        res = left = right = 0
-        count = {}
-        for c in s:
-            right += 1
-            count[c] = count.get(c, 0) + 1
-            while count[c] > 1:
-                count[s[left]] -= 1
+        res, left = 0, 0
+        freq = collections.Counter()
+        for right, c in enumerate(s):
+            freq[c] += 1
+            while any(freq[x] > 1 for x in freq.keys()):
+                freq[s[left]] -= 1
                 left += 1
-            res = max(res, right - left)
+            res = max(res, right-left + 1)
         return res

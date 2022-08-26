@@ -2,9 +2,7 @@
 408. Valid Word Abbreviation
 Easy
 
-A string can be abbreviated by replacing any number of non-adjacent, non-empty substrings with their lengths. The lengths should not have leading zeros.
-
-For example, a string such as "substitution" could be abbreviated as (but not limited to):
+A string can be abbreviated by replacing any number of non-adjacent, non-empty substrings with their lengths. The lengths should not have leading zeros. For example, a string such as "substitution" could be abbreviated as (but not limited to):
 
 "s10n" ("s ubstitutio n")
 "sub4u4" ("sub stit u tion")
@@ -19,29 +17,28 @@ The following are not valid abbreviations:
 Given a string word and an abbreviation abbr, return whether the string matches the given abbreviation.
 
 A substring is a contiguous non-empty sequence of characters within a string.
-
  
-
 Example 1:
-
 Input: word = "internationalization", abbr = "i12iz4n"
 Output: true
-Explanation: The word "internationalization" can be abbreviated as "i12iz4n" ("i nternational iz atio n").
-Example 2:
+Explanation: The word "internationalization" can be abbreviated as "i12iz4n" 
+("i nternational iz atio n").
 
+Example 2:
 Input: word = "apple", abbr = "a2e"
 Output: false
 Explanation: The word "apple" cannot be abbreviated as "a2e".
 
-
 Solution:
+The idea is to compare word and abbr char by char. 
+If abbr[j] is char, check if word[i] == abbr[j]; 
+If yes, continue to the next char; if no, return False.
 
-The idea is to compare word and abbr char by char. If abbr[j] is char, check if word[i] == abbr[j]; If yes, continue to the next char; if no, return False.
-
-If abbr[j] is a digit, then scan abbr and get the number N; then add N to i to skip scanning N chars in word. Corner case here is to check if N starts with 0.
+If abbr[j] is a digit, then scan abbr and get the number N; 
+then add N to i to skip scanning N chars in word. 
+Corner case here is to check if N starts with 0.
 
 At the end, check if i and j have both reached the end of word and abbr.
-
 """
 
 

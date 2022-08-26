@@ -26,8 +26,7 @@ Output: [8,9,9,9,0,0,0,1]
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         """
-        Time complexity O(M+N)
-        Space complexity O(max(M, N))
+        Time: O(M+N), Space: O(max(M, N))
         """
         dummy = node = ListNode()
         carry = 0

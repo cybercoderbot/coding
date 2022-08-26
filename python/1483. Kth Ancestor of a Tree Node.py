@@ -23,7 +23,6 @@ treeAncestor.getKthAncestor(6, 3); // returns -1 because there is no such ancest
 
 
 class TreeAncestor:
-
     def __init__(self, n: int, parent: List[int]):
         m = int(log2(n)) + 1 +  # at most 16 for this problem
         self.dp = [[-1] * m for _ in range(n)]  # ith node's 2^j parent

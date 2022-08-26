@@ -107,10 +107,10 @@ class Solution:
 
         # original -> clone mapping
         clones = {node: Node(node.val)}
-        queue = [node]
+        queue = collections.deque([node])
 
         while queue:
-            src = queue.pop(0)
+            src = queue.popleft()
             for nn in src.neighbors:
                 if nn not in clones:
                     clones[nn] = Node(nn.val)

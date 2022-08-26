@@ -66,7 +66,7 @@ class Solution:
         if not nums:
             return -1
 
-        deq = []
+        deq = collections.deque([])
         for i in range(len(nums)):
             nums[i] += deq[0] if deq else 0
             while len(deq) and nums[i] > deq[-1]:
@@ -74,5 +74,5 @@ class Solution:
             if nums[i] > 0:
                 deq.append(nums[i])
             if i >= k and deq and deq[0] == nums[i - k]:
-                deq.pop(0)
+                deq.popleft()
         return max(nums)

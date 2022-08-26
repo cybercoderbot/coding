@@ -32,10 +32,9 @@ class Solution:
         res[node] = (depth, parent)
         """
         res = defaultdict(tuple)
-        queue = [(root, 0, None)]
-
+        queue = collections.deque([(root, 0, None)])
         while queue:
-            node, depth, parent = queue.pop(0)
+            node, depth, parent = queue.popleft()
             if not node:
                 continue
             if node.val in (x, y):

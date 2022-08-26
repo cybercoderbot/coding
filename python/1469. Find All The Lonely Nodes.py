@@ -50,6 +50,7 @@ class Solution:
     def getLonelyNodes(self, root: TreeNode) -> List[int]:
         res = []
 
+        @lru_cache(None)
         def dfs(node):
             if node.left and not node.right:
                 res.append(node.left.val)
@@ -63,7 +64,6 @@ class Solution:
                 dfs(node.right)
 
         dfs(root)
-
         return res
 
 
@@ -76,19 +76,16 @@ class Solution:
         2) not node.left  -> res.append(node.right.val)
         Time: O(N), Space: O(N)
         """
-        queue = [root]
         res = []
+        queue = collections.deque([root])
         while queue:
-            node = queue.pop(0)
-
+            node = queue.popleft()
             if node.left:
                 queue.append(node.left)
                 if not node.right:
                     res.append(node.left.val)
-
             if node.right:
                 queue.append(node.right)
                 if not node.left:
                     res.append(node.right.val)
-
         return res

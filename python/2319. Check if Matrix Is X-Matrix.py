@@ -39,12 +39,12 @@ class Solution:
 
 class Solution:
     def checkXMatrix(self, grid: List[List[int]]) -> bool:
-        n = len(grid)
+        N = len(grid)
         for i, row in enumerate(grid):
             for j, x in enumerate(row):
-                if (i == j or i+j == n-1) and not x:
+                if (i == j or i+j == N-1) and not x:
                     return False
-                if i != j and i+j != n-1 and x:
+                if i != j and i+j != N-1 and x:
                     return False
         return True
 

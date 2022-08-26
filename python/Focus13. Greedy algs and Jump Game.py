@@ -1,4 +1,66 @@
 class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        """
+        53. Maximum Subarray
+        Find the contiguous subarray which has the largest sum and return its sum.
+        """
+        res = -inf
+        total = 0
+        for x in nums:
+            total += x
+            res = max(res, total)
+            total = max(total, 0)
+        return res
+
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        """
+        55. Jump Game.
+        Start at first index. Return true if you can reach the last index.
+        """
+        N = len(nums)
+        goal = N-1
+        for i in range(N-2, -1, -1):
+            if i + nums[i] >= goal:
+                goal = i
+        return goal == 0
+
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        """
+        55. Jump Game.
+        """
+        longest = 0
+        i, N = 0, len(nums)
+        while i <= longest:
+            longest = max(longest, i + nums[i])
+            if longest >= N - 1:
+                return True
+            i += 1
+        return False
+
+
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        """
+        45. Jump Game II.
+        Start from first position, return the min number of jumps to reach the last position.
+        """
+        res, N = 0, len(nums)
+        left, right = 0, 0
+        while right < N - 1:
+            maxJump = 0
+            for i in range(left, right+1):
+                maxJump = max(maxJump, i + nums[i])
+            left = right + 1
+            right = maxJump
+            res += 1
+        return res
+
+
+class Solution:
     def canJump(self, nums: List[int]) -> bool:
         """
         55. Jump Game. 
@@ -9,7 +71,7 @@ class Solution:
 
         while i <= maxPos:
             maxPos = max(maxPos, i + nums[i])
-            if maxPos >= N - 1:
+            if maxPos >= N-1:
                 return True
             i += 1
 
@@ -29,8 +91,8 @@ class Solution:
         res = 1
         while right < N - 1:
             res += 1
-            nxt = max(i + nums[i] for i in range(left, right + 1))
-            left, right = right, nxt
+            maxPos = max(i + nums[i] for i in range(left, right + 1))
+            left, right = right, maxPos
 
         return res
 
@@ -42,10 +104,9 @@ class Solution:
         When you are at index i, you can jump to i + nums[i] or i - nums[i], check if you can reach to any index with value 0. You can not jump outside of the array at any time.
         """
         N = len(nums)
-        queue = [start]
-
+        queue = collections.deque([start])
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
 
             if nums[node] == 0:
                 return True
@@ -74,11 +135,12 @@ class Solution:
         for i, x in enumerate(nums):
             pos[x].append(i)
 
-        queue, seen = [0], {0}
         res = 0
+        queue = collections.deque([0])
+        seen = {0}
         while queue:
             for _ in range(len(queue)):
-                i = queue.pop(0)
+                i = queue.popleft()
                 if i == len(nums)-1:
                     return res
                 for j in [i-1, i+1] + pos[nums[i]]:
@@ -94,13 +156,11 @@ class Solution:
 class Solution:
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
         """
-        1871. Jump Game VII
+        1871. Jump Game VII (BFS)
         You can move from index i to index j if:
         1) i + minJump <= j <= min(i + maxJump, s.length - 1), and 
         2) s[j] == '0'.
-        BFS
         """
-
         queue, left = [0], 0
         for i in queue:
             if i == len(s)-1:

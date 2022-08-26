@@ -54,10 +54,10 @@ class Solution:
         if not root:
             return 0
 
-        queue = [(root, 1)]
         res = 0
+        queue = collections.deque([(root, 1)])
         while queue:
-            node, depth = queue.pop(0)
+            node, depth = queue.popleft()
             res = max(res, depth)
             if node.left:
                 queue.append((node.left, depth+1))

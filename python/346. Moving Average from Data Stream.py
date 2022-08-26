@@ -1,39 +1,35 @@
-class MovingAverage(object):
+"""
+346. Moving Average from Data Stream
+Easy
 
-    # 这道题定义了一个MovingAverage类，里面可以存固定个数字，然后我们每次读入一个数字，
-    # 如果加上这个数字后总个数大于限制的个数，那么我们移除最早进入的数字，然后返回更新后的平均数，
-    # 这种先进先出的特性最适合使用队列queue来做，而且我们还需要一个变量sum来记录当前所有
-    # 数字之和，这样有新数字进入后，如果没有超出限制个数，则sum加上这个数字，如果超出了，那么sum先
-    # 减去最早的数字，再加上这个数字，然后返回sum除以queue的个数即可
+Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window. Implement the MovingAverage class:
 
-    def __init__(self, size):
-        """
-        Initialize your data structure here.
-        :type size: int
-        """
+MovingAverage(int size) Initializes the object with the size of the window size.
+double next(int val) Returns the moving average of the last size values of the stream.
 
-        self.sum = 0
+Example 1:
+Input
+["MovingAverage", "next", "next", "next", "next"]
+[[3], [1], [10], [3], [5]]
+Output
+[null, 1.0, 5.5, 4.66667, 6.0]
+
+Explanation
+MovingAverage movingAverage = new MovingAverage(3);
+movingAverage.next(1); // return 1.0 = 1 / 1
+movingAverage.next(10); // return 5.5 = (1 + 10) / 2
+movingAverage.next(3); // return 4.66667 = (1 + 10 + 3) / 3
+movingAverage.next(5); // return 6.0 = (10 + 3 + 5) / 3
+"""
+
+
+class MovingAverage:
+    def __init__(self, size: int):
+        self.nums = collections.deque([])
         self.size = size
-        self.queue = collections.deque(maxlen=size)
 
-    def next(self, val):
-        """
-        :type val: int
-        :rtype: float
-        """
-
-        self.queue.append(val)
-        return float(sum(self.queue))/len(self.queue)
-
-        # self.queue.append(val)
-        # if len(self.queue) <= self.size:
-        #     self.sum += val
-        # else:
-        #     self.sum += val - self.queue.popleft()
-
-        # return self.sum/self.size
-
-
-# Your MovingAverage object will be instantiated and called as such:
-# obj = MovingAverage(size)
-# param_1 = obj.next(val)
+    def next(self, val: int) -> float:
+        self.nums.append(val)
+        if len(self.nums) > self.size:
+            self.nums.popleft()
+        return sum(self.nums) / len(self.nums)

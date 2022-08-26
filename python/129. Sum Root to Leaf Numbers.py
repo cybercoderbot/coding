@@ -40,10 +40,10 @@ class Solution:
         Record (node, pre) when traversing the tree
         res += pre when reaching leaf node
         """
-        queue = [(root, 0)]
         res = 0
+        queue = collections.deque([(root, 0)])
         while queue:
-            node, pre = queue.pop(0)
+            node, pre = queue.popleft()
             pre = 10 * pre + node.val
             if not node.left and not node.right:
                 res += pre

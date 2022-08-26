@@ -22,30 +22,14 @@ Output: [["a"]]
 
 
 class Solution:
-    """
-    Complexity
-
-    Let N be the length of strings and K be the maximum length of a string in strings.
-
-    Time complexity: O(N*K)
-    We iterate over all N strings and for each string, we iterate over all the characters to generate 
-    the Hash value, which takes O(K) time. To sum up, the overall time complexity is O(N*K).
-
-    Space complexity: O(N*K)
-    We need to store all the strings plus their Hash values in mapHashToList. In the worst scenario, 
-    when each string in the given list belongs to a different Hash value, the maximum number of strings 
-    stored in mapHashToList is 2*N. Each string takes at most O(K) space. Hence the overall space 
-    complexity is O(N*K).
-
-    """
-
     def groupStrings(self, strings: List[str]) -> List[List[str]]:
         """
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N * K), Space: O(N * K)
         """
-
         def hashkey(string: str):
+            """
+            Generate the Hash value, O(K) time/space
+            """
             key = []
             for c1, c2 in zip(string[:-1], string[1:]):
                 mod = (ord(c2) - ord(c1)) % 26 + ord('a')
@@ -53,7 +37,6 @@ class Solution:
             return ''.join(key)
 
         groups = collections.defaultdict(list)
-
         for s in strings:
             key = hashkey(s)
             groups[key].append(s)

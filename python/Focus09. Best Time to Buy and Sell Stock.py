@@ -19,6 +19,20 @@ class Solution:
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         """
+        121. Best Time to Buy and Sell Stock
+        """
+        res = 0
+        left = 0
+        for right in range(1, len(prices)):
+            if prices[left] > prices[right]:
+                left = right
+            res = max(res, prices[right] - prices[left])
+        return res
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        """
         122. Best Time to Buy and Sell Stock II (Unlimited transactions)
         """
         buy, sell = inf, 0

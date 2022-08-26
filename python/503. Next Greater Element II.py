@@ -19,16 +19,14 @@ Output: [2,3,4,-1,4]
 """
 
 
-class Solution(object):
+class Solution:
     def nextGreaterElements(self, nums: List[int]) -> List[int]:
         """
         Approach 1 - backward
         Decreasing mono-stack
 
-        Time: O(N)
-        Space: O(N)
+        Time: O(N), Space: O(N)
         """
-
         stack = nums[::-1]
         res = []
 
@@ -53,15 +51,14 @@ class Solution:
         Loop once, we can get the Next Greater Number of a normal array.
         Loop twice, we can get the Next Greater Number of a circular array
 
-        Time: O(N)
-        Space: O(N)
+        Time: O(N), Space: O(N)
         """
 
         res, stack = [], []
         for x in reversed(nums + nums):
             while stack and x >= stack[-1]:
                 stack.pop()
-            ans.append(stack[-1] if stack else -1)
+            res.append(stack[-1] if stack else -1)
             stack.append(x)
         res.reverse()
         return res[:len(nums)]
@@ -76,10 +73,8 @@ class Solution:
         Loop once, we can get the Next Greater Number of a normal array.
         Loop twice, we can get the Next Greater Number of a circular array
 
-        Time: O(N)
-        Space: O(N)
+        Time: O(N), Space: O(N)
         """
-
         res = [-1] * len(nums)
         stack = []
 
@@ -88,7 +83,6 @@ class Solution:
                 k, _ = stack.pop()
                 res[k] = x
             stack.append((i % len(nums), x))
-
         return res
 
 

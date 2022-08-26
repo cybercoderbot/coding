@@ -43,9 +43,9 @@ class Solution:
 
         res = []
         parent = {root: None}
-        queue = [(root, 0)]
+        queue = collections.deque([(root, 0)])
         while queue:
-            node, pre = queue.pop(0)
+            node, pre = queue.popleft()
             pre += node.val
 
             if node.left:

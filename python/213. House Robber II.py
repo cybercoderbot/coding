@@ -34,7 +34,6 @@ class Solution:
         return max(self.helper(nums[:-1]), self.helper(nums[1:]))
 
     def helper(self, nums: List[int]) -> int:
-
         if not nums:
             return 0
 

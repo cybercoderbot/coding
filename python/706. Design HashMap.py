@@ -48,11 +48,10 @@ At most 10^4 calls will be made to add, remove, and contains.
 
 
 class MyHashSet:
-    """
-    Using List of Lists
-    """
-
     def __init__(self):
+        """
+        Using List of Lists
+        """
         self.size = int(1e4)
         self.hashSet = [[] for i in range(self.size)]
 

@@ -44,5 +44,4 @@ class Solution:
         for x in nums:
             node.next = ListNode(x)
             node = node.next
-
         return dummy.next

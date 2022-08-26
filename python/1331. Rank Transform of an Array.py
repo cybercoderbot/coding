@@ -35,8 +35,6 @@ class Solution:
         arr: [10,10,10,10], rank: {10: 1}
         """
         sort = sorted(set(arr))
-        # sort = SortedSet(arr)
-
         rank = defaultdict(int)
         for i, x in enumerate(sort, 1):
             if x not in m:

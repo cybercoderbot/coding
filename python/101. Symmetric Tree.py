@@ -26,9 +26,9 @@ class Solution:
         """Iterative BFS"""
         if root is None:
             return True
-        queue = [(root.left, root.right)]
+        queue = collections.deque([(root.left, root.right)])
         while queue:
-            left, right = queue.pop(0)
+            left, right = queue.popleft()
             if not left and not right:
                 continue
             if not left or not right:

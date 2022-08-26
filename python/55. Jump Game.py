@@ -18,33 +18,28 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum jump 
 """
 
 
-class Solution(object):
-    def canJump(self, nums: List[int]) -> bool:
-        """
-        Idea is to work backwards from the last index.
-        Keep track of the smallest index that can "jump" to the last index.
-        Check whether the current index can jump to this smallest index.
-        """
-
-        N = len(nums)
-        last = N-1
-
-        for i in range(N-2, -1, -1):
-            if nums[i] + i >= last:
-                last = i
-        return last == 0
-
-
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-
         longest = 0
-
         i, N = 0, len(nums)
         while i <= longest:
             longest = max(longest, i + nums[i])
             if longest >= N - 1:
                 return True
             i += 1
-
         return False
+
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        """
+        Idea is to work backwards from the last index.
+        Keep track of the smallest index that can "jump" to the last index.
+        Check whether the current index can jump to this smallest index.
+        """
+        N = len(nums)
+        last = N-1
+        for i in range(N-2, -1, -1):
+            if nums[i] + i >= last:
+                last = i
+        return last == 0

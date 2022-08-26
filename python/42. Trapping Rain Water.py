@@ -55,7 +55,6 @@ class Solution:
             else:
                 res += right - height[j]
                 j -= 1
-
         return res
 
 

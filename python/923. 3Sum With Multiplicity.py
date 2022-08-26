@@ -2,9 +2,7 @@
 923. 3Sum With Multiplicity
 Medium
 
-Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == target.
-
-As the answer can be very large, return it modulo 10^9 + 7.
+Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == target. As the answer can be very large, return it modulo 10^9 + 7.
 
 Example 1:
 Input: arr = [1,1,2,2,3,3,4,4,5,5], target = 8
@@ -37,14 +35,14 @@ Explanation: (1, 2, 3) occured one time in the array so we return 1.
 class Solution:
     def threeSumMulti(self, arr: List[int], target: int) -> int:
         """
-        Time: O(N^2)
-        Space:O(N)
+        Return the number of tuples i, j, k such that 
+        arr[i] + arr[j] + arr[k] == target
+        Time: O(N^2), Space:O(N)
         """
         res = 0
         seen = defaultdict(int)
-
-        for i, n in enumerate(arr):
-            res += seen[target-n]
+        for i, x in enumerate(arr):
+            res += seen[target-x]
             for j in range(i):
                 sm = arr[j] + arr[i]
                 seen[sm] += 1

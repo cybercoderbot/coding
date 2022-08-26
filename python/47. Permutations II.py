@@ -34,8 +34,7 @@ class Solution:
         To exclude duplication, only swap nums[i] with nums[j] when no such value
         has appeared in this position.
 
-        Time: O(N!)
-        Space: O(N!)
+        Time: O(N!), Space: O(N!)
         """
 
         def backtrack(i):

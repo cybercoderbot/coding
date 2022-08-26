@@ -30,5 +30,4 @@ class Solution:
         """
         max candy: min( half of candy, candy types )
         """
-
         return min(len(candyType)//2, len(set(candyType)))

@@ -24,7 +24,6 @@ class Solution:
         """
         3Sum -> sort array
         """
-
         nums.sort()
         res = nums[0] + nums[1] + nums[2]
         N = len(nums)
@@ -38,7 +37,6 @@ class Solution:
 
                 if abs(sum3 - target) < abs(res - target):
                     res = sum3
-
                 if sum3 < target:
                     j += 1
                 elif sum3 > target:

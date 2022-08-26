@@ -24,7 +24,7 @@ Explanation: The string s has been split into three parts, each part has 2 chara
 class Solution:
     def licenseKeyFormatting(self, s: str, k: int) -> str:
         """
-        O(N) time and O(N) space
+        O(N) time, O(N) space
         """
         s = s.replace("-", "").upper()[::-1]
         return '-'.join(s[i:i+k] for i in range(0, len(s), k))[::-1]

@@ -1,4 +1,28 @@
 class Solution:
+    def nextPermutation(self, nums):
+        """ 
+        31. Next Permutation (in place)
+        [1,2,3]->[1,3,2], [1,1,5]->[1,5,1], [3,2,1]->[1,2,3]
+        https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
+        Time O(N), Space: O(1)
+        [0,1,2,5,3,3,0] -> [0,1,3,5,3,2,0] -> [0,1,3,0,2,3,5]
+        """
+        N = len(nums)
+        idx1 = next((i for i in range(N-2, -1, -1)
+                     if nums[i] < nums[i+1]), None)
+        if idx1 is None:
+            nums.reverse()
+            # nums.sort()
+        else:
+            idx2 = next((i for i in range(N - 1, idx1, -1)
+                         if nums[i] > nums[idx1]), None)
+            nums[idx1], nums[idx2] = nums[idx2], nums[idx1]
+            nums[idx1+1:] = reversed(nums[idx1+1:])
+            # nums[idx1 + 1:] = sorted(nums[idx1 + 1:])
+        return
+
+
+class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         """
         46. Permutations
@@ -43,6 +67,35 @@ class Solution:
 
         res = []
         backtrack(i=0)
+        return res
+
+
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        """
+        60. Permutation Sequence
+        Given n and k, return the kth permutation sequence.
+        Approach 1 - brute force O(N!)
+        """
+        if n == 0:
+            return ""
+        perms = list(permutations(range(1, n+1)))
+        return "".join([str(x) for x in perms[k-1]])
+
+
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        """
+        60. Permutation Sequence
+        Given n and k, return the kth permutation sequence.
+        """
+        res = ""
+        nums = list(range(1, n+1))
+        k -= 1
+        while n:
+            n -= 1
+            index, k = divmod(k, math.factorial(n))
+            res += str(nums.pop(index))
         return res
 
 

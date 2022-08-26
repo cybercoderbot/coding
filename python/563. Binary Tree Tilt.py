@@ -44,6 +44,7 @@ class Solution:
     def findTilt(self, root: TreeNode) -> int:
         res = 0
 
+        @lru_cache(None)
         def sumNodes(node):
             nonlocal res
 
@@ -53,9 +54,7 @@ class Solution:
             left = sumNodes(node.left)
             right = sumNodes(node.right)
             res += abs(left - right)
-
             return left + right + node.val
 
         sumNodes(root)
-
         return res

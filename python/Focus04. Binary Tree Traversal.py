@@ -68,6 +68,34 @@ class Solution:
         589. N-ary Tree Preorder Traversal
         root -> children
         """
+        if not root:
+            return []
+        res = [root.val]
+        for child in root.children:
+            res.extend(self.preorder(child))
+        return res
+
+
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        """
+        590. N-ary Tree Postorder Traversal
+        """
+        if not root:
+            return []
+        res = []
+        for child in root.children:
+            res.extend(self.postorder(child))
+        res.append(root.val)
+        return res
+
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        """
+        589. N-ary Tree Preorder Traversal
+        root -> children
+        """
         @lru_cache(None)
         def traverse(node):
             if not node:
@@ -132,6 +160,27 @@ class Solution:
                 res.append(node.val)
                 stack.extend(node.children)
         return res[::-1]
+
+
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        """
+        429. N-ary Tree Level Order Traversal
+        """
+        if not root:
+            return []
+        queue = collections.deque([root])
+        res = []
+        while queue:
+            vals, level = [], []
+            for node in queue:
+                vals.append(node.val)
+                for child in node.children:
+                    if child:
+                        level.append(child)
+            res.append(vals)
+            queue = level
+        return res
 
 
 class Solution:
@@ -262,7 +311,7 @@ class Solution:
 
 
 class Solution:
-    def verticalOrder(self, root: TreeNode) -> List[List[int]]:
+    def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         """
         314. Binary Tree Vertical Order Traversal
         queue: (col, node). seen: {col: [node.val]}
@@ -270,17 +319,20 @@ class Solution:
         """
         if not root:
             return []
+        if not root.left and not root.right:
+            return [[root.val]]
 
-        seen = collections.defaultdict(list)
-        queue = [(0, root)]
+        tree = collections.defaultdict(list)
+        queue = collections.deque([(0, root)])
         while queue:
-            col, node = queue.pop(0)
-            if node:
-                seen[col].append(node.val)
+            col, node = queue.popleft()
+            tree[col].append(node.val)
+            if node.left:
                 queue.append((col-1, node.left))
+            if node.right:
                 queue.append((col+1, node.right))
 
-        return [seen[x] for x in sorted(seen.keys())]
+        return [tree[x] for x in sorted(tree.keys())]
 
 
 class Solution:
@@ -290,7 +342,6 @@ class Solution:
         105. Construct Binary Tree from Preorder and Inorder Traversal
         Inorder:  left -> root -> right
         Preorder: root -> left -> right
-
         The 1st node in preorder is the root of the tree. Let it be x
 
         Elements left to x in inorder form the LEFT subtree.
@@ -298,14 +349,13 @@ class Solution:
 
         Build left subtree, then build right subtree.
         """
-
         if not inorder or not preorder:
             return None
 
         val = preorder.pop(0)
         index = inorder.index(val)
 
-        root = TreeNode(inorder[index])
+        root = TreeNode(val=val)
         root.left = self.buildTree(preorder, inorder[:index])
         root.right = self.buildTree(preorder, inorder[index+1:])
 
@@ -317,21 +367,18 @@ class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
         """
         106. Construct Binary Tree from Inorder and Postorder Traversal
-
         Inorder:   left -> root -> right
         Postorder: left -> right -> root
-
         The last node in postorder is the root of the tree. 
         Build right subtree, then build left subtree.
         """
-
         if not inorder or not postorder:
             return None
 
         val = postorder.pop()
         index = inorder.index(val)
 
-        root = TreeNode(val)
+        root = TreeNode(val=val)
         # right -> left
         root.right = self.buildTree(inorder[index+1:], postorder)
         root.left = self.buildTree(inorder[:index], postorder)
@@ -340,21 +387,20 @@ class Solution:
 
 
 class Solution:
-    @lru_cache(None)
     def buildTree(self, preorder: List[int], postorder: List[int]) -> TreeNode:
         """
         889. Construct Binary Tree from Preorder and Postorder Traversal
 
-        The first node in preorder and the last node in postorder are both value of the root. The Second last of postorder is value of right child of the root. 
+        The first node in preorder and the last node in postorder are both value of the root. 
+        The Second last of postorder is value of RIGHT child of the root. 
         So we can find the index to split left and right children in preorder. 
         Don't forget to evaluate if the length of postorder > 1, since we used post[-2].
         """
-
         if not preorder or not postorder:
             return None
 
-        root = TreeNode(preorder[0])
-        if len(postorder) == 1:
+        root = TreeNode(val=preorder[0])
+        if len(preorder) == 1:
             return root
 
         right = postorder[-2]
@@ -369,6 +415,7 @@ class Solution:
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         """
+        106. Construct Binary Tree from Inorder and Postorder Traversal
         Trace-retrace via stack
         """
         # mapping from val to pos
@@ -392,6 +439,7 @@ class Solution:
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
         """
+        106. Construct Binary Tree from Inorder and Postorder Traversal
         Trace-retrace via recursion
         """
         loc = {x: i for i, x in enumerate(inorder)}
@@ -417,6 +465,9 @@ class Solution:
 
 class Solution:
     def buildTree(self, preorder: List[int], postorder: List[int]) -> TreeNode:
+        """
+        889. Construct Binary Tree from Preorder and Postorder Traversal
+        """
         stack = [TreeNode(preorder[0])]
         i = 0
         for x in preorder[1:]:
@@ -429,5 +480,36 @@ class Solution:
             else:
                 stack[-1].right = node
             stack.append(node)
+
+        return stack[0]
+
+
+class Solution:
+    def recoverFromPreorder(self, s: str) -> TreeNode:
+        """
+        1028. Recover a Tree From Preorder Traversal
+        """
+        if not s:
+            return None
+
+        stack = []
+        depth, val = 0, ""
+        for i, c in enumerate(s):
+            if c.isdigit():
+                val += s[i]
+                if i+1 == len(s) or s[i+1] == "-":
+                    node = TreeNode(int(val))
+                    while len(stack) > depth:
+                        stack.pop()
+                    if stack:
+                        if not stack[-1].left:
+                            stack[-1].left = node
+                        else:
+                            stack[-1].right = node
+                    stack.append(node)
+                    depth = 0
+            elif c == "-":
+                depth += 1
+                val = ""
 
         return stack[0]

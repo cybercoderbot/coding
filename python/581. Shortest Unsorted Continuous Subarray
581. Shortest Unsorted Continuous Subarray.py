@@ -28,7 +28,7 @@ Similarly, to find the lower bound, simply loop through the list backward(starti
 """
 
 
-class Solution(object):
+class Solution:
     def findUnsortedSubarray(self, nums: List[int]) -> int:
         """
         Sort the list and check if it's still the same number in the list.
@@ -38,7 +38,7 @@ class Solution(object):
         return res[-1] - res[0] + 1 if res else 0
 
 
-class Solution(object):
+class Solution:
     def findUnsortedSubarray(self, nums: List[int]) -> int:
 
         sort = sorted(nums)
@@ -61,16 +61,15 @@ class Solution:
         left = right = 0
         N = len(nums)
 
-        mmax = -inf
+        low, high = inf, -inf
         for i in range(N):
-            mmax = max(mmax, nums[i])
-            if nums[i] < mmax:
+            high = max(high, nums[i])
+            if nums[i] < high:
                 right = i+1
 
-        mmin = inf
-        for i in range(right-1, -1, -1):  # lo <= hi
-            mmin = min(mmin, nums[i])
-            if nums[i] > mmin:
+        for i in range(right-1, -1, -1):
+            low = min(low, nums[i])
+            if nums[i] > low:
                 left = i
 
         return right - left

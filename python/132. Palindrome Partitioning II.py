@@ -64,7 +64,7 @@ class Solution:
                 return 0
             res = inf
             for j in range(i, N):
-                if (isPalindrome(i, j)):
+                if isPalindrome(i, j):
                     res = min(res, dp(j+1) + 1)
             return res
 

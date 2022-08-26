@@ -29,9 +29,8 @@ Output: [1,5,2,4,3]
 class Solution:
     def reorderList(self, head: ListNode) -> None:
         """
-        Do not return anything, modify head in-place instead.
+        Modify head in-place instead.
         """
-
         # 1. locate the mid-point
         fast = slow = head
         while fast and fast.next:

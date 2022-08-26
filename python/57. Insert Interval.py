@@ -23,34 +23,27 @@ class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         """
         Loop through the intervals [xi, yi] and compare with new interval [x0, y0]
-
         1) if yi < x0, add [xi, yi] to answer
         2) if y0 < xi, add [x0, y0] and the remaining of intervals to answer
         2) if overlapping, merge the two intervals 
-            x0 = min(x0, xi) and y0 = max(y0, yi).
-
-        Time: O(N)
-        Space: O(N)
-
+            x0 = min(x0, xi) and y0 = max(y0, yi)
+        Time: O(N), Space: O(N)
         """
-
         i, N = 0, len(intervals)
         x0, y0 = newInterval
 
         res = []
-
         while i < N:
             xi, yi = intervals[i]
             if y0 < xi:
                 break
-
             if yi < x0:
                 res.append([xi, yi])
             else:
-                x0, y0 = min(x0, xi), max(y0, yi)
+                x0 = min(x0, xi)
+                y0 = max(y0, yi)
             i += 1
 
         res.append([x0, y0])
         res.extend(intervals[i:])
-
         return res

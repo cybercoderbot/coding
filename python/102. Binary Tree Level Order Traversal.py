@@ -32,7 +32,6 @@ class Solution:
             return
 
         res, queue = [], [root]
-
         while queue:
             level, vals = [], []
             for node in queue:

@@ -14,9 +14,9 @@ class Solution:
         """
         # build graph as adjacency list
         graph = defaultdict(list)
-        queue = [root]
+        queue = collections.deque([root])
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             for child in (node.left, node.right):
                 if child:
                     queue.append(child)

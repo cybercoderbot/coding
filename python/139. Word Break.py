@@ -18,22 +18,15 @@ Note that you are allowed to reuse a dictionary word.
 
 """
 The idea is the following:
-
 dp is an array that contains booleans
-
 dp[i] is True if there is a word in the dictionary that ends at ith index of s 
 AND dp is also True at the beginning of the word
 
 Example:
-
 s = "leetcode"
-
 words = ["leet", "code"]
-
 dp[3] is True because there is "leet" in the dictionary that ends at 3rd index of "leetcode"
-
 dp[7] is True because there is "code" in the dictionary that ends at the 7th index of "leetcode" AND dp[3] is True
-
 The result is the last index of dp.
 """
 
@@ -52,10 +45,9 @@ class Solution:
 
 class Solution(object):
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-
-        queue = [s]
+        queue = collections.deque([s])
         while queue:
-            front = queue.pop(0)
+            front = queue.popleft()
             if front in wordDict:
                 return True
             prefix = ''

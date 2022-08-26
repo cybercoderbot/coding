@@ -53,13 +53,13 @@ class Solution:
             return -1
 
         visited = set((0, 0))
-        queue = [(0, 0, 1)]
+        queue = collections.deque([(0, 0, 1)])
         neighbors = [(0, 1), (1, 0), (-1, 0), (0, -1),
                      (1, 1), (-1, -1), (1, -1), (-1, 1)]
         M, N = len(grid), len(grid[0])
 
         while queue:
-            x, y, path = queue.pop(0)
+            x, y, path = queue.popleft()
             if (x, y) == (M-1, N-1):
                 return path
 

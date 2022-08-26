@@ -7,7 +7,6 @@ class Solution:
         Return number of ways to reach to top of n steps.
         Top down DP
         """
-
         if n == 1:
             return 1
         if n == 2:
@@ -17,22 +16,19 @@ class Solution:
 
 
 class Solution:
-    def climbStairs(self, n):
+    def climbStairs(self, N):
         """
         70. Climbing Stairs
         Bottom up DP
         Space: O(N)
         """
-
-        if n == 1:
+        if N == 1:
             return 1
 
-        cache = [0] * n
+        cache = [0] * N
         cache[0], cache[1] = 1, 2
-
-        for i in range(2, n):
+        for i in range(2, N):
             cache[i] = cache[i-1] + cache[i-2]
-
         return cache[-1]
 
 
@@ -43,7 +39,6 @@ class Solution:
         1) F(0) = 0, F(1) = 1
         2) F(n) = F(n - 1) + F(n - 2), for n > 1.
         """
-
         if N <= 1:
             return N
 
@@ -62,7 +57,6 @@ class Solution:
         1) F(0) = 0, F(1) = 1
         2) F(n) = F(n - 1) + F(n - 2), for n > 1.
         """
-
         a, b = 0, 1
         for _ in range(N):
             a, b = b, a+b
@@ -73,12 +67,10 @@ class Solution:
     def tribonacci(self, N: int) -> int:
         """
         1137. N-th Tribonacci Number
-
         The Tribonacci sequence Tn is defined as follows: 
         T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n >= 0.
         Given n, return the value of Tn.
         """
-
         if N == 0:
             return 0
 

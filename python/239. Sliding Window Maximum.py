@@ -22,59 +22,55 @@ Window position                Max
 Example 2:
 Input: nums = [1], k = 1
 Output: [1]
-
 """
-
-from collections import deque
 
 
 class Solution:
     def maxSlidingWindow(self, nums, k):
         """
         Monotonically decreasing array 
-        queue: index of large to small number in nums
+        deq: index of large to small number in nums
         """
-
-        queue = []
         res = []
+        deq = collections.deque([])
         for i, x in enumerate(nums):
-
             # make sure the rightmost val is the smallest
-            while queue and nums[queue[-1]] < x:
-                queue.pop()
-            queue.append(i)
+            while deq and nums[deq[-1]] < x:
+                deq.pop()
+
+            deq.append(i)
 
             # make sure the leftmost val is in-bound
-            if i - queue[0] >= k:
-                queue.pop(0)
+            if i - deq[0] >= k:
+                deq.popleft()
 
             # if i + 1 < k, then we are initializing the bigger array
             if i + 1 >= k:
-                res.append(nums[queue[0]])
+                res.append(nums[deq[0]])
         return res
 
 
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        queue = deque()
+        deq = collections.deque()
 
         for i in range(len(nums)):
             # the first/left (max) element is out of the current window
-            if queue and i - queue[0] == k:
-                queue.popleft()
+            if deq and i - deq[0] == k:
+                deq.popleft()
 
-            while queue:
-                # pop useless elements from last/right of the queue
-                if nums[queue[-1]] < nums[i]:
-                    queue.pop()
+            while deq:
+                # pop useless elements from last/right of the deq
+                if nums[deq[-1]] < nums[i]:
+                    deq.pop()
                 else:
                     break
 
-            queue.append(i)
+            deq.append(i)
 
             # i == k-1 is the beginning of a full window
             res = []
             if i >= k-1:
-                res.append(nums[queue[0]])
+                res.append(nums[deq[0]])
 
         return res

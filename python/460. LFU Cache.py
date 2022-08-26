@@ -15,10 +15,7 @@ When a key is first inserted into the cache, its use counter is set to 1 (due to
 
 The functions get and put must each run in O(1) average time complexity.
 
- 
-
 Example 1:
-
 Input
 ["LFUCache", "put", "put", "get", "put", "get", "get", "put", "get", "get", "get"]
 [[2], [1, 1], [2, 2], [1], [3, 3], [2], [3], [4, 4], [1], [3], [4]]
@@ -65,7 +62,6 @@ class ListNode:
 
 
 class LFUCache:
-
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.cache = dict()

@@ -23,6 +23,13 @@ class Solution:
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         """O(N) time, O(N) space"""
+        freq = collections.Counter(nums)
+        return next(k for k, v in freq.items() if v == 1)
+
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        """O(N) time, O(N) space"""
         for x in nums:
             if nums.count(x) == 1:
                 return x

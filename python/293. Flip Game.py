@@ -24,7 +24,6 @@ class Solution:
         Loop through s and look for ++
         If ++ is found, add the string with ++ replaced by -- to answer.
         """
-
         res = []
         for i in range(len(s)-1):
             if s[i:i+2] == "++":

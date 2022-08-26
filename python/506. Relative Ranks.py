@@ -21,19 +21,17 @@ Example 2:
 Input: score = [10,3,8,9,4]
 Output: ["Gold Medal","5","Bronze Medal","Silver Medal","4"]
 Explanation: The placements are [1st, 5th, 3rd, 2nd, 4th].
-
 """
 
 
 class Solution:
     def findRelativeRanks(self, scores: List[int]) -> List[str]:
-        '''
+        """
         Step1: Initialize a list and assign the total ranks
         Step2: Using a dictionary map the score with respective rank 
         Final: Return the ranks using the input score list order
-
-        TimeComplexity: O(nlogn)
-        '''
+        Time: O(NlogN)
+        """
         ranks = ["Gold Medal", "Silver Medal", "Bronze Medal"]
         sorts = sorted(scores, reverse=True)
         for i in range(4, len(scores)+1):
@@ -46,9 +44,7 @@ class Solution:
 
 
 class Solution:
-
     def findRelativeRanks(self, scores: List[int]) -> List[str]:
-
         # Sort scores from best to worst
         nums_sorted = sorted(scores, reverse=True)
 
@@ -65,7 +61,6 @@ class Solution:
 
 
 class Solution:
-
     def findRelativeRanks(self, nums):
         sort = sorted(nums)[::-1]
         rank = ["Gold Medal", "Silver Medal", "Bronze Medal"] + \

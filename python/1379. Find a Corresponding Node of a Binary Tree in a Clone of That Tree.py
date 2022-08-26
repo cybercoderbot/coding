@@ -39,9 +39,9 @@ class Solution:
         if original == target:
             return cloned
 
-        queue = [(original, cloned)]
+        queue = collections.deque([(original, cloned)])
         while queue:
-            src, dst = queue.pop(0)
+            src, dst = queue.popleft()
             if src == target:
                 return dst
             if src:

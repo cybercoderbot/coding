@@ -11,17 +11,15 @@ Output: true
 Example 2:
 Input: root = [5,3,6,2,4,null,7], k = 28
 Output: false
-
 """
 
 
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
         seen = set()
-        queue = [root]
-
+        queue = collections.deque([root])
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             if not node:
                 continue
             if k - node.val in seen:
@@ -37,15 +35,13 @@ class Solution:
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
         seen = set()
-        queue = [root]
-
+        queue = collections.deque([root])
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             if k - node.val in seen:
                 return True
 
             seen.add(node.val)
-
             if node.right:
                 queue.append(node.right)
             if node.left:

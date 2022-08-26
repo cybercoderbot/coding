@@ -36,11 +36,11 @@ class Solution:
     def racecar(self, target: int) -> int:
         """queue: [move, pos, speed]"""
 
-        queue = [[0, 0, 1]]
+        queue = collections.deque([[0, 0, 1]])
         visited = set()
 
         while queue:
-            move, pos, speed = queue.pop(0)
+            move, pos, speed = queue.popleft()
             if pos == target:
                 return move
             if (pos, speed) in visited:

@@ -37,7 +37,6 @@ class Solution:
         2) If out of bound: di, dj = dj, -di
         3) Update: i, j = i+di, j+dj
         """
-
         i, j = 0, 0
         di, dj = 0, 1
         res = [[-1]*N for _ in range(M)]

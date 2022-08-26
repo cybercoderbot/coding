@@ -40,7 +40,6 @@ push executes in O(n) as we need to re-order the elemets so as to have the top o
 
 
 class MyStack:
-
     def __init__(self):
         """
         Initialize your data structure here.
@@ -73,12 +72,11 @@ class MyStack:
 
 
 class MyStack:
-
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        self.q = deque()
+        self.q = collectinos.deque()
 
     def push(self, x: int) -> None:
         """

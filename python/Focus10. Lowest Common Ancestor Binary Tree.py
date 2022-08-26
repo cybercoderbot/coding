@@ -11,7 +11,7 @@ class Solution:
 
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         235. Lowest Common Ancestor of a Binary Search Tree
         """
@@ -29,7 +29,7 @@ class Solution:
 
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         236. Lowest Common Ancestor of a Binary Tree
         """
@@ -46,7 +46,7 @@ class Solution:
 
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         1644. Lowest Common Ancestor of a Binary Tree II
         If either node p or q does not exist in the tree, return null.
@@ -54,10 +54,10 @@ class Solution:
         Time: O(N), Space: O(N)
         """
         parents = {root.val: None}
-        queue = [root]
+        queue = collections.deque([root])
 
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             if node.left:
                 parents[node.left.val] = node
                 queue.append(node.left)
@@ -78,7 +78,7 @@ class Solution:
 
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         """
         1644. Lowest Common Ancestor of a Binary Tree II
         If either node p or q does not exist in the tree, return null.
@@ -109,7 +109,7 @@ class Solution:
 
 
 class Solution:
-    def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
+    def lowestCommonAncestor(self, p: Node, q: Node) -> Node:
         """
         1650. Lowest Common Ancestor of a Binary Tree III
         Each node will have a reference to its parent node.
@@ -122,7 +122,7 @@ class Solution:
 
 
 class Solution:
-    def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
+    def lowestCommonAncestor(self, p: Node, q: Node) -> Node:
         """
         1650. Lowest Common Ancestor of a Binary Tree III
         Each node will have a reference to its parent node.
@@ -141,7 +141,7 @@ class Solution:
 
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', nodes: 'List[TreeNode]') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, nodes: List[TreeNode]) -> TreeNode:
         """
         1676. Lowest Common Ancestor of a Binary Tree IV
         All the nodes exist in the tree, and all node values are unique.

@@ -49,7 +49,7 @@ class Solution:
         Time: O(N), Space: O(N)
         """
         res, j = 0, -1  # starting anchor
-        queue = deque()
+        queue = collections.deque()
         seen = {}  # last seen
         for i, x in enumerate(s):
             if not queue or queue[-1] != x:

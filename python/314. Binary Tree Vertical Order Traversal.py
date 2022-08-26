@@ -2,9 +2,7 @@
 314. Binary Tree Vertical Order Traversal
 Medium
 
-Given the root of a binary tree, return the vertical order traversal of its nodes' values. (i.e., from top to bottom, column by column).
-
-If two nodes are in the same row and column, the order should be from left to right.
+Given the root of a binary tree, return the vertical order traversal of its nodes' values. (i.e., from top to bottom, column by column). If two nodes are in the same row and column, the order should be from left to right.
 
 Example 1:
 Input: root = [3,9,20,null,null,15,7]
@@ -18,7 +16,6 @@ Example 3:
 Input: root = [3,9,8,4,0,1,7,null,null,null,2,5]
 Output: [[4],[9,5],[3,0,1],[8,2],[7]]
 """
-
 
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -35,10 +32,10 @@ class Solution:
     def verticalOrder(self, root: TreeNode) -> List[List[int]]:
         # dic: {col: node.val}
         dic = collections.defaultdict(list)
-        queue = [(0, root)]
+        queue = collections.deque([(0, root)])
 
         while queue:
-            col, node = queue.pop(0)
+            col, node = queue.popleft()
 
             if node:
                 dic[col].append(node.val)
@@ -48,14 +45,11 @@ class Solution:
         return [dic[x] for x in sorted(dic.keys())]
 
 
-class Solution(object):
-
+class Solution():
     def verticalOrder(self, root):
         """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-
-        this problem seemed very hard but actually once you draw a picture on a paper or in your brain, it becomes pretty clear.
+        This problem seemed very hard but actually once you draw a picture 
+        on a paper or in your brain, it becomes pretty clear.
         - for the left  node, you set its index as index - 1
         - for the right node, you set its index as index + 1
         - use queue to loop through all the nodes in a tree
@@ -69,12 +63,12 @@ class Solution(object):
 
         MIN, MAX = 0, 0
         table = {}
-        queue = [(0, root)]
+        queue = collections.deque([(0, root)])
         res = []
 
         while queue:
             # order matters
-            index, node = queue.pop(0)
+            index, node = queue.popleft()
             if index not in table:
                 table[index] = [node.val]
             else:

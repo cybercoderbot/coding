@@ -25,8 +25,8 @@ class Solution:
     def maxArea(self, height: List[int]) -> int:
         """
         Brute Force
-        simply consider the area for every possible pair of the lines and 
-        find out the maximum area out of those. 
+        simply consider the area for every possible pair of the lines and
+        find out the maximum area out of those.
         Time: O(N^2), Space: O(1)
         """
         res = 0
@@ -53,33 +53,23 @@ The algorithm can be better understood by looking at the example below:
 How does this approach work?
 
 Initially we consider the area constituting the exterior most lines. Now, to maximize the area, we need to consider the area between the lines of larger lengths. If we try to move the pointer at the longer line inwards, we won't gain any increase in area, since it is limited by the shorter line. But moving the shorter line's pointer could turn out to be beneficial, as per the same argument, despite the reduction in the width. This is done since a relatively longer line obtained by moving the shorter line's pointer might overcome the reduction in area caused by the width reduction.
-
-Complexity Analysis
-
-Time complexity: O(N). Single pass.
-
-Space complexity: O(1). Constant space is used.
 """
 
 
-class Solution(object):
+class Solution:
     def maxArea(self, height: List[int]) -> int:
         """
         Two pointers
         Time: O(N), Space: O(1)
         """
-        N = len(height)
-        left, right = 0, N-1
-
+        left, right = 0, len(height)-1
         res = 0
         while left < right:
             width = right - left
             depth = min(height[left], height[right])
-            res = max(res,  width * depth)
-
+            res = max(res, width * depth)
             if height[left] < height[right]:
                 left += 1
             else:
                 right -= 1
-
         return res

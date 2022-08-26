@@ -28,10 +28,10 @@ class Solution:
         if not root:
             return
 
-        queue = [root]
+        queue = collections.deque([root])
         freq = defaultdict(int)
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             freq[node.val] += 1
             if node.left:
                 queue.append((node.left))

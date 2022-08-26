@@ -37,7 +37,6 @@ class Solution:
         B (x-3) -> A: (x-4), (x-5), (x-6)
 
         Recurrence relation:
-
         fn(i) = not fn(i-1) or not fn(i-2) or not fn(i-3)
         where fn(i) indicates if player can win with i stones left. 
 
@@ -45,5 +44,4 @@ class Solution:
         Then, this problem really becomes checking if n is a multiple of 4. 
         If so, return False; otherwise, return True.
         """
-
         return n % 4

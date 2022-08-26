@@ -29,18 +29,14 @@ Output: [1,5,1]
 """
 
 
-"""
-look for the last occurrence of an adjacent increasing pair nums[k-1] and nums[k];
-look for the smallest numbers (say at j) in nums[k:] that is larger than nums[k-1];
-swap nums[k-1] and nums[j];
-reverse numbers in nums[k:].
-"""
-
-
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
         """
-        Do not return anything, modify nums in-place instead.
+        Modify nums in-place.
+        look for the last occurrence of an adjacent increasing pair nums[k-1] and nums[k];
+        look for the smallest numbers (say at j) in nums[k:] that is larger than nums[k-1];
+        swap nums[k-1] and nums[j];
+        reverse numbers in nums[k:].
         """
         k = len(nums)-1
         while k and nums[k-1] >= nums[k]:

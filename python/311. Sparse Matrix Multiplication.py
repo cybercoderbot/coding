@@ -17,10 +17,9 @@ Output: [[0]]
 class Solution:
     def multiply(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
         """
-        Time complexity O(MKN)
-        Space complexity O(MN)
+        Time: O(M * K * N), Space: O(M * N)
         """
-        M, K, N = len(A), len(B), len(B[0])  # dimensions
+        M, K, N = len(A), len(B), len(B[0])
         res = [[0] * N for _ in range(M)]
 
         for i, k in product(range(M), range(K)):

@@ -13,6 +13,28 @@ class Solution:
 
 
 class Solution:
+    def minOperations(self, nums: List[int], target: int) -> int:
+        """
+        1658. Minimum Operations to Reduce target to Zero
+        You can either remove the leftmost or the rightmost element from the array nums 
+        and subtract its value from target. Return the min number of operations to reduce 
+        target to exactly 0. If not, return -1.
+        """
+        k = sum(nums) - target
+        if not k:
+            return len(nums)
+
+        seen = defaultdict(int, {0: -1})
+        res = cumsum = 0
+        for i, x in enumerate(nums):
+            cumsum += x
+            if cumsum - k in seen:
+                res = max(res, i - seen[cumsum-k])
+            seen[cumsum] = i
+        return len(nums) - res if res else -1
+
+
+class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         """
         167. Two Sum II - Input Array Is Sorted
@@ -30,10 +52,6 @@ class Solution:
 
 
 class TwoSum:
-    """
-    170. Two Sum III - Data structure design
-    """
-
     def __init__(self):
         self.seen = defaultdict(int)
 
@@ -41,6 +59,9 @@ class TwoSum:
         self.seen[num] += 1
 
     def find(self, value: int) -> bool:
+        """
+        170. Two Sum III - Data structure design
+        """
         for x in self.seen:
             if value - x in self.seen:
                 if value - x != x or self.seen[x] >= 2:
@@ -55,9 +76,9 @@ class Solution:
         BFS traverse the tree. Use a set to keep track of seen nodes.
         """
         seen = set()
-        queue = [root]
+        queue = collections.deque([root])
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             if target - node.val in seen:
                 return True
             seen.add(node.val)
@@ -66,35 +87,6 @@ class Solution:
             if node.right:
                 queue.append(node.right)
         return False
-
-
-class Solution:
-    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
-        """
-        993. Cousins in Binary Tree
-        Preorder DFS iteration and record depth and parent of each node
-        queue: (node, depth, parent)
-        seen[node] = (depth, parent)
-        cousin: same depth, different parents
-        """
-        if not root:
-            return False
-
-        seen = defaultdict(tuple)
-        queue = [(root, 0, None)]
-        while queue:
-            node, depth, parent = queue.pop(0)
-            if not node:
-                continue
-            if node.val in (x, y):
-                seen[node.val] = (depth, parent)
-            queue.append((node.left, depth+1, node))
-            queue.append((node.right, depth+1, node))
-
-        depthx, parentx = seen[x]
-        depthy, parenty = seen[y]
-
-        return depthx == depthy and parentx != parenty
 
 
 class Solution:
@@ -113,7 +105,8 @@ class Solution:
             """
             if not root:
                 return []
-            return inorder(root.left) + [root.val] + inorder(root.right)
+            left, right = inorder(root.left), inorder(root.right)
+            return left + [root.val] + right
 
         nums1, nums2 = inorder(root1), inorder(root2)
 
@@ -155,7 +148,6 @@ class Solution:
         15. 3Sum (no dups in results)
         Sort nums -> 2sum
         """
-
         if len(nums) < 3:
             return []
 
@@ -184,8 +176,27 @@ class Solution:
         return res
 
 
-class Solution(object):
-    def fourSum(self, nums, target):
+class Solution:
+    def threeSumMulti(self, nums: List[int], target: int) -> int:
+        """
+        923. 3Sum With Multiplicity
+        Return the number of tuples i, j, k such that 
+        nums[i] + nums[j] + nums[k] == target
+        Time: O(N^2), Space:O(N)
+        """
+        res = 0
+        seen = defaultdict(int)
+        for i, x in enumerate(nums):
+            res += seen[target-x]
+            for j in range(i):
+                y = nums[j] + nums[i]
+                seen[y] += 1
+
+        return res % (10**9+7)
+
+
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[int]:
         """
         4Sum: sort nums. [a,b,c,d] are distinct
         """
@@ -256,10 +267,10 @@ class Solution:
         Record (node, pre) when traversing the tree
         res += pre when reaching leaf node
         """
-        queue = [(root, 0)]
         res = 0
+        queue = collections.deque([(root, 0)])
         while queue:
-            node, pre = queue.pop(0)
+            node, pre = queue.popleft()
             pre = 10 * pre + node.val
             if not node.left and not node.right:
                 res += pre
@@ -335,9 +346,9 @@ class Solution:
             return node and not node.left and not node.right
 
         res = 0
-        queue = [(root, False)]
+        queue = collections.deque([(root, False)])
         while queue:
-            node, isLeft = queue.pop(0)
+            node, isLeft = queue.popleft()
             if isLeft and isLeaf(node):
                 res += node.val
             if node.left:

@@ -11,7 +11,6 @@ The next element in s[k] should be nums[nums[k]], and then nums[nums[nums[k]]], 
 We stop adding right before a duplicate element occurs in s[k].
 Return the longest length of a set s[k].
 
- 
 Example 1:
 Input: nums = [5,4,0,3,1,6,2]
 Output: 4
@@ -23,7 +22,6 @@ s[0] = {nums[0], nums[5], nums[6], nums[2]} = {5, 6, 2, 0}
 Example 2:
 Input: nums = [0,1,2]
 Output: 1
-
 """
 
 
@@ -33,8 +31,7 @@ class Solution:
         Traverse the array following the conneciton.
         x = nums[x]
 
-        Time: O(N)
-        Space: O(N)
+        Time: O(N), Space: O(N)
         """
         res = 0
         seen = [False] * len(nums)

@@ -35,10 +35,10 @@ class Solution:
 
         M, N = len(image), len(image[0])
         original = image[sr][sc]
-        queue = [(sr, sc)]
+        queue = collections.deque([(sr, sc)])
 
         while queue:
-            x, y = queue.pop(0)
+            x, y = queue.popleft()
             image[x][y] = color
             neighbors = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
             for i, j in neighbors:

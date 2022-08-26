@@ -29,12 +29,10 @@ Output: false
 class Solution:
     def isHappy(self, n: int) -> bool:
         """
-        Compute the next number following the "happy number" rule and check
-
+        Compute the next number following the happy number rule and check
         If the number reaches 1 (True)
         If the number has appeared before (False)
         """
-
         seen = set()
         while n not in seen:
             seen.add(n)

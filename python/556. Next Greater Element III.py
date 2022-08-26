@@ -34,8 +34,7 @@ PS see also problem 31. Next Permutation, which uses exactly the same idea.
 class Solution:
     def nextGreaterElement(self, n):
         """
-        Time complexity O(N)
-        Space complexity O(N)
+        Time: O(N), Space: O(N)
         """
         nums = list(str(n))
 
@@ -67,8 +66,7 @@ class Solution:
 class Solution:
     def nextGreaterElement(self, n: int) -> int:
         """
-        Time complexity O(logN)
-        Space complexity O(logN)
+        Time: O(logN), Space: O(logN)
         """
         s = list(str(n))
         for i in reversed(range(len(s)-1)):

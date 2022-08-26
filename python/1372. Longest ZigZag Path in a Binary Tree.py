@@ -46,10 +46,10 @@ class Solution:
         if not root:
             return 0
 
-        queue = [(root, 0, '')]
         res = 0
+        queue = collections.deque([(root, 0, '')])
         while queue:
-            node, path, label = queue.pop(0)
+            node, path, label = queue.popleft()
             if not node:
                 continue
             res = max(res, path)

@@ -1,25 +1,9 @@
-"""
-105. Construct Binary Tree from Preorder and Inorder Traversal
-Medium
-
-Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
-
-Example 1:
-Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
-Output: [3,9,20,null,null,15,7]
-
-Example 2:
-Input: preorder = [-1], inorder = [-1]
-Output: [-1]
-"""
-
-
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         """
+        105. Construct Binary Tree from Preorder and Inorder Traversal
         Inorder:  left -> root -> right
         Preorder: root -> left -> right
-
         The 1st node in preorder is the root of the tree. Let it be x
 
         Elements left to x in inorder form the LEFT subtree.
@@ -27,7 +11,6 @@ class Solution:
 
         Build left subtree, then build right subtree.
         """
-
         if not inorder or not preorder:
             return None
 
@@ -41,21 +24,16 @@ class Solution:
         return root
 
 
-"""
-106. Construct Binary Tree from Inorder and Postorder Traversal
-"""
-
-
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
         """
+        106. Construct Binary Tree from Inorder and Postorder Traversal
         Inorder:   left -> root -> right
         Postorder: left -> right -> root
 
         The last node in postorder is the root of the tree. 
         Build right subtree, then build left subtree.
         """
-
         if not inorder or not postorder:
             return None
 
@@ -75,7 +53,6 @@ class Solution:
         """
         Trace-retrace via stack
         """
-
         d = {x: i for i, x in enumerate(inorder)}
 
         def build(low, high):
@@ -97,7 +74,7 @@ class Solution:
         """
         Trace-retrace via recursion
         """
-
+        @lru_cache(None)
         def build(left, right):
             nonlocal index
 
@@ -121,10 +98,8 @@ class Solution:
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
         """
-        Time: O(N)
-        Space: O(N)
+        Time: O(N), Space: O(N)
         """
-
         d = {x: i for i, x in enumerate(inorder)}  # relative position
         root = None
         stack = []
@@ -183,7 +158,6 @@ Foreword
 I saw some solutions saying O(N) time, but actually they are not.
 If it takes already O(N) time to find left part and right part, it could not be O(N).
 
-
 Complexity:
 Time O(N), as we iterate both pre index and post index only once.
 Space O(height), depending on the height of constructed tree.
@@ -209,7 +183,6 @@ class Solution:
         """
         The first element in preorder and the last element in postorder are both be the value of the root. The second to last of postorder should be the value of right child of the root. So we can find the index to split left and right children in preorder. Don't forget to evaluate if the length of postorder is larger than 1, since we used post[-2].
         """
-
         if not preorder or not postorder:
             return None
 

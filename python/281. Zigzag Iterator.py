@@ -23,15 +23,15 @@ class ZigzagIterator:
     """
 
     def __init__(self, v1: List[int], v2: List[int]):
-        self.vals = []
+        self.vals = collections.deque([])
         if v1:
             self.vals.append(v1)
         if v2:
             self.vals.append(v2)
 
     def next(self) -> int:
-        vec = self.vals.pop(0)
-        res = vec.pop(0)
+        vec = self.vals.popleft()
+        res = vec.popleft()
         if vec:
             self.vals.append(vec)
         return res

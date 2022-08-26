@@ -17,7 +17,7 @@ Output: [1,2,3,4]
 class Solution:
     def findDiagonalOrder(self, matrix: List[List[int]]) -> List[int]:
         if not matrix:
-            return []  # edge case
+            return []
 
         res = []
         M, N = len(matrix), len(matrix[0])  # dimension

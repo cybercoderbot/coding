@@ -34,7 +34,6 @@ class Solution:
         """
         res.append(nums[i:i+N]) row by row
         """
-
         if len(nums) != M * N:
             return []
 

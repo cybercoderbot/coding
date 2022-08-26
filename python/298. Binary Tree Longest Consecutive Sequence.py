@@ -29,9 +29,9 @@ class Solution:
             return 0
 
         res = 0
-        queue = [(root, 1)]
+        queue = collections.deque([(root, 1)])
         while queue:
-            node, cur = queue.pop(0)
+            node, cur = queue.popleft()
             res = max(res, cur)
             for child in node.left, node.right:
                 if child:

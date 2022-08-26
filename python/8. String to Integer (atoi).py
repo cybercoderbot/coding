@@ -17,84 +17,37 @@ Note:
 Only the space character ' ' is considered a whitespace character.
 Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.
 
-
 Example 1:
 Input: s = "42"
 Output: 42
-Explanation: The underlined characters are what is read in, the caret is the current reader position.
-Step 1: "42" (no characters read because there is no leading whitespace)
-         ^
-Step 2: "42" (no characters read because there is neither a '-' nor '+')
-         ^
-Step 3: "42" ("42" is read in)
-           ^
-The parsed integer is 42.
-Since 42 is in the range [-231, 231 - 1], the final result is 42.
 
 Example 2:
 Input: s = "   -42"
 Output: -42
-Explanation:
-Step 1: "   -42" (leading whitespace is read and ignored)
-            ^
-Step 2: "   -42" ('-' is read, so the result should be negative)
-             ^
-Step 3: "   -42" ("42" is read in)
-               ^
-The parsed integer is -42.
-Since -42 is in the range [-231, 231 - 1], the final result is -42.
 
 Example 3:
 Input: s = "4193 with words"
 Output: 4193
-Explanation:
-Step 1: "4193 with words" (no characters read because there is no leading whitespace)
-         ^
-Step 2: "4193 with words" (no characters read because there is neither a '-' nor '+')
-         ^
-Step 3: "4193 with words" ("4193" is read in; reading stops because the next character is a non-digit)
-             ^
-The parsed integer is 4193.
-Since 4193 is in the range [-2^31, 2^31 - 1], the final result is 4193.
-"""
-
-"""
-Define an anchor left which is to mark the beginning of a number (digit or +/-).
-Loop through the string using an index i, for which
-
-1. if anchor left is not set yet
-   - if str[i] is +/- or digit, set the anchor (left=i)
-   - elif str[i] is space, move to next position
-   - else return 0
-2. if anchor left is set
-   - if str[i] is digit, move to next position
-   - else break
-
-If anchor left isn't set, there is no valid number.
-If anchor left is set, there is a valid number if i > left+1 or str[left].isdigit().
-Return the number capped within [-2**31, 2**31-1].
 """
 
 
 class Solution:
     def myAtoi(self, s: str) -> int:
-        MIN, MAX = -pow(2, 31), pow(2, 31)-1
+        # trims leading and trailing whitespace
+        t = list(s.strip())
 
-        left = -1
-        for i, c in enumerate(s):
-            if left == -1:
-                if c in "+-" or c.isdigit():
-                    left = i
-                elif not c.isspace():
-                    return 0
-            elif not c.isdigit():
-                break
-        else:
-            i = len(s)
+        if len(t) == 0:
+            return 0
 
-        right = i
+        sign = -1 if t[0] == '-' else 1
+
+        if t[0] in '-+':
+            t = t[1:]
+
         res = 0
-        if 0 <= left and (left+1 < right or s[left].isdigit()):
-            res = int(s[left:right])
+        for c in t:
+            if not c.isdigit():
+                break
+            res = res*10 + int(c)
 
-        return max(MIN, min(MAX, res))
+        return max(-2**31, min(sign*res, 2**31-1))

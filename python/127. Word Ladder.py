@@ -72,7 +72,7 @@ class Solution:
                     return res
                 for i in range(len(word)):
                     key = word[:i] + "*" + word[i+1:]
-                    for ww in mp.get[key]:
+                    for ww in mp[key]:
                         if ww not in seen:
                             queue2.append(ww)
                             seen.add(ww)

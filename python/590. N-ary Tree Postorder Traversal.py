@@ -15,7 +15,6 @@ Input: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,1
 Output: [2,6,14,11,7,3,12,8,4,13,9,10,5,1]
 """
 
-
 """
 # Definition for a Node.
 class Node:
@@ -26,11 +25,11 @@ class Node:
 
 
 class Solution:
+    @lru_cache(None)
     def postorder(self, root: 'Node') -> List[int]:
         """
         postorder: children -> root
         """
-
         if not root:
             return []
         else:
@@ -44,6 +43,7 @@ class Solution:
 class Solution:
     def postorder(self, root: 'Node') -> List[int]:
 
+        @lru_cache(None)
         def dfs(node):
             if not node:
                 return

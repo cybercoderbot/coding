@@ -28,10 +28,10 @@ class Solution:
         """
 
         hasNull = False
-        queue = [root]
+        queue = collections.deque([root])
 
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             if not node:
                 hasNull = True
                 continue
